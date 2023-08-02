@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    {% include 'login.html' %}
+    <nav class="menu-bar show">
+        <div class="menu-bar__head">
+            <h1>이치연
+                <button class="menu-bar__close">
+                    <i class="fa-solid fa-angles-left">
+                    </i>
+                </button>
+            </h1>
+        </div>
+    </nav>
+    <header class="header">
+        <button class="header__menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="/">
+        </a>
+        <div>
+        </div>
+    </header>
+    <section class="intro">
+        <div class="intro__text">
+            <img class="intro__logo" src="logo.png" alt="">
+            <h6>저기 우리 함께 할래요?</h6>
+            <h3>동료를 모집해보세요!</h3>
+            <button class="login__btn">
+                <a>Sign in</a>
+                <!-- <a href="/write">Write</a> -->
+            </button>
+        </div>
+        <img class="intro__img" src="img/intro.jpeg" alt="">
+    </section>
+    <!-- 페이지 별로 바뀌어야할 부분 -->
+    {% block content %}
+    {% endblock %}
+
+    <main class="main">
+        <div class="main__search">
+            <ul>
+                <li>전체</li>
+                <li>프로젝트</li>
+                <li>스터디</li>
+                <li>공모전</li>
+            </ul>
+            <div>
+                <input type="text">
+            </div>
+        </div>
+        <div class="main__board">
+
+            <section class="board">
+                <div class="board__head">
+                    <span class="board__group">스터디</span>
+                    <time class="board__deadline">~23.8.17</time>
+                </div>
+                <h1 class="board__title">React 스터디 모집</h1>
+                <p class="board__desc">즐겁게 성장할 React 스터디원
+                    모집합니다.
+                </p>
+                <div class="board__stack">
+                    <h5 class="board__stack--title">스택</h5>
+                    <div>
+                        <span>react</span>
+                        <span>js</span>
+                        <span>css</span>
+                    </div>
+                </div>
+                <div class="board__footer">
+                    <h5 class="board__name">이치연</h5>
+                    <div>
+                        <span class="board__like">좋아요</span>
+                        <span class="board__view">조회수</span>
+                    </div>
+                </div>
+            </section>
+            <section class="board">
+                <div class="board__head">
+                    <span class="board__group">스터디</span>
+                    <time class="board__deadline">~23.8.17</time>
+                </div>
+                <h1 class="board__title">React 스터디 모집</h1>
+                <p class="board__desc">즐겁게 성장할 React 스터디원
+                    모집합니다.
+                </p>
+                <div class="board__stack">
+                    <h5 class="board__stack--title">스택</h5>
+                    <div>
+                        <span>react</span>
+                        <span>js</span>
+                        <span>css</span>
+                    </div>
+                </div>
+                <div class="board__footer">
+                    <h5 class="board__name">이치연</h5>
+                    <div>
+                        <span class="board__like">좋아요</span>
+                        <span class="board__view">조회수</span>
+                    </div>
+                </div>
+            </section>
+            <section class="board">
+                <div class="board__head">
+                    <span class="board__group">스터디</span>
+                    <time class="board__deadline">~23.8.17</time>
+                </div>
+                <h1 class="board__title">React 스터디 모집</h1>
+                <p class="board__desc">즐겁게 성장할 React 스터디원
+                    모집합니다.
+                </p>
+                <div class="board__stack">
+                    <h5 class="board__stack--title">스택</h5>
+                    <div>
+                        <span>react</span>
+                        <span>js</span>
+                        <span>css</span>
+                    </div>
+                </div>
+                <div class="board__footer">
+                    <h5 class="board__name">이치연</h5>
+                    <div>
+                        <span class="board__like">좋아요</span>
+                        <span class="board__view">조회수</span>
+                    </div>
+                </div>
+            </section>
+            <section class="board">
+                <div class="board__head">
+                    <span class="board__group">스터디</span>
+                    <time class="board__deadline">~23.8.17</time>
+                </div>
+                <h1 class="board__title">React 스터디 모집</h1>
+                <p class="board__desc">즐겁게 성장할 React 스터디원
+                    모집합니다.
+                </p>
+                <div class="board__stack">
+                    <h5 class="board__stack--title">스택</h5>
+                    <div>
+                        <span>react</span>
+                        <span>js</span>
+                        <span>css</span>
+                    </div>
+                </div>
+                <div class="board__footer">
+                    <h5 class="board__name">이치연</h5>
+                    <div>
+                        <span class="board__like">좋아요</span>
+                        <span class="board__view">조회수</span>
+                    </div>
+                </div>
+            </section>
+            <section class="board">
+                <div class="board__head">
+                    <span class="board__group">스터디</span>
+                    <time class="board__deadline">~23.8.17</time>
+                </div>
+                <h1 class="board__title">React 스터디 모집</h1>
+                <p class="board__desc">즐겁게 성장할 React 스터디원
+                    모집합니다.
+                </p>
+                <div class="board__stack">
+                    <h5 class="board__stack--title">스택</h5>
+                    <div>
+                        <span>react</span>
+                        <span>js</span>
+                        <span>css</span>
+                    </div>
+                </div>
+                <div class="board__footer">
+                    <h5 class="board__name">이치연</h5>
+                    <div>
+                        <span class="board__like">좋아요</span>
+                        <span class="board__view">조회수</span>
+                    </div>
+                </div>
+            </section>
+            <section class="board">
+                <div class="board__head">
+                    <span class="board__group">스터디</span>
+                    <time class="board__deadline">~23.8.17</time>
+                </div>
+                <h1 class="board__title">React 스터디 모집</h1>
+                <p class="board__desc">즐겁게 성장할 React 스터디원
+                    모집합니다.
+                </p>
+                <div class="board__stack">
+                    <h5 class="board__stack--title">스택</h5>
+                    <div>
+                        <span>react</span>
+                        <span>js</span>
+                        <span>css</span>
+                    </div>
+                </div>
+                <div class="board__footer">
+                    <h5 class="board__name">이치연</h5>
+                    <div>
+                        <span class="board__like">좋아요</span>
+                        <span class="board__view">조회수</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="js/modal.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="https://kit.fontawesome.com/15235ae2d2.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

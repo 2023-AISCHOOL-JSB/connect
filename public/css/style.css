@@ -1,0 +1,29 @@
+@import url('reset.css');
+@import url('intro.css');
+@import url('main.css');
+
+/* components */
+@import url('components/board.css');
+@import url('components/menubar.css');
+
+/* screen */
+@import url('screen/header.css');
+@import url('screen/login.css');
+
+
+
+:root{
+    --btn-color:#4C7DFB;
+    --main-color:#4C7DFB;
+    --box-color:#92B0FF;
+    --menu-bar:#E8F0FF;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+/* .hidden{
+    visibility: visible;
+    opacity: 1;
+} */

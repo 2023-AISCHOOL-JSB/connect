@@ -1,0 +1,44 @@
+<!-- 공통된 레이아웃 설정
+- 헤더를 추가
+- bootstrap 디자인, js를 추가
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <title>Document</title>
+</head>
+<body>
+    <nav class="menu-bar hidden">
+        <div class="menu-bar__head">
+            <h1>이치연</h1>
+            <button class="menu-bar__close">
+                <i class="fa-solid fa-angles-left">
+                </i>
+            </button>
+        </div>
+    </nav>
+    <header class="header">
+        <button class="header__menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="/">
+            <img class="header__logo" src="logo.png" alt="">
+        </a>
+        <div>
+            
+        </div>
+    </header>
+    
+    <!-- 페이지 별로 바뀌어야할 부분 -->
+    {% block content %}
+    {% endblock %}
+    <script src="js/menu.js"></script>
+    <script src="https://kit.fontawesome.com/15235ae2d2.js" crossorigin="anonymous"></script>
+</body>
+</html>

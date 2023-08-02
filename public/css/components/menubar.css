@@ -1,0 +1,44 @@
+
+
+.menu-bar {
+    font-size: 25px;
+    font-weight: 900;
+    color: var(--main-color);
+    background-color: var(--menu-bar);
+    
+    position: fixed;
+    z-index: 2;
+    height: 1000px;
+    transition: all 0.3s ease-in;
+    width: 0;
+    overflow: hidden;
+    transform: translateX(-160px); 
+    padding: 35px;
+}
+
+
+
+.show-menu {
+    
+    width: 200px;
+    transform: translateX(0); 
+}
+
+.menu-bar__head{
+    /* display: flex; */
+    display : inline-block;
+    
+    
+}
+
+.menu-bar__head h1{
+    width: 200px;
+}
+.menu-bar__head button{
+    border: none;
+    background-color: inherit;
+    font-size: 25px;
+    color: #fcfcfc;
+    margin-left: 30px;
+    
+}

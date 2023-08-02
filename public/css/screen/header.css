@@ -1,0 +1,24 @@
+
+.header__logo{
+    width: 110px;
+    height: 70px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 60px;
+}
+
+.header__menu{
+    background-color: inherit;
+    border: none;
+    font-size: 25px;
+}
+
+.header__menu:hover{
+    scale: 1.1;
+    transition: 0.5s ease-in;
+    
+}
