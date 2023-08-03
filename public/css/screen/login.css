@@ -9,7 +9,8 @@
     transition: all 1s;
     visibility: hidden;
     opacity: 0;
-    transition: all 0.4s;
+    transition: all 1s;
+    z-index: 5;
     
 }
 
@@ -84,6 +85,17 @@
 #login__join{
     background-color: white;
     color: var(--main-color);
+    width: 400px;
+    height: 60px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+
 }
 
 #login__git{
@@ -106,4 +118,19 @@
     right: 20px;
     top:20px
 
+}
+
+.login__alert{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:20px;
+    width: 400px;
+}
+
+.login__alert-text{
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--main-color);
+    
 }

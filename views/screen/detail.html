@@ -1,0 +1,80 @@
+{% extends 'layout.html'%}
+{% block content %}
+{% include 'components/nav.html' %}
+{% include 'components/header.html' %}
+
+
+
+<main class="detail">
+    <section class="detail__box">
+        <h1 class="detail__title">제주도 같이가서 공모전하실분 구해요</h1>
+        <div class="detail__info">
+            <span>2023.08.13</span>
+            <span>홍길동</span>
+        </div>
+        <div class="detail__ud">
+            <span>수정</span>
+            <span>삭제</span>
+        </div>
+        <table class="detail__table">
+            <tr>
+                <td class="detail__table--title">모집구분</td>
+                <td class="detail__table--desc">스터디</td>
+            </tr>
+            <tr>
+                <td class="detail__table--title">마감일</td>
+                <td class="detail__table--desc">23.08.13</td>
+            </tr>
+            <tr>
+                <td class="detail__table--title">모집인원</td>
+                <td class="detail__table--desc">8명</td>
+            </tr>
+            <tr>
+                <td class="detail__table--title">기술스택</td>
+                <td class="detail__table--desc">HTML CSS JS Node</td>
+            </tr>
+        </table>
+        <section class="detail__desc">
+            <h1>공모전 모집합니다.</h1>
+            Lorem Ipsum is simply dummy text of
+            the printing and typesetting industry. Lorem Ipsum has been
+            the industry's standard dummy
+            text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to
+            make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+            typesetting,
+            remaining essentially unchanged.
+
+
+            It was popularised in the 1960s
+            with the release of Letraset
+            sheets containing Lorem Ipsum passages,
+            and more recently
+            with desktop publishing software
+            like Aldus PageMaker including
+            versions of Lorem Ipsum.
+        </section>
+
+        <div class="detail__buttons">
+            <a href="/chat">Chat</a>
+            <a href="/">github</a>
+            <button type="button"><i class="fa-regular fa-heart"></i> <span class="detail__like"> 5</span></button>
+        </div>
+
+        <form class="detail__msg">
+            <h1 class="detail__msg--title">댓글 <span class="detail__msg--num">0</span></h1>
+            <input class="detail__msg--input" type="text">
+            <button class="detail__msg--btn" type="submit">댓글 작성</button>
+        </form>
+        <ul class="detail__msg-list">
+            <li>
+                <h1>김영재</h1>
+                <span>2023.07.23 17:00</span>
+                <p>치연쓰</p>
+                <!-- <button>대댓글 달기</button> -->
+            </li>
+        </ul>
+    </section>
+</main>
+
+{% endblock %}

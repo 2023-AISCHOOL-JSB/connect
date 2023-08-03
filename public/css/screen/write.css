@@ -1,0 +1,123 @@
+
+.write__box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.write{
+    display: flex;
+    align-items: flex-start;
+    
+    flex-direction: column;
+}
+
+#editor{
+    width: 1000px;
+}
+
+#write__title{
+    width: 1000px;
+    height: 40px;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.write label{
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.write__buttons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 20px;
+    margin-top:20px;
+    font-weight: 700;
+    margin-bottom:100px;
+}
+
+
+.write__upload, .write__back{
+    width: 100px;
+    height: 40px;
+    color: white;
+    background-color: black;
+    font-weight: 700;
+    font-size: 20px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.write__back{
+    color: black;
+    background-color: var(--background-color);
+}
+
+.write__info{
+    margin-bottom:100px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.write__intro{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.write__group{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top:20px;
+    opacity: 1;
+    
+}
+.hidden{
+    display: none;
+    opacity: 0;
+}
+
+
+.write h1{
+    font-size: 25px;
+    font-weight: 700;
+    margin:20px 0;
+    border-bottom:2px solid var(--border-color);
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.write h3{
+    font-size: 20px;
+    font-weight: 500;
+    margin:10px 0;
+}
+
+.write select, .write__date{
+    width: 470px;
+    height: 50px;
+    font-size: 20px;
+    padding: 0 20px;
+}
+
+
+.write__group--info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.hidden{
+    display: none;
+}

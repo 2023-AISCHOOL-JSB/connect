@@ -9,7 +9,6 @@
 
 <body>
     <section class="login">
-
         <img src="img/login.jpeg" alt="">
         <form class="login__form" action="/login" method="post">
             <i class="fa-solid fa-xmark login__close "></i>
@@ -31,10 +30,13 @@
                 <input type="checkbox">
                 <span>자동로그인</span>
             </div>
+            <div class="login__alert">
+                <h1 class="login__alert-text"></h1>
+            </div>
             <div class="login__buttons">
-                <button>Login</button>
-                <button id="login__join">Join</button>
-                <button id="login__git"><i class="fa-brands fa-github "></i>Github</button>
+                <button class="login__button" type="submit">Login</button>
+                <a id="login__join" href="/join">Join</a>
+                <!-- <button id="login__git"><i class="fa-brands fa-github "></i>Github</button> -->
             </div>
         </form>
 
