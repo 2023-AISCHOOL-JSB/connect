@@ -8,3 +8,7 @@ let conn = mysql.createConnection({
     port: 3306, // port번호
     database : 'nodejs' 
 })
+
+conn.connect() 
+
+module.exports = conn ;

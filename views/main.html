@@ -34,10 +34,19 @@
             <img class="intro__logo" src="logo.png" alt="">
             <h6>저기 우리 함께 할래요?</h6>
             <h3>동료를 모집해보세요!</h3>
+        
+            <!-- 로그인 -->
+            {% if obj != undefined %}
+            <button class="intro__btn">
+                
+                <a href="/write">Write</a>
+            </button>
+            {% else %}
             <button class="login__btn">
-                <a>Sign in</a>
+                <a>Sing in</a>
                 <!-- <a href="/write">Write</a> -->
             </button>
+            {% endif %}
         </div>
         <img class="intro__img" src="img/intro.jpeg" alt="">
     </section>
