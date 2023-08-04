@@ -28,3 +28,39 @@ function getTodayDate() {
 
 // 오늘 날짜를 input 요소의 value로 설정
 todayDateInput.value = getTodayDate();
+
+
+
+// 기술 스택
+function addOption(value, text) {
+            const container = document.getElementById('selected-container');
+
+            const span = document.createElement('span');
+            span.textContent = text;
+            span.classList.add('span-text')
+
+            const remove = document.createElement('span');
+            remove.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+            remove.classList.add('remove');
+            remove.addEventListener('click', function () {
+                container.removeChild(span);
+                const optionToRemove = document.querySelector(`#options option[value="${value}"]`);
+                optionToRemove.removeAttribute('disabled');
+            });
+
+            span.appendChild(remove);
+            container.appendChild(span);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectElem = document.getElementById('options');
+            selectElem.addEventListener('change', function () {
+                const option = this.options[this.selectedIndex];
+                const value = option.value;
+                const text = option.text;
+                addOption(value, text);
+                option.setAttribute('disabled', true); // 추가된 코드
+                this.selectedIndex = 0; // 추가된 코드
+            });
+        });
+

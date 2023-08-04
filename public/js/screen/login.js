@@ -9,6 +9,8 @@ const loginSubmit = document.querySelector('.login__button')
 
 // 로그인 경고
 
+
+
 loginSubmit.addEventListener('click', (event) => {
     if (loginId.value === "") {
         event.preventDefault()
@@ -31,11 +33,15 @@ loginSubmit.addEventListener('click', (event) => {
 
 
 
-// 로그인 모달
-loginBtn.addEventListener('click', () => {
+document.addEventListener('DOMContentLoaded', function() {
+    loginBtn.addEventListener('click', () => {
     login.classList.add('show-modal')
     console.log('hi')
 })
+});
+
+// 로그인 모달
+
 
 loginClose.addEventListener('click', (event) => {
     login.classList.remove('show-modal')

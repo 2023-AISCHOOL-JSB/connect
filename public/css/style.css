@@ -5,7 +5,7 @@
 @import url('components/menubar.css');
 @import url('components/header.css');
 @import url('components/search.css');
-
+@import url('components/notice.css');
 /* screen */
 @import url('screen/login.css');
 @import url('screen/main.css');
@@ -13,6 +13,7 @@
 @import url('screen/join.css');
 @import url('screen/write.css');
 @import url('screen/detail.css');
+@import url('screen/group.css');
 
 :root{
     --btn-color:#4C7DFB;
@@ -23,6 +24,7 @@
     --background-color:whitesmoke;
     --nav-color: #1a59f9 ;
     --border-color:#bcbcbc;
+    --gray-color:#f5f5f5;
 }
 
 *{

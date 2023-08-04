@@ -18,4 +18,9 @@ router.get('/detail', (req, res) => {
     res.render('screen/detail')
 })
 
+// 나중에 group router 만들어야됨
+router.get('/group', (req, res) => {
+    res.render('screen/group')
+})
+
 module.exports = router
