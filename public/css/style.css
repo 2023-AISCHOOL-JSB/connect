@@ -1,6 +1,7 @@
 @import url('reset.css');
 
 /* components */
+@import url('components/canvan.css');
 @import url('components/board.css');
 @import url('components/menubar.css');
 @import url('components/header.css');

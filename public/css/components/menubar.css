@@ -5,7 +5,6 @@
     font-weight: 700;
     color: var(--nav-color);
     background-color: var(--menu-bar);
-
     position: fixed;
     z-index: 2;
     height: 1000px;
@@ -14,13 +13,9 @@
     overflow: hidden;
     transform: translateX(-160px); 
     padding: 35px;
-    
 }
 
-
-
-.show-menu {
-    
+.show-menu {   
     width: 200px;
     transform: translateX(0); 
 }

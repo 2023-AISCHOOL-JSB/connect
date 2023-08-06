@@ -16,14 +16,7 @@
 
 }
 
-.group__nav div{
-    width: 33%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    height: 50px;
-}
+
 
 .notice__list li{
     margin-bottom: 10px;
