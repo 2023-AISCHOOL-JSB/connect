@@ -1,0 +1,33 @@
+.main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--background-color);
+    padding-top:50px;
+    
+    
+}
+.main__board{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 1300px;
+    
+}
+.main__board-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.main__search ul{
+    display: flex;
+
+}
+
+
+

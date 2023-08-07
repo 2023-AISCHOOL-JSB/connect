@@ -1,0 +1,107 @@
+
+*{
+box-sizing: border-box;
+margin:0
+}
+.logo-picture{ 
+    text-align: center; /* 텍스트 정렬 가운데로 설정 */
+    
+}
+header{
+height: 80px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #4C7DFB;
+margin-bottom:20px;
+}
+
+
+.join{
+display: flex;
+align-items: center;
+justify-content: center;
+height: auto;
+}
+.join form h1{
+margin-bottom:50px;
+}
+
+.join label{
+font-size: 16px;
+font-weight: 600;
+margin-bottom:10px;
+}
+
+.join img{
+height: 800px;
+width: 650px;
+}
+
+.join form{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+background-color:#F8FAFF ;
+height: 800px;
+width: 550px;
+padding-left:130px;
+}
+
+.join div{
+display: flex;
+flex-direction: column;
+}
+
+.join h1{
+font-size: 40px;
+font-weight: 900;
+margin-bottom:20px;
+}
+
+.join__input{
+width: 300px;
+height: 40px;
+border:none;
+margin-bottom:20px;
+}
+
+
+
+.join button{
+width: 300px;
+height: 50px ;
+border:none;
+font-size: 19px;
+margin-bottom: 20px;
+margin-top:10px;
+}
+.join-btn{
+background-color: #4C7DFB;
+color:white;
+margin-bottom:30px;
+
+}
+
+.join select{
+margin-bottom: 30px;
+width: 300px;
+height: 40px;
+}
+
+.join option{
+width: 300px;
+font-weight: bold;
+}
+
+.join-check{
+display: flex;
+width: 300px;
+justify-content: center;
+align-items: center;
+text-decoration: none;
+color: black;
+}
+
+

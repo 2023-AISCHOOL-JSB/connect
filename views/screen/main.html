@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'screen/login.html' %}
+{% include 'components/nav.html' %}
+
+<header class="header">
+    <button class="header__menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+    <a href="/">
+    </a>
+    <div>
+    </div>
+</header>
+<section class="intro">
+    <div class="intro__text">
+        <img class="intro__logo" src="img/logo.png" alt="">
+        <h6>저기 우리 함께 할래요?</h6>
+        <h3>동료를 모집해보세요!</h3>
+        <button class="login__btn">
+            <a>Sign in</a>
+        </button>
+        <!-- <button class="intro__btn">
+            <a href="/write">Write</a>
+        </button> -->
+    </div>
+    <img class="intro__img" src="img/intro.jpeg" alt="">
+</section>
+
+<main class="main">
+    {% include 'components/search.html'%}
+    <div class="main__board-flex">
+
+        <div class="main__board">
+            {% include 'components/board.html'%}
+        </div>
+    </div>
+</main>
+{% endblock %}
