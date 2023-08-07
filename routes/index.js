@@ -3,13 +3,20 @@ const router = express.Router()
 
 
 router.get('/', (req, res) => {
-    console.log('mainPage',req.session.user)
-    res.render('main', {obj : req.session.user})
+    res.render('screen/main',{obj : req.session.user})
 })
 
-// 회원가입 Page 열기
-router.get('/join',(req,res)=>{
-    res.render('join')
+router.get('/join', (req, res) => {
+    res.render('screen/join')
 })
+
+router.get('/write', (req, res) => {
+    res.render('screen/write')
+})
+
+router.get('/detail', (req, res) => {
+    res.render('screen/detail')
+})
+
 
 module.exports = router

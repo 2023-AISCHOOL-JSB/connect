@@ -1,29 +1,32 @@
 @import url('reset.css');
-@import url('intro.css');
-@import url('main.css');
 
 /* components */
 @import url('components/board.css');
 @import url('components/menubar.css');
+@import url('components/header.css');
+@import url('components/search.css');
 
 /* screen */
-@import url('screen/header.css');
 @import url('screen/login.css');
-
-
+@import url('screen/main.css');
+@import url('screen/intro.css');
+@import url('screen/join.css');
+@import url('screen/write.css');
+@import url('screen/detail.css');
 
 :root{
     --btn-color:#4C7DFB;
     --main-color:#4C7DFB;
     --box-color:#92B0FF;
-    --menu-bar:#E8F0FF;
+    --menu-bar:#edeff4;
+    --search-color : #545454;
+    --background-color:whitesmoke;
+    --nav-color: #1a59f9 ;
+    --border-color:#bcbcbc;
 }
 
 *{
     box-sizing: border-box;
 }
 
-/* .hidden{
-    visibility: visible;
-    opacity: 1;
-} */
+

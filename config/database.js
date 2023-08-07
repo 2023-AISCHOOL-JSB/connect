@@ -2,13 +2,13 @@
 const mysql = require('mysql2')
 
 let conn = mysql.createConnection({
-    host : 'localhost', // 데이터베이스 e주소임
-    user: 'root',
-    password: '1234', // 설정한 비번
-    port: 3306, // port번호
-    database : 'nodejs' 
+    host : 'project-db-stu3.smhrd.com', // 데이터베이스 e주소임
+    user: 'Insa4_JSB_hacksim_4',
+    password: 'aishcool4', // 설정한 비번
+    port: 3307, // port번호
+    database : 'Insa4_JSB_hacksim_4' 
 })
 
-conn.connect() 
+conn.connect();
 
-module.exports = conn ;
+module.exports = conn;

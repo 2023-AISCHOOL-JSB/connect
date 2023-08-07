@@ -1,0 +1,132 @@
+
+
+.detail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.detail__box{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 700px;
+}
+
+.detail__title{
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom:30px;
+}
+
+.detail__info{
+    font-size: 20px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.detail__ud{
+    font-size: 17px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--border-color);
+    margin-bottom: 50px;
+}
+
+.detail__table{
+    font-size: 22px;
+    font-weight: 700;
+
+    margin-bottom: 35px;
+}
+.detail__table tr{
+    display: block;
+    margin-bottom:10px;
+}
+
+.detail__table--title{
+    width: 100px ;
+}
+
+.detail__table--desc{
+    width: 300px ;
+}
+
+
+.detail__desc{
+    font-size: 20px;
+    line-height: 1.4;
+    height: auto;
+    margin-bottom: 70px;
+}
+
+.detail__buttons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.detail__buttons a, .detail__buttons button{
+    width: 120px;
+    height: 60px;
+    background-color: var(--btn-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    color: white;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 80px;
+
+}
+
+.detail__like{
+    margin-left: 5px;
+}
+
+.detail__msg{
+
+}
+
+.detail__msg--title{
+    font-size: 15px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.detail__msg--input{
+    width: 530px;
+    height: 75px;
+    margin-bottom: 60px;
+}
+
+.detail__msg--btn{
+    height: 75px;
+    width: 100px;
+    background-color: var(--btn-color);
+    color: white;
+    font-size: 17px;
+}
+
+.detail__msg-list{
+    margin-bottom: 100px;
+    
+}
+
+.detail__msg-list h1{
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.detail__msg-list
