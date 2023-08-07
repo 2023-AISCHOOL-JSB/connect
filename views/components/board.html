@@ -1,4 +1,5 @@
 {%for board in data%}
+{%if board.b_type == '모집'%}
 <a href="/detail?a={{ board.b_idx }}" class="post_idx" style=" color: black;">
     <section class="board">
         <div class="board__head">
@@ -6,17 +7,24 @@
             <time class="board__deadline" data-array="{{board.b_category}}" data-prepend="~" data-index="2">-</time>
         </div>
         <h1 class="board__title">{{board.b_title}}</h1>
-        <p class="board__desc">{{board.b_content.slice(0,20)}}</p>
+        <p class="board__desc">{{board.b_content.slice(0,30)}}</p>
         <div class="board__stack">
-            {%if board.b_type !== '게시판'%}
             <h5 class="board__stack--title">스택</h5>
             <div>
                 <span>react</span>
                 <span>js</span>
                 <span>css</span>
             </div>
-            {%endif%}
         </div>
+        {%else%}
+        <a href="/detail?a={{ board.b_idx }}" class="post_idx" style=" color: black;">
+            <section class="board">
+                <div class="board__head">
+                    <span class="board__group1">자유게시판</span>
+                </div>
+                <h1 class="board__title">{{board.b_title}}</h1>
+                <p class="board__desc">{{board.b_content.slice(0,30)}}</p>
+                {%endif%}
         <div class="board__footer">
             <h5 class="board__name">작성자</h5>
             <div>
@@ -26,6 +34,7 @@
         </div>
     </section>
 </a>
+
 {%endfor%}
 
 
