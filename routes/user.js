@@ -55,8 +55,8 @@ router.post('/login', (req,res)=>{
           } else {
             console.log('자동 로그인 안함');
             // 자동 로그인이 체크되지 않았다면, 쿠키의 만료 시간을 30분 후로 설정합니다.
-            req.session.cookie.expires = new Date(Date.now() + 30 * 60 * 1000);
-            req.session.cookie.maxAge = 30 * 60 * 1000;
+            req.session.cookie.expires = new Date(Date.now() + 10 * 1000);
+            req.session.cookie.maxAge = 10 * 1000;
             req.session.user = rows[0];
           }
             
