@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
+
 const conn = require("../config/database");
 
 router.get('/', (req, res) => {
     let sql = "select * from tb_board WHERE b_permit = 'YES' order by b_idx desc LIMIT 12"
     conn.query(sql,(err,rows)=>{
         res.render("screen/main",{data:rows});
-    })
-})
+    })});
+
 
 router.get('/join', (req, res) => {
     res.render('screen/join')
@@ -52,4 +53,4 @@ router.get('/group', (req, res) => {
     res.render('screen/group')
 })
 
-module.exports = router
+module.exports = router;

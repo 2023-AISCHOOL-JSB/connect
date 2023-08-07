@@ -1,32 +1,21 @@
-const groupNav = document.querySelectorAll('.group__nav');
-const canvan = document.querySelector('.canvan')
-const timeline = document.querySelector('.timeline')
+const noticeBtn = document.querySelector('.group__notice')
+const noticeList = document.querySelector('.notice__list')
+const canvanBoard = document.querySelector('.canvan')
+const canvanBtn = document.querySelector('.group__board')
 
-// 보류
 
+// const canvan
 
-for (let i = 0; i < groupNav.length; i++){
-    groupNav[i].addEventListener('click', (event) => {
-        // 모든 탭의 파란색 클래스를 제거합니다.
-        for (let j = 0; j < groupNav.length; j++) {
-            groupNav[j].classList.remove('blue');
-        }
+noticeBtn.addEventListener('click', () => {
+    noticeBtn.classList.add('blue')
+    noticeList.classList.remove('hidden')
+    canvanBtn.classList.remove('blue')
+    canvanBoard.classList.add('hidden')
+})
 
-        // 클릭한 탭에만 파란색 클래스를 추가합니다.
-        event.currentTarget.classList.add('blue');
-    });
-}
-
-// 실패 다음에 끝장본다 
-// for (let i = 0; i < groupNav.length; i++) {
-//     groupNav[i].addEventListener('click', () => {
-//         for (let j = 0; j < groupNav.length; j++) {
-//             if (i === j) {
-//                 groupNav[j].classList.add('blue');
-//             } else {
-//                 groupNav[j].classList.remove('blue');
-//             }
-//         }
-//         console.log(i);
-//     });
-// }
+canvanBtn.addEventListener('click', () => {
+    canvanBtn.classList.add('blue')
+    canvanBoard.classList.remove('hidden')
+    noticeBtn.classList.remove('blue')
+    noticeList.classList.add('hidden')
+})

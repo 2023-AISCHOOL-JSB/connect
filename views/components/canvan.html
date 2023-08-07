@@ -1,0 +1,81 @@
+<section class="canvan__write hidden">
+    <form action="/" method="post">
+        <button class="canvan__write__close" type="button"><i class="fa-solid fa-xmark"></i></button>
+
+        <div>
+            <label for="todo">
+                할일
+            </label>
+            <input type="text" id="todo">
+        </div>
+        <div>
+            <label for="deadline">
+                기간
+            </label>
+            <input type="date" id="deadline" placeholder="">
+        </div>
+        <div>
+            <label for="member">
+                팀원
+            </label>
+            <input type="text" id="member" placeholder="">
+        </div>
+        <section class="canvan__btn__box">
+            <button class="canvan__btn" type="submit">작성하기</button>
+        </section>
+    </form>
+</section>
+
+
+<div class="new-task__box">
+    <button class="add-new-task-btn"><i class="fa-solid fa-plus"></i> Add new task</button>
+</div>
+
+
+<section class="canvan hidden">
+
+    <section class="todo">
+        <h1>Todo</h1>
+        <ul class="todo__list">
+            <li class="todo__list__li" draggable="true">
+                <div class="list__head">
+                    <h3 class="list__title">채팅기능 구현</h3>
+                    <button class="list__menu-btn"><i class="fa-regular fa-hand"></i></button>
+                </div>
+                <div class="list__footer">
+                    <span class="list__user">김영재</span>
+                    <time class="list__deadline">~08.17</time>
+                </div>
+                <div class="list__buttons hidden">
+                    <!-- <button class="list__btn--pro">In progress</button>
+                    <button class="list__btn--done">Done</button> -->
+
+                    <button class="list__delete-btn"><i class="fa-solid fa-trash"></i></button>
+                    <button class="list__edit-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+
+
+                </div>
+
+            </li>
+
+
+        </ul>
+    </section>
+    <section class="progress">
+        <h1> In progress</h1>
+        <ul class="progress__list">
+
+
+        </ul>
+    </section>
+    <section class="done">
+        <h1>Done</h1>
+        <ul class="done__list">
+
+
+
+        </ul>
+    </section>
+</section>
+
+<script src="js/components/canvan.js"></script>

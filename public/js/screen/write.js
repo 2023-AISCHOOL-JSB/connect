@@ -63,3 +63,4 @@ function addOption(value, text) {
                 this.selectedIndex = 0; // 추가된 코드
             });
         });
+
