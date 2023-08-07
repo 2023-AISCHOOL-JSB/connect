@@ -1,150 +1,74 @@
-<section class="board">
-    <div class="board__head">
-        <span class="board__group">스터디</span>
-        <time class="board__deadline">~23.8.17</time>
-    </div>
-    <h1 class="board__title">React 스터디 모집</h1>
-    <p class="board__desc">즐겁게 성장할 React 스터디원
-        모집합니다.
-    </p>
-    <div class="board__stack">
-        <h5 class="board__stack--title">스택</h5>
-        <div>
-            <span>react</span>
-            <span>js</span>
-            <span>css</span>
+{%for board in data%}
+<a href="/detail?a={{ board.b_idx }}" class="post_idx" style=" color: black;">
+    <section class="board">
+        <div class="board__head">
+            <span class="board__group" data-array="{{board.b_category}}" data-index="0">-</span>
+            <time class="board__deadline" data-array="{{board.b_category}}" data-prepend="~" data-index="2">-</time>
         </div>
-    </div>
-    <div class="board__footer">
-        <h5 class="board__name">이치연</h5>
-        <div>
-            <span class="board__like">좋아요</span>
-            <span class="board__view">조회수</span>
+        <h1 class="board__title">{{board.b_title}}</h1>
+        <p class="board__desc">{{board.b_content.slice(0,20)}}</p>
+        <div class="board__stack">
+            {%if board.b_type !== '게시판'%}
+            <h5 class="board__stack--title">스택</h5>
+            <div>
+                <span>react</span>
+                <span>js</span>
+                <span>css</span>
+            </div>
+            {%endif%}
         </div>
-    </div>
-</section>
-<section class="board">
-    <div class="board__head">
-        <span class="board__group">스터디</span>
-        <time class="board__deadline">~23.8.17</time>
-    </div>
-    <h1 class="board__title">React 스터디 모집</h1>
-    <p class="board__desc">즐겁게 성장할 React 스터디원
-        모집합니다.
-    </p>
-    <div class="board__stack">
-        <h5 class="board__stack--title">스택</h5>
-        <div>
-            <span>react</span>
-            <span>js</span>
-            <span>css</span>
+        <div class="board__footer">
+            <h5 class="board__name">작성자</h5>
+            <div>
+                <span class="board__like">조회수{{board.b_views}}</span>
+                <span class="board__view">좋아요{{board.b_likes}}</span>
+            </div>
         </div>
-    </div>
-    <div class="board__footer">
-        <h5 class="board__name">이치연</h5>
-        <div>
-            <span class="board__like">좋아요</span>
-            <span class="board__view">조회수</span>
-        </div>
-    </div>
-</section>
-<section class="board">
-    <div class="board__head">
-        <span class="board__group">스터디</span>
-        <time class="board__deadline">~23.8.17</time>
-    </div>
-    <h1 class="board__title">React 스터디 모집</h1>
-    <p class="board__desc">즐겁게 성장할 React 스터디원
-        모집합니다.
-    </p>
-    <div class="board__stack">
-        <h5 class="board__stack--title">스택</h5>
-        <div>
-            <span>react</span>
-            <span>js</span>
-            <span>css</span>
-        </div>
-    </div>
-    <div class="board__footer">
-        <h5 class="board__name">이치연</h5>
-        <div>
-            <span class="board__like">좋아요</span>
-            <span class="board__view">조회수</span>
-        </div>
-    </div>
-</section>
-<section class="board">
-    <div class="board__head">
-        <span class="board__group">스터디</span>
-        <time class="board__deadline">~23.8.17</time>
-    </div>
-    <h1 class="board__title">React 스터디 모집</h1>
-    <p class="board__desc">즐겁게 성장할 React 스터디원
-        모집합니다.
-    </p>
-    <div class="board__stack">
-        <h5 class="board__stack--title">스택</h5>
-        <div>
-            <span>react</span>
-            <span>js</span>
-            <span>css</span>
-        </div>
-    </div>
-    <div class="board__footer">
-        <h5 class="board__name">이치연</h5>
-        <div>
-            <span class="board__like">좋아요</span>
-            <span class="board__view">조회수</span>
-        </div>
-    </div>
-</section>
-<section class="board">
-    <div class="board__head">
-        <span class="board__group">스터디</span>
-        <time class="board__deadline">~23.8.17</time>
-    </div>
-    <h1 class="board__title">React 스터디 모집</h1>
-    <p class="board__desc">즐겁게 성장할 React 스터디원
-        모집합니다.
-    </p>
-    <div class="board__stack">
-        <h5 class="board__stack--title">스택</h5>
-        <div>
-            <span>react</span>
-            <span>js</span>
-            <span>css</span>
-        </div>
-    </div>
-    <div class="board__footer">
-        <h5 class="board__name">이치연</h5>
-        <div>
-            <span class="board__like">좋아요</span>
-            <span class="board__view">조회수</span>
-        </div>
-    </div>
-</section>
-<section class="board">
-    <div class="board__head">
-        <span class="board__group">스터디</span>
-        <time class="board__deadline">~23.8.17</time>
-    </div>
-    <h1 class="board__title">React 스터디 모집</h1>
-    <p class="board__desc">즐겁게 성장할 React 스터디원
-        모집합니다.
-    </p>
-    <div class="board__stack">
-        <h5 class="board__stack--title">스택</h5>
-        <div>
-            <span>react</span>
-            <span>js</span>
-            <span>css</span>
-        </div>
-    </div>
-    <div class="board__footer">
-        <h5 class="board__name">이치연</h5>
-        <div>
-            <span class="board__like">좋아요</span>
-            <span class="board__view">조회수</span>
-        </div>
-    </div>
-</section>
+    </section>
+</a>
+{%endfor%}
+
+
+
+<script>
+    function populateElement(element) {
+        // data-array, data-index 및 data-prepend 속성에서 값을 가져온 다음 파싱합니다.
+        const dataArrayRaw = element.getAttribute('data-array');
+        const dataIndex = parseInt(element.getAttribute('data-index'), 10);
+        const prependValue = element.getAttribute('data-prepend') || ''; // prepend 값을 가져오거나 빈 문자열 사용
+        const dataArray = JSON.parse(dataArrayRaw);
+
+        // 원하는 값을 추출하고 "~"를 추가한 후 표시합니다.
+        const displayValue = prependValue + dataArray[dataIndex];
+        element.textContent = displayValue;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // 선택한 요소 처리
+        const customElements = document.querySelectorAll('.board__group, .board__deadline, .detail__table--desc');
+        customElements.forEach((element) => {
+            populateElement(element);
+        });
+    });
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const formatter = new Intl.DateTimeFormat('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        return formatter.format(date);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const postDateElements = document.querySelectorAll('.post-date');
+        postDateElements.forEach((element) => {
+            const rawDate = element.getAttribute('data-date');
+            const formattedDate = formatDate(rawDate);
+            element.textContent = formattedDate;
+        });
+    });</script>
