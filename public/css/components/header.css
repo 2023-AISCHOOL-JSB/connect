@@ -1,0 +1,30 @@
+
+.header__logo{
+    width: 80px;
+    height: 50px;
+    
+    
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 60px 60px;
+}
+
+.header__menu{
+    background-color: inherit;
+    border: none;
+    font-size: 25px;
+    
+    position: relative; /* 부모 요소에 position: relative; 추가 */
+    right: 100px; /* 오른쪽으로 50px 이동 *
+
+}
+
+.header__menu:hover{
+    scale: 1.1;
+    transition: 0.5s ease-in;
+    
+}

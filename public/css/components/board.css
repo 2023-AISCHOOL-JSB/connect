@@ -1,0 +1,66 @@
+.board{
+    width: 270px;
+    height: 300px;
+    border-radius: 30px;
+    border: 3px solid var(--box-color);
+    padding: 40px 40px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: white;
+    margin: 20px 20px; 
+}
+
+.board__head, .board__footer{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-weight: bold;
+    align-items: center;
+}
+
+.board__title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.board__desc{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.board__stack{
+    display: flex;
+    flex-direction: column;
+}
+
+.board__stack div{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.board__stack--title{
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.board__stack span, .board__group{
+    background-color: var(--box-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    border-radius:10px ;
+    margin-right: 5px;
+    font-weight: 900;
+    font-size: 12px;  
+}
+
+.board__footer{
+    font-size: 10px;
+    font-weight: bold;
+}
+/* 수정됨 */

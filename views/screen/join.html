@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% include 'components/header.html' %}
+
+<main class="join">
+
+    <form action="/join" method="post">
+        <h1>Sign Up</h1>
+        <div class="name">
+            <label for="name">이름</label>
+            <input class="join__input" type="text" id="name">
+        </div>
+        <div class="ID">
+            <label for="id">아이디</label>
+            <input class="join__input" type="text" id="id">
+        </div>
+        <div class="GitHub">
+            <label for="git_id">GitHub ID</label>
+            <input class="join__input" type="text" id="git_id">
+        </div>
+        <div class="pw">
+            <label for="password">비밀번호</label>
+            <input class="join__input" type="password" id="password">
+        </div>
+
+        <div class="pw-confirm">
+            <label for="password-check">비밀번호 확인</label>
+            <input class="join__input" type="password" id="password-check">
+        </div>
+
+        <div class="input process">
+            <label for="class">과정을 입력해주세요</label>
+            <select name="" id="class">
+                <option value="">JS</option>
+                <option value="">App</option>
+                <option value="">Spring</option>
+                <option value="">클라우드</option>
+                <option value="">사물지능</option>
+                <option value="">시각지능</option>
+                <option value="">언어지능</option>
+            </select>
+        </div>
+
+
+        <button class="join-btn">Join</button>
+
+        <a href="/" class="join-check">
+            아이디가 이미 존재하나요? login
+        </a>
+
+
+    </form>
+    <img src="img/join.jpeg" alt="">
+</main>
+
+{% endblock %}
