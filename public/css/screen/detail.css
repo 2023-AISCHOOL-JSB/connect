@@ -159,3 +159,31 @@
     background-color: inherit;
     color: var(--main-color);
 }
+
+/* 새로고침 호버값 */
+.wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+  
+  .coment-icon,
+  .coment-icon-hover {
+    position: absolute;
+    transition: opacity 0.3s;
+  }
+  
+  .coment-icon-hover {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .wrapper:hover .coment-icon {
+    opacity: 0;
+  }
+  
+  .wrapper:hover .coment-icon-hover {
+    opacity: 1;
+    pointer-events: auto;
+  }
