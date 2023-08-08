@@ -43,4 +43,27 @@ router.delete('/delete/:id', function(req, res) {
   });
 });
 
+// drop 하면 post로 바뀜
+
+router.post('/update/:id', function(req, res) {
+  const id = parseInt(req.params.id);
+  const process = req.body.process
+    
+
+  // MySQL 데이터베이스에서 해당 ID의 항목 삭제
+  const updateQuery = "update tb_canvan set in_process = ? where process_idx = ?";
+
+  conn.query(updateQuery, [id, process], (err, rows) => {
+    if (err) {
+      console.error('Database error:', err);
+      res.status(500).json({ message: 'Database error' });
+    } else if (rows.affectedRows === 0) {
+      res.status(404).json({ message: 'Item not found' });
+    } else {
+      res.json({ message: 'Item deleted successfully' });
+    }
+  });
+});
+
+
 module.exports = router;
