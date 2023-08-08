@@ -1,0 +1,67 @@
+{extends "layout.html"}
+{% block content %}
+
+<main class="chat"><!--사진-->
+
+    <section class="chat__list">
+
+        <img src="../photo/logo2.PNG" alt="connect로고" id="logo">
+
+        <!--검색창-->
+        <div class="search-mode">
+            <input type="text" placeholder="search" id="search">
+        </div>
+
+        <label class="chat__list__info">
+            <div class="talk__box">
+                <div class="nickname">leechi</div>
+                <div class="time">12:34</div>
+            </div>
+            <div class="text">공부를하세요</div>
+        </label>
+        <hr>
+
+        <label class="chat__info ">
+            <div class="talk__box">
+                <div class="nickname">김영재</div>
+                <div class="time">12:40</div>
+            </div>
+            <div class="text">반갑습니다</div>
+        </label>
+        <hr>
+
+
+        <label class="chat__info ">
+            <div class="talk__box">
+                <div class="nickname">이의현</div>
+                <div class="time">13:22</div>
+            </div>
+            <div class="text">스터디하자</div>
+            </div>
+        </label>
+        <hr>
+
+
+        <label class="chat__info ">
+            <div class="talk__box">
+                <div class="nickname">최진우</div>
+                <div class="time">13:52</div>
+            </div>
+            <div class="text">Hi</div>
+        </label>
+        <hr>
+
+
+        <label class="chat__info ">
+            <div class="talk__box">
+                <div class="nickname">Reat 스터디</div>
+                <div class="time">14:00</div>
+            </div>
+            <div class="text">안녕하세요</div>
+        </label>
+        <hr>
+
+    </section>
+</main>
+
+{% endblock %}

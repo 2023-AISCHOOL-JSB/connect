@@ -1,0 +1,155 @@
+/**오른쪽 채팅창*/
+.chat__msg__chat{
+    height: 90%;
+    width: 100%;
+}
+.right__msg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 800px;
+    
+}
+
+.chat{
+    background-color:#E8F0FF;
+    width: 800px;
+    height:828px;
+    display: flex;
+    align-items: center;
+    
+    flex-direction: column;
+    padding: 10px 20px 0 20px;
+}
+.chat__msg__header{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.chat__msg__title{
+    display: inline-block;
+    font-size: 25px;
+    font-weight: bold;
+    margin: auto;
+    margin-top: 30px;
+}
+
+
+
+/**대화 말풍선*/
+
+.name_me, .name_y{
+    margin-bottom:10px;
+}
+
+.chat__box--left {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-top:5px;
+}
+
+.chat__box--right {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top:5px;
+    flex-direction: column;
+
+}
+
+.chat__msg--detail--right{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.tail_y {
+    content: '';
+    position: relative;
+    bottom: 0;
+    left: 5%;
+    width: 0;
+    height: 0;
+    border: 0.906em solid transparent;
+    border-top-color: white;
+    border-bottom: 0;
+    border-left: 0;
+    
+}
+
+.time_y{
+    margin-top:10px;
+    color: gray;
+    font-size: 12px;
+}
+.talk_me{
+    
+    background: #4c7dfb;
+    color: white;
+    border-radius: 10px;    
+    width: auto;
+    height: auto;
+    padding: 10px;
+}
+.talk_y{
+    
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: auto;
+    height: auto;
+}
+
+.time_me{
+    margin-left: 60px;
+    padding-top: 5px;
+    color: gray;
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+
+.message {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+
+
+.input__chat {
+    height: 40px;
+    border: none;
+    width: 80%;
+    padding-left: 20px;
+    border: #4c7dfb 1px solid;
+
+}
+
+.button__click {
+    position: center;
+    background-color: #4c7dfb;
+    color: white;
+    border: none;
+    font-weight: bold;
+    width: 20%;
+    height: 40px;
+    cursor: pointer;
+}
+.name_me, .name_y{
+    font-weight: bold;
+}

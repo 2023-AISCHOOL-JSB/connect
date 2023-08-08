@@ -26,13 +26,13 @@
                 <p class="board__desc">{{board.b_content.slice(0,30)}}</p>
                 {%endif%}
         <div class="board__footer">
-            <h5 class="board__name">작성자</h5>
+            <h5 class="board__name">{{board.user_name}}</h5>
             <div>
                 <span class="board__like">조회수</span>
-                <span class="board__like">1</span>
+                <span class="board__like">{{board.b_views}}</span>
                 <br>
-                <span class="board__view">좋아요{{board.b_likes}}</span>
-                <span class="board__view">1</span>
+                <span class="board__view">좋아요</span>
+                <span class="board__view">{{board.b_likes}}</span>
             </div>
         </div>
     </section>
