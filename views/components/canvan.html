@@ -40,7 +40,7 @@
             {% for i in to %}
             {% if i.in_process == 'todo' %}
 
-            <li class="todo__list__li" draggable="true" data-id="i.process_idx">
+            <li class="todo__list__li" draggable="true" data-id="{{i.process_idx}}">
                 <div class="list__head">
                     <h3 class="list__title">{{i.todo}}</h3>
                     <button class="list__menu-btn"><i class="fa-regular fa-hand"></i></button>
@@ -53,7 +53,8 @@
                     <!-- <button class="list__btn--pro">In progress</button>
                     <button class="list__btn--done">Done</button> -->
 
-                    <button class="list__delete-btn"><i class="fa-solid fa-trash"></i></button>
+                    <button class="list__delete-btn" data-id="{{i.process_idx}}"><i
+                            class="fa-solid fa-trash"></i></button>
                     <button class="list__edit-btn"><i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
             </li>
@@ -67,8 +68,7 @@
         <h1> In progress</h1>
         <ul class="progress__list">
             {% for i in to %}
-            {% if i.in_process == 'inprogress' %}
-            <li class="todo__list__li" draggable="true" data-id="i.process_idx">
+            {% if i.in_process == ' inprogress' %} <li class="todo__list__li" draggable="true" data-id="i.process_idx">
                 <div class="list__head">
                     <h3 class="list__title">{{i.todo}}</h3>
                     <button class="list__menu-btn"><i class="fa-regular fa-hand"></i></button>

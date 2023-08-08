@@ -1,5 +1,5 @@
 const todolist = document.querySelectorAll('.todo__list__li');
-    const sections = document.querySelectorAll('.canvan section');
+const sections = document.querySelectorAll('.canvan section');
 
     for (const section of sections) {
         section.addEventListener('dragover', (e) => {
@@ -33,6 +33,8 @@ const listMenuBtn = document.querySelectorAll('.list__menu-btn')
 const listButtons = document.querySelectorAll('.list__buttons')
 
 
+
+
 for (let i = 0; i < listMenuBtn.length; i++ ) {
     let handCount = 0
 listMenuBtn[i].addEventListener('click', () => {
@@ -61,3 +63,38 @@ closeModalBtn.addEventListener("click", () => {
     canvanWrite.classList.add('hidden')
     
 })
+
+
+//  delete
+
+const listDelete = document.querySelectorAll(".list__delete-btn")
+
+
+listDelete.forEach((deleteBtn) => {
+    deleteBtn.addEventListener('click', (e) => {
+        
+        const itemId = deleteBtn.getAttribute('data-id')
+        deleteItem(itemId)
+    })
+})
+
+function deleteItem(id) {
+  fetch(`/group/delete/${id}`, {
+    method: 'DELETE'
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data.message); // 서버에서 보낸 응답 메시지
+
+    // 화면에서 삭제된 항목 제거 (예: button.parentNode.remove())
+  })
+  .catch(error => {
+    console.error('Fetch error:', error);
+  });
+}
+
