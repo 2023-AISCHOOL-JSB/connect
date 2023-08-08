@@ -3,8 +3,6 @@
 {% include 'components/nav.html' %}
 {% include 'components/header.html' %}
 
-
-
 <main class="detail">
     <section class="detail__box">
         {%for i in data%}
@@ -42,22 +40,20 @@
             {%endif%}
         </table>
         <section class="detail__desc">
-            {{i.b_content}}
+            {{ i.b_content|safe}}
         </section>
-
         <div class="detail__buttons">
             <a href="/chat">Chat</a>
             <a href="/">github</a>
             <button type="button"><i class="fa-regular fa-heart"></i> <span class="detail__like"> 5</span></button>
         </div>
-
         <form class="detail__msg" action="/addComment" method="POST">
             <h1 class="detail__msg--title">댓글수 <span class="detail__msg--num">{{commentCount}}</span>
                 <span class="wrapper">
                     <i class="fa-solid fa-rotate-right fa-lg coment-icon" style="color: #000000;"></i>
                     <i class="fa-solid fa-rotate-right fa-spin fa-lg coment-icon-hover" style="color: #000000;"></i>
-                  </span>
-                </h1>
+                </span>
+            </h1>
             <input type="hidden" name="post_idx" value="{{ data[0].b_idx }}" />
             <div>
                 <input class="detail__msg--input" type="text" name="content" required />
@@ -67,7 +63,8 @@
         <ul class="detail__msg-list">
             {% for comment in comments %}
             <li>
-                <h1><span class="user-name">{{ comment.user_name }}</span> <span class="comment-date" data-date="{{ comment.created_at }}">-</span></h1>
+                <h1><span class="user-name">{{ comment.user_name }}</span> <span class="comment-date"
+                        data-date="{{ comment.created_at }}">-</span></h1>
                 <p style="font-size: 20px;">{{ comment.cmt_content }}</p>
             </li>
             {% endfor %}
@@ -77,49 +74,39 @@
 </main>
 
 <script>
-
     function populateElement(element) {
-        // data-array, data-index 및 data-prepend 속성에서 값을 가져온 다음 파싱합니다.
         const dataArrayRaw = element.getAttribute('data-array');
         const dataIndex = parseInt(element.getAttribute('data-index'), 10);
-        const prependValue = element.getAttribute('data-prepend') || ''; // prepend 값을 가져오거나 빈 문자열 사용
+        const prependValue = element.getAttribute('data-prepend') || '';
         const dataArray = JSON.parse(dataArrayRaw);
-
-        // 원하는 값을 추출하고 "~"를 추가한 후 표시합니다.
         const displayValue = prependValue + dataArray[dataIndex];
         const displayValue1 = dataArray[dataIndex] + prependValue;
-        element.textContent = displayValue;
-        element.textContent = displayValue1;
+        element.innerHTML = displayValue;
+        element.innerHTML = displayValue1;
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        // 선택한 요소 처리
         const customElements = document.querySelectorAll('.board__group, .board__deadline, .detail__table--desc');
         customElements.forEach((element) => {
             populateElement(element);
         });
-    
-        // 포스트 날짜 처리
+
         const postDateElements = document.querySelectorAll('.post-date');
         postDateElements.forEach((element) => {
             const rawDate = element.getAttribute('data-date');
             const formattedDate = formatDate(rawDate);
             element.textContent = formattedDate;
         });
-    
-        // 댓글 작성 날짜 처리
+
         const commentDateElements = document.querySelectorAll('.comment-date');
         commentDateElements.forEach((element) => {
             const rawDate = element.getAttribute('data-date');
             const formattedDate = formatDate(rawDate);
             const userName = element.previousElementSibling.textContent;
 
-            // 사용자 이름과 날짜를 함께 표시합니다.
             element.parentElement.innerHTML = `${userName} ${formattedDate}`;
         });
     });
-
- 
 
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -131,9 +118,8 @@
             minute: '2-digit',
             hour12: false
         });
-    
+
         return formatter.format(date);
     }
-    
 </script>
 {% endblock %}

@@ -30,6 +30,7 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
+
 // 3. post방식으로 데이터를 넘겨줄 때 필요함
 app.use(bodyParser.urlencoded({ extended: true }));
 

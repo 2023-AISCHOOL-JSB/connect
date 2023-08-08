@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const conn = require("../config/database");
 
 router.get("/", (req, res) => {
@@ -95,7 +94,6 @@ async function getPostDetail(post_idx, req, res) {
       // 해당 게시글이 없을 경우 오류 메시지 출력
       return res.status(404).send("해당게시글이 없습니다.");
     }
-
     // 댓글 수를 가져옴
     let commentCount;
     try {
