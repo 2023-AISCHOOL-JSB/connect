@@ -1,3 +1,4 @@
+
 const todolist = document.querySelectorAll('.todo__list__li');
     const sections = document.querySelectorAll('.canvan section');
 
@@ -29,35 +30,18 @@ const todolist = document.querySelectorAll('.todo__list__li');
 
 // write
 
-const listMenuBtn = document.querySelectorAll('.list__menu-btn')
-const listButtons = document.querySelectorAll('.list__buttons')
+const listMenuBtn = document.querySelector('.list__menu-btn')
+const listButtons = document.querySelector('.list__buttons')
 
-
-for (let i = 0; i < listMenuBtn.length; i++ ) {
-    let handCount = 0
-listMenuBtn[i].addEventListener('click', () => {
-    listButtons[i].classList.toggle('hidden')
+let handCount = 0
+listMenuBtn.addEventListener('click', () => {
+    listButtons.classList.toggle('hidden')
     handCount++
-    console.log(handCount)
     if (handCount % 2 == 1) {
-        listMenuBtn[i].innerHTML = `<i class="fa-solid fa-hand"></i>`
+        listMenuBtn.innerHTML = `<i class="fa-solid fa-hand"></i>`
     } else {
-        listMenuBtn[i].innerHTML = `<i class="fa-regular fa-hand"></i>`
+        listMenuBtn.innerHTML = `<i class="fa-regular fa-hand"></i>`
     }
-})
-    }
+    
 
-const canvanWrite = document.querySelector(".canvan__write");
-const openModalBtn = document.querySelector(".add-new-task-btn");
-const closeModalBtn = document.querySelector(".canvan__write__close");
-// 모달창 열기
-openModalBtn.addEventListener("click", () => {
-    canvanWrite.classList.remove('hidden')
-    
-  
-});
-// 모달창 닫기
-closeModalBtn.addEventListener("click", () => {
-    canvanWrite.classList.add('hidden')
-    
 })
