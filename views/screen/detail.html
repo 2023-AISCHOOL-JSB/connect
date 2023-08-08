@@ -15,7 +15,7 @@
         </div>
         {% if loginUser and loginUser.user_id == i.user_id %}
         <div>
-            <a href="/write?edit={{i.b_idx}}">수정</a>
+            <span>수정</span>
             <span>삭제</span>
         </div>
         {% endif %}
@@ -50,13 +50,9 @@
             <a href="/">github</a>
             <button type="button"><i class="fa-regular fa-heart"></i> <span class="detail__like"> 5</span></button>
         </div>
+
         <form class="detail__msg" action="/addComment" method="POST">
-            <h1 class="detail__msg--title">댓글수 <span class="detail__msg--num">{{commentCount}}</span>
-                <span class="wrapper">
-                    <i class="fa-solid fa-rotate-right fa-lg coment-icon" style="color: #000000;"></i>
-                    <i class="fa-solid fa-rotate-right fa-spin fa-lg coment-icon-hover" style="color: #000000;"></i>
-                  </span>
-                </h1>
+            <h1 class="detail__msg--title">댓글수 <span class="detail__msg--num">{{commentCount}}</span></h1>
             <input type="hidden" name="post_idx" value="{{ data[0].b_idx }}" />
             <div>
                 <input class="detail__msg--input" type="text" name="content" required />

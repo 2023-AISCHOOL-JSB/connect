@@ -19,3 +19,4 @@ canvanBtn.addEventListener('click', () => {
     noticeBtn.classList.remove('blue')
     noticeList.classList.add('hidden')
 })
+
