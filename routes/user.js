@@ -110,4 +110,41 @@ router.get('/logout',(req,res)=>{
   res.send(`<script>location.href="http://localhost:3000/"</script>`)
 })
 
+// 회원가입 수정 페이지 이동
+router.get('/setting',(req,res)=>{
+  res.render('screen/setting',{obj : req.session.user})
+})
+// 회원 정보 수정 기능 라우터 (JS fetch 와의 연동) ★★★★★
+router.post('/modify',(req,res)=>{
+  console.log('회원정보수정!',req.body)
+
+  // 1. 내가 받아온 새 이름과 새 주소를 name, add 라는 변수에 넣을 것
+  let {name,git,phone,process1} = req.body
+  console.log(name,git,phone,process1)
+  // 2. id 값? session에서 가져오기
+  let id = req.session.user.user_id 
+  // 3. DB 연동
+  let sql = 'update tb_user set user_name = ?, user_email = ?, user_phone=?, user_class= ? where user_id = ?'
+  conn.query(sql,[name,git,phone,process1, id],(err, rows)=>{
+      console.log(rows)
+      if(rows.affectedRows>0){
+          console.log('값 변경 성공!')
+          req.session.user.user_name = name
+          req.session.user.user_email = git
+          req.session.user.user_phone = phone
+          req.session.user.user_class = process1
+          res.json({msg : 'success'})
+      }else{
+          console.log('값 변경 실패...')
+          res.json({msg : 'failed..'})
+      }
+    })
+    //  3-2) update set 을 이용해서 DB값 변경
+    //  3-3) 세션 안에 있는 값 변경 (이름, 주소변경)
+    // 4. console.log('값 변경 성공!'), '값 변경 실패'
+    //      => 페이지 이동 X 캡쳐해서 단톡방에
+    
+  })
+  
+
 module.exports = router;

@@ -7,6 +7,8 @@
     </ul>
     <div class="search__bar">
         <button class="search__button"><i class="fa-solid fa-magnifying-glass"></i></button>
-        <input type="text" class="search__input" placeholder="제목, 게시글 검색">
+        <form action="/search" method="post">
+            <input name="content" type="text" class="search__input" placeholder="제목, 게시글 검색">
+        </form>
     </div>
 </div>
