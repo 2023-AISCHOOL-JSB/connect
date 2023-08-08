@@ -86,7 +86,7 @@ function deleteItem(id) {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    return response.json();
+    return response.json(); 
   })
   .then(data => {
     console.log(data.message); // 서버에서 보낸 응답 메시지
