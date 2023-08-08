@@ -4,7 +4,7 @@ const conn = require("../config/database");
 
 router.post("/wirte", (req, res) => {
   let {title, content, categoryMain, category, human, lastdate, selectedStacks} = req.body;
-
+  let userid = req.session.user.user_id
   let categoryJson;
   if (categoryMain !== "게시판") {
     const parsedSelectedStacks = JSON.parse(selectedStacks);
@@ -15,8 +15,8 @@ router.post("/wirte", (req, res) => {
     categoryJson = JSON.stringify({});
   }
 
-  let sql = "INSERT INTO tb_board (b_title, b_content, created_at, b_type, b_category) VALUES (?, ?, NOW(), ?, ?)";
-  conn.query(sql, [title, content, categoryMain, categoryJson], (err, rows) => {
+  let sql = "INSERT INTO tb_board (b_title, b_content, created_at,user_id, b_type, b_category) VALUES (?, ?, NOW(), ?,?, ?)";
+  conn.query(sql, [title, content, userid, categoryMain, categoryJson], (err, rows) => {
     if (err) {
       console.error("Error:", err);
       res.send(`<script>alert("전송 실패");
@@ -83,8 +83,8 @@ router.post('/login', (req,res)=>{
         } else {
           console.log('자동 로그인 안함');
           // 자동 로그인이 체크되지 않았다면, 쿠키의 만료 시간을 30분 후로 설정합니다.
-          req.session.cookie.expires = new Date(Date.now() + 10 * 1000);
-          req.session.cookie.maxAge = 10 * 1000;
+          req.session.cookie.expires = new Date(Date.now() + 100* 1000);
+          req.session.cookie.maxAge = 100 * 1000;
           req.session.user = rows[0];
         }
           

@@ -11,12 +11,14 @@
         <h1 class="detail__title">{{i.b_title}}</h1>
         <div class="detail__info">
             <span class="post-date" data-date="{{ i.created_at }}">-</span>
-            <span>dkssud홍길동</span>
+            <span>{{i.user_name}}</span>
         </div>
-        <div class="detail__ud">
-            <span>수정</span>
-            <span>삭제</span>
-        </div>
+        {% if loginUser and loginUser.user_id == i.user_id %}
+        <div>
+        <span>수정</span>
+        <span>삭제</span>
+    </div>
+      {% endif %}
         <table class="detail__table">
             {%if i.b_type == '모집'%}
             <tr>
@@ -25,7 +27,7 @@
             </tr>
             <tr>
                 <td class="detail__table--title">마감일</td>
-                <td class="detail__table--desc"data-array="{{ i.b_category }}" data-index="2">-</td>
+                <td class="detail__table--desc" data-array="{{ i.b_category }}" data-index="2">-</td>
             </tr>
             <tr>
                 <td class="detail__table--title">모집인원</td>
@@ -34,7 +36,7 @@
             <tr>
                 <td class="detail__table--title">기술스택</td>
                 <!-- data-index = 배열의 3번째다 -->
-                <td class="detail__table--desc" data-array="{{ i.b_category }}" data-index="3"></td> 
+                <td class="detail__table--desc" data-array="{{ i.b_category }}" data-index="3"></td>
             </tr>
             {%else %}
             {%endif%}
@@ -68,50 +70,50 @@
 </main>
 
 <script>
-    
-function populateElement(element) {
-    // data-array, data-index 및 data-prepend 속성에서 값을 가져온 다음 파싱합니다.
-    const dataArrayRaw = element.getAttribute('data-array');
-    const dataIndex = parseInt(element.getAttribute('data-index'), 10);
-    const prependValue = element.getAttribute('data-prepend') || ''; // prepend 값을 가져오거나 빈 문자열 사용
-    const dataArray = JSON.parse(dataArrayRaw);
-  
-    // 원하는 값을 추출하고 "~"를 추가한 후 표시합니다.
-    const displayValue = prependValue + dataArray[dataIndex];
-    const displayValue1 = dataArray[dataIndex] + prependValue ;
-    element.textContent = displayValue;
-    element.textContent = displayValue1;
-  }
-  
-  document.addEventListener('DOMContentLoaded', function () {
-    // 선택한 요소 처리
-    const customElements = document.querySelectorAll('.board__group, .board__deadline, .detail__table--desc');
-    customElements.forEach((element) => {
-      populateElement(element);
-    });
-  });
 
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    const formatter = new Intl.DateTimeFormat('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
+    function populateElement(element) {
+        // data-array, data-index 및 data-prepend 속성에서 값을 가져온 다음 파싱합니다.
+        const dataArrayRaw = element.getAttribute('data-array');
+        const dataIndex = parseInt(element.getAttribute('data-index'), 10);
+        const prependValue = element.getAttribute('data-prepend') || ''; // prepend 값을 가져오거나 빈 문자열 사용
+        const dataArray = JSON.parse(dataArrayRaw);
+
+        // 원하는 값을 추출하고 "~"를 추가한 후 표시합니다.
+        const displayValue = prependValue + dataArray[dataIndex];
+        const displayValue1 = dataArray[dataIndex] + prependValue;
+        element.textContent = displayValue;
+        element.textContent = displayValue1;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // 선택한 요소 처리
+        const customElements = document.querySelectorAll('.board__group, .board__deadline, .detail__table--desc');
+        customElements.forEach((element) => {
+            populateElement(element);
+        });
     });
 
-    return formatter.format(date);
-  }
-  document.addEventListener('DOMContentLoaded', function () {
-    const postDateElements = document.querySelectorAll('.post-date');
-    postDateElements.forEach((element) => {
-        const rawDate = element.getAttribute('data-date');
-        const formattedDate = formatDate(rawDate);
-        element.textContent = formattedDate;
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const formatter = new Intl.DateTimeFormat('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        });
+
+        return formatter.format(date);
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        const postDateElements = document.querySelectorAll('.post-date');
+        postDateElements.forEach((element) => {
+            const rawDate = element.getAttribute('data-date');
+            const formattedDate = formatDate(rawDate);
+            element.textContent = formattedDate;
+        });
     });
-});
 
 
 </script>
