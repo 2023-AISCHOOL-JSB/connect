@@ -8,7 +8,7 @@
 
 
 <main class="write__box">
-    <form action="../user/wirte" method="post" class="write">
+    <form action="/user/write" method="post" class="write">
         <div class="write__info">
             <h1>게시글 구분</h1>
             <select class="write__select" name="categoryMain">
@@ -87,19 +87,18 @@
     const editor = new toastui.Editor({
         el: document.querySelector('#editor'),
         height: '500px',
-        initialEditType: 'wysiwyg',
+        initialEditType: 'WYSIWYG',
         previewStyle: 'vertical',
-        viewer: true,
-        hideModeSwitch: true, // 밑에 스위치 제거
-        toolbarItems: [
+        viewer: false,
+        hideModeSwitch: false, // 밑에 스위치 제거
+        toolbarItems:[
+            // 툴바 옵션 설정
             ['heading', 'bold', 'italic', 'strike'],
             ['hr', 'quote'],
-            ['ul', 'ol', 'task'],
-            ['table', 'link'],
-            ['code', 'codeblock'],
-            ['scrollSync'],
-        ],
-    });
+            ['ul', 'ol'],
+            ['table', 'image', 'link'],
+            ['code', 'codeblock']
+          ]})
 
     document.querySelector('.write').addEventListener('submit', function (event) {
         event.preventDefault();

@@ -7,6 +7,9 @@ const session = require("express-session");
 const fileStore = require("session-file-store")(session);
 const indexRouter = require("./routes");
 const userRouter = require("./routes/user");
+const groupRouter = require("./routes/group");
+const chatRouter = require("./routes/chat");
+
 
 const cors = require("cors");
 
@@ -27,6 +30,7 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
+
 // 3. post방식으로 데이터를 넘겨줄 때 필요함
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -47,6 +51,9 @@ app.use(
 // 6. 라우팅 처리
 app.use("/", indexRouter);
 app.use("/user", userRouter);
+app.use("/group", groupRouter);
+app.use("/chat", chatRouter);
+
 
 app.listen(app.get("port"), () => {
   console.log(app.get("port") + "번 포트에서 대기중...");

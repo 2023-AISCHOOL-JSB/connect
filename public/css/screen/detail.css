@@ -126,8 +126,13 @@
     background-color: var(--btn-color);
     color: white;
     font-size: 17px;
-    
-    
+}
+/* 수정함 */
+.detail__msg--input,
+.detail__msg--btn {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 5px; /* 높이 값 감소 */
 }
 
 .detail__msg-list{
@@ -158,4 +163,81 @@
     font-size: 15px;
     background-color: inherit;
     color: var(--main-color);
+}
+
+/* 새로고침 호버값 */
+.wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+  
+  .coment-icon,
+  .coment-icon-hover {
+    position: absolute;
+    transition: opacity 0.3s;
+  }
+  
+  .coment-icon-hover {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .wrapper:hover .coment-icon {
+    opacity: 0;
+  }
+  
+  .wrapper:hover .coment-icon-hover {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* CSS 댓글창*/
+  .comment-container {
+    font-family: Arial, sans-serif;
+    width: 600px;
+    margin: auto;
+    background-color: #f8f8f8;
+    padding: 20px 20px 10px 20px; /* bottom 패딩을 5px에서 10px로 변경 */
+    border-radius: 5px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment {
+    padding-bottom: 0;
+    margin-bottom: 10px; /* 모든 댓글 간 여백 설정 */
+}
+
+
+.comment:last-child {
+    /* 마지막 댓글에 대한 추가 스타일 */
+    padding-bottom: 0;
+    margin-bottom: 10px; /* 마지막 댓글의 여백을 다른 댓글과 동일하게 */
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.comment-date {
+    font-size: 14px;
+    color: #999;
+}
+
+.comment-content {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.comment-separator {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.detail__msg-list {
+    list-style: none;
+    padding: 20;
+    margin: 0;
 }
