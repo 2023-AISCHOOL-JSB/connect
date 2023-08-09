@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const { JSDOM } = require('jsdom');
 
 const bodyParser = require("body-parser");
 const nunjucks = require("nunjucks");
