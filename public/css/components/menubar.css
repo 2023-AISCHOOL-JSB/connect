@@ -50,8 +50,9 @@
     align-items: flex-start;
     justify-content: space-around;
     height: 500px;
-}
-
+    list-style-type: none; /* 기본 불릿 표시 없애기 */
+    padding-left: 0; /* 좌측 여백 없애기 (선택사항) */
+    }
 
 .menu-bar__buttons{
     margin-bottom:20px;

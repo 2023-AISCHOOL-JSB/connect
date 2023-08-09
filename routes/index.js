@@ -3,18 +3,68 @@ const router = express.Router();
 const conn = require("../config/database");
 
 router.get("/", (req, res) => {
+  res.redirect('/page/1');
+});
+
+// 페이징 라우터 추가
+router.get("/page/:pageNumber", async (req, res) => {
+  const pageNumber = parseInt(req.params.pageNumber, 10);
+  
+  if (isNaN(pageNumber) || pageNumber < 1) {
+    return res.status(400).send("Invalid page number");
+  }
+  
+  const postsPerPage = 12;
+  const offset = (pageNumber - 1) * postsPerPage;
+
+  let totalPostCount, totalPages;
+  try {
+    totalPostCount = await getTotalPostCount();
+    totalPages = Math.ceil(totalPostCount / postsPerPage); 
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("데이터베이스 에러");
+  }
+
   let sql = `
       SELECT tb_board.*, tb_user.user_name 
       FROM tb_board 
       INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id 
       WHERE tb_board.b_permit = 'YES'
       ORDER BY tb_board.b_idx DESC
-      LIMIT 12
+      LIMIT ?, ?
     `;
-  conn.query(sql, (err, rows) => {
-    res.render("screen/main", { data: rows, obj: req.session.user });
+    
+  conn.query(sql, [offset, postsPerPage], (err, rows) => {
+    res.render("screen/main", { data: rows, obj: req.session.user, totalPages: totalPages });
   });
 });
+
+// 총 게시물 수 반환 함수 추가
+function getTotalPostCount() {
+  return new Promise((resolve, reject) => {
+    const query = "SELECT COUNT(b_idx) as postCount FROM tb_board WHERE b_permit = 'YES'";
+    conn.query(query, (err, results, fields) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results[0].postCount);
+      }
+    });
+  });
+}
+
+// 검색 기능
+router.post('/search',(req,res)=>{
+  console.log(req.body.content)
+  const search = req.body.content
+
+  let sql = `SELECT * FROM tb_board WHERE b_title LIKE '%${search}%' OR b_content LIKE '%${search}%' OR user_id LIKE '%${search}%' OR b_type LIKE '%${search}%' order by created_at desc`
+
+  conn.query(sql,[search],(err, rows)=>{
+   res.render('screen/main', { data:rows , obj: req.session.user })
+  })
+})
 
 router.get("/join", (req, res) => {
   res.render("screen/join");
@@ -22,6 +72,24 @@ router.get("/join", (req, res) => {
 
 router.get("/write", (req, res) => {
   res.render("screen/write", { obj: req.session.user });
+});
+
+router.delete('/deletePost/:postIdx', (req, res) => {
+  const postIdx = req.params.postIdx;
+
+  // SQL 쿼리를 사용하여 게시물 삭제
+  const sql = 'UPDATE tb_board SET b_permit = "NO" WHERE b_idx = ?';
+  conn.query(sql, [postIdx], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('데이터베이스 에러');
+    }
+    if (result.affectedRows > 0) {
+      res.status(200).send('성공적으로 삭제되었습니다.');
+    } else {
+      res.status(404).send('해당 게시물이 없습니다.');
+    }
+  });
 });
 
 router.get("/detail", (req, res) => {
@@ -156,6 +224,7 @@ router.post("/addComment", (req, res) => {
     res.redirect("/detail?a=" + post_idx);
   });
 });
+
 
 
 module.exports = router;

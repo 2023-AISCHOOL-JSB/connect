@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이페이지</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      hr {
+        width: 100%;
+        margin: 20px 0;
+        border: none;
+        border-top: 1px solid #ddd;
+      }
+
+      .contact-section {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .contact-method {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .contact-method h3 {
+        margin: 0;
+        margin-right: 10px;
+        width: 120px;
+        text-align: right;
+      }
+
+      .input-change {
+        flex: 1;
+      }
+
+      input.input-class {
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 100%;
+      }
+
+      button {
+        margin-right: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        background-color: #286efa;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #1f3dd2;
+      }
+    </style>
+  </head>
+  <body>
+            <div class="contact-section">
+                <h1>마이페이지(설정)</h1>
+                <hr />
+                <div class="contact-method">
+                    <h3>ID</h3>
+                    <span class="input-change">{{obj.user_id}}</span>
+                </div>
+                <hr />
+                <div class="contact-method">
+                    <h3>이름</h3>
+                    <span class="input-change">{{obj.user_name}}</span>
+                </div>
+                <hr />
+                <div class="contact-method">
+                    <h3>GitHub ID</h3>
+                    <span class="input-change">{{obj.user_email}}</span>
+                </div>
+                <hr />
+                <div class="contact-method">
+                    <h3>Phone</h3>
+                    <span class="input-change">{{obj.user_phone}}</span>
+                </div>
+                <hr />
+                <div class="contact-method">
+                    <h3>반(과정)</h3>
+                    <span class="input-change">{{obj.user_class}}</span>
+                </div>
+                <hr />
+                <div class="button-container">
+                    <button onclick="updateMyPage()">수정</button>
+                    <button onclick="completeUpdate()">저장</button>
+                    <a href="/"><button>메인돌아가기</button></a>
+                </div>
+            </div>
+
+    <script>
+      const updateMyPage = () => {
+        let inputList = document.getElementsByClassName("input-change");
+        for (let i = 1; i < inputList.length; i++) {
+          console.log("update", inputList[i].innerText);
+          inputList[i].innerHTML = `<input type='text' class="input-class" value="${inputList[i].innerText}" oninput="changeData()"></input>`;
+        }
+      };
+
+      let changedName = "";
+      let changedGit = "";
+      let changedPhone = "";
+      let changedProcess = "";
+
+      const changeData = () => {
+        changedName = document.getElementsByClassName("input-class")[0].value;
+        changedGit = document.getElementsByClassName("input-class")[1].value;
+        changedPhone = document.getElementsByClassName("input-class")[2].value;
+        changedProcess = document.getElementsByClassName("input-class")[3].value;
+      };
+
+      const completeUpdate = () => {
+        console.log(changedName, changedGit, changedPhone, changedProcess);
+
+        let url = "http://localhost:3000/user/modify";
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: changedName,
+            git: changedGit,
+            phone: changedPhone,
+            process1: changedProcess,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+
+            if (res.msg == "success") {
+              alert("변경성공");
+            } else {
+              alert("변경실패!");
+            }
+            location.href = "http://localhost:3000/user/setting";
+          });
+      };
+    </script>
+  </body>
+</html>

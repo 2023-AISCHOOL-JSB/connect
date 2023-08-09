@@ -1,0 +1,22 @@
+<style>
+    .pagination {
+      text-align:center;
+      margin-right:5%;
+    }
+    .pagination > a {
+      font-size: medium;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #007BFF;
+    }
+    .pagination .active {
+      background-color: #007BFF;
+      color: white;
+    }
+  </style>
+
+<a href="/page/1">&laquo;</a>
+{% for pageNumber in range(1, totalPages + 1) %}
+<a href="/page/{{pageNumber}}" class="{{ 'active' if pageNumber == currentPage }}">{{pageNumber}}</a>
+{% endfor %}
+<a href="/page/{{totalPages}}">&raquo;</a>

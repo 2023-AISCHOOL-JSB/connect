@@ -14,7 +14,7 @@
         {% if loginUser and loginUser.user_id == i.user_id %}
         <div>
             <span>수정</span>
-            <span>삭제</span>
+            <span id="delete-post-btn" style="cursor: pointer;">삭제</span>
         </div>
         {% endif %}
         <table class="detail__table">
@@ -61,16 +61,27 @@
             </div>
         </form>
         <ul class="detail__msg-list">
-            {% for comment in comments %}
-            <li>
-                <h1><span class="user-name">{{ comment.user_name }}</span> <span class="comment-date"
-                        data-date="{{ comment.created_at }}">-</span></h1>
-                <p style="font-size: 20px;">{{ comment.cmt_content }}</p>
-            </li>
-            {% endfor %}
+            {% if comments.length > 0 %}
+            <div class="comment-container">
+                {% for comment in comments %}
+                <div class="comment">
+                    <h2>
+                        <span class="user-name">{{ comment.user_name }}</span>
+                        <span class="comment-date" data-date="{{ comment.created_at }}">-</span>
+                    </h2>
+                    <p class="comment-content">{{ comment.cmt_content }}</p>
+                    {% if not loop.last %}
+                    <div class="comment-separator"></div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>댓글이 존재하지 않습니다.</p>
+            {% endif %}
         </ul>
+        {%endfor%}
     </section>
-    {%endfor%}
 </main>
 
 <script>
@@ -103,8 +114,7 @@
             const rawDate = element.getAttribute('data-date');
             const formattedDate = formatDate(rawDate);
             const userName = element.previousElementSibling.textContent;
-
-            element.parentElement.innerHTML = `${userName} ${formattedDate}`;
+            element.parentElement.innerHTML = `${userName} | ${formattedDate}`;
         });
     });
 
@@ -121,5 +131,31 @@
 
         return formatter.format(date);
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const deletePostBtn = document.querySelector("#delete-post-btn");
+        if (deletePostBtn) {
+            deletePostBtn.addEventListener("click", handleDeletePost);
+            async function handleDeletePost() {
+                const postIdx = document.querySelector('input[name="post_idx"]').value;
+
+                // 확인 대화 상자 추가
+                if (!confirm("진짜 삭제하시겠습니까?")) {
+                    return;
+                }
+
+                const response = await fetch(`/deletePost/${postIdx}`, {
+                    method: 'DELETE',
+                });
+                if (response.ok) {
+                    alert('글이 성공적으로 삭제되었습니다.');
+                    window.location.href = '/'; // 또는 다른 페이지로 이동
+                } else {
+                    alert('글 삭제 중 오류가 발생했습니다.');
+                }
+            }
+        }
+    });
+
 </script>
 {% endblock %}

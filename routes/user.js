@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
 
-router.post("/wirte", (req, res) => {
+router.post("/write", (req, res) => {
   let {title, content, categoryMain, category, human, lastdate, selectedStacks} = req.body;
   let userid = req.session.user.user_id
   let categoryJson;
   if (categoryMain !== "게시판") {
-    const parsedSelectedStacks = JSON.parse(selectedStacks);
+    const parsedSelectedStacks = selectedStacks ? JSON.parse(selectedStacks) : [];
     let categoryArray = [category, human, lastdate, parsedSelectedStacks];
     categoryJson = JSON.stringify(categoryArray);
   } else {
@@ -75,22 +75,11 @@ router.post('/login', (req,res)=>{
   
       if(rows.length > 0){
          console.log('로그인 성공!', rows)
-         if(req.body.autologin != undefined){
           req.session.user = rows[0];
-          // 자동 로그인이 체크되었다면, 쿠키의 만료 시간을 14일 후로 설정합니다.
-          req.session.cookie.expires = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
-          req.session.cookie.maxAge = 14 * 24 * 60 * 60 * 1000;
-        } else {
-          console.log('자동 로그인 안함');
-          // 자동 로그인이 체크되지 않았다면, 쿠키의 만료 시간을 30분 후로 설정합니다.
-          req.session.cookie.expires = new Date(Date.now() + 100* 1000);
-          req.session.cookie.maxAge = 100 * 1000;
-          req.session.user = rows[0];
-        }
-          
-         res.send(`<script>alert("환영합니다");
-         location.href="http://localhost:3000/"</script>`)
-      } else {
+          res.send(`<script>alert("환영합니다");
+          location.href="http://localhost:3000/"</script>`)
+      } 
+         else {
          console.log('로그인 실패!')
          res.send(`<script>alert("아이디/비밀번호를 다시 확인해주세여.");
          location.href="http://localhost:3000/"</script>`)
@@ -110,4 +99,38 @@ router.get('/logout',(req,res)=>{
   res.send(`<script>location.href="http://localhost:3000/"</script>`)
 })
 
+router.get('/setting',(req,res)=>{
+  res.render('screen/setting',{obj : req.session.user})
+})
+// 회원 정보 수정 기능 라우터 (JS fetch 와의 연동) ★★★★★
+router.post('/modify',(req,res)=>{
+  console.log('회원정보수정!',req.body)
+
+  // 1. 내가 받아온 새 이름과 새 주소를 name, add 라는 변수에 넣을 것
+  let {name,git,phone,process1} = req.body
+  console.log(name,git,phone,process1)
+  // 2. id 값? session에서 가져오기
+  let id = req.session.user.user_id 
+  // 3. DB 연동
+  let sql = 'update tb_user set user_name = ?, user_email = ?, user_phone=?, user_class= ? where user_id = ?'
+  conn.query(sql,[name,git,phone,process1, id],(err, rows)=>{
+      console.log(rows)
+      if(rows.affectedRows>0){
+          console.log('값 변경 성공!')
+          req.session.user.user_name = name
+          req.session.user.user_email = git
+          req.session.user.user_phone = phone
+          req.session.user.user_class = process1
+          res.json({msg : 'success'})
+      }else{
+          console.log('값 변경 실패...')
+          res.json({msg : 'failed..'})
+      }
+    })
+    //  3-2) update set 을 이용해서 DB값 변경
+    //  3-3) 세션 안에 있는 값 변경 (이름, 주소변경)
+    // 4. console.log('값 변경 성공!'), '값 변경 실패'
+    //      => 페이지 이동 X 캡쳐해서 단톡방에
+    
+  })
 module.exports = router;
