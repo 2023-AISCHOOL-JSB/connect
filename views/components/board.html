@@ -23,7 +23,7 @@
                     <span class="board__group1">자유게시판</span>
                 </div>
                 <h1 class="board__title">{{board.b_title}}</h1>
-                <p class="board__desc">{{board.b_content.slice(0,30)}}</p>
+                <p class="board__desc">{{ board.b_content | stripHtmlTags | truncate(30) }}</p>
                 {%endif%}
         <div class="board__footer">
             <h5 class="board__name">{{board.user_name}}</h5>

@@ -26,9 +26,13 @@ app.set("port", process.env.PORT || 3000);
 
 // 2. 동적인 페이지 설정 - nunjucks
 app.set("view engine", "html");
-nunjucks.configure("views", {
+const env = nunjucks.configure("views", {
   express: app,
   watch: true,
+});
+// html태그 제거기능
+env.addFilter('stripHtmlTags', function (str) {
+  return str.replace(/<[^>]+>/gm, ""); // 기존 정규식에 옵션 `m` 추가(여러 줄 처리)
 });
 
 // 3. post방식으로 데이터를 넘겨줄 때 필요함
