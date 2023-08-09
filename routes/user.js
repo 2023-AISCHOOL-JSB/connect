@@ -75,19 +75,8 @@ router.post('/login', (req,res)=>{
   
       if(rows.length > 0){
          console.log('로그인 성공!', rows)
-         if(req.body.autologin != undefined){
-          req.session.user = rows[0];
-          // 자동 로그인이 체크되었다면, 쿠키의 만료 시간을 14일 후로 설정합니다.
-          req.session.cookie.expires = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
-          req.session.cookie.maxAge = 14 * 24 * 60 * 60 * 1000;
-        } else {
-          console.log('자동 로그인 안함');
-          // 자동 로그인이 체크되지 않았다면, 쿠키의 만료 시간을 30분 후로 설정합니다.
-          req.session.cookie.expires = new Date(Date.now() + 100* 1000);
-          req.session.cookie.maxAge = 100 * 1000;
-          req.session.user = rows[0];
-        }
-          
+         req.session.user = rows[0];
+      
          res.send(`<script>alert("환영합니다");
          location.href="http://localhost:3000/"</script>`)
       } else {
@@ -107,7 +96,8 @@ router.get('/logout',(req,res)=>{
   // 1. 세션 삭제
   req.session.destroy()
   // 2. 메인페이지에 다시 접근
-  res.send(`<script>location.href="http://localhost:3000/"</script>`)
+  res.send(`<script>alert('로그아웃 완료');
+  location.href="http://localhost:3000/"</script>`)
 })
 
 // 회원가입 수정 페이지 이동
