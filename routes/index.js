@@ -46,7 +46,6 @@ router.delete('/deletePost/:postIdx', (req, res) => {
       console.error(err);
       return res.status(500).send('데이터베이스 에러');
     }
-
     if (result.affectedRows > 0) {
       res.status(200).send('성공적으로 삭제되었습니다.');
     } else {
