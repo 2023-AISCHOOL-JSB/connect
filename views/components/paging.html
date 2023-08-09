@@ -1,22 +1,30 @@
 <style>
-    .pagination {
-      text-align:center;
-      margin-right:5%;
-    }
-    .pagination > a {
+  /* 다른 스타일은 여기에 유지 */
+.pagination{
+  margin-right: 2%;
+  text-align: center;
+}
+  .page-link {
       font-size: medium;
       padding: 5px 10px;
       text-decoration: none;
-      color: #007BFF;
-    }
-    .pagination .active {
-      background-color: #007BFF;
-      color: white;
-    }
-  </style>
-
-<a href="/page/1">&laquo;</a>
-{% for pageNumber in range(1, totalPages + 1) %}
-<a href="/page/{{pageNumber}}" class="{{ 'active' if pageNumber == currentPage }}">{{pageNumber}}</a>
-{% endfor %}
-<a href="/page/{{totalPages}}">&raquo;</a>
+      margin: 0 2px;
+      background-color: #f8f9fa;
+      border: 1px solid transparent;
+  }
+  
+  .page-link.bordered {
+      color: rgb(255, 7, 7);
+      background-color: #7aa629;
+      border: 1px solid #7aa629;
+      border-radius: 4px;
+  }
+</style>
+  
+<div class="pagination">
+  <a href="/page/1">&laquo;</a>
+  {% for pageNumber in range(1, totalPages + 1) %}
+      <a href="/page/{{ pageNumber }}" class="page-link {% if pageNumber == currentPage %}bordered{% endif %}">{{ pageNumber }}</a>
+  {% endfor %}
+  <a href="/page/{{ totalPages }}">&raquo;</a>
+</div>
