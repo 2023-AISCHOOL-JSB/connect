@@ -30,9 +30,9 @@ const env = nunjucks.configure("views", {
   express: app,
   watch: true,
 });
-// html태그 제거기능
+//html 태그제거
 env.addFilter('stripHtmlTags', function (str) {
-  return str.replace(/<[^>]+>/gm, ""); // 기존 정규식에 옵션 `m` 추가(여러 줄 처리)
+  return str.replace(/<\/?[^>]+(>|$)/g, "");
 });
 
 // 3. post방식으로 데이터를 넘겨줄 때 필요함

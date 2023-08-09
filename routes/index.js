@@ -16,6 +16,18 @@ router.get("/", (req, res) => {
   });
 });
 
+// 검색 기능
+router.post('/search',(req,res)=>{
+  console.log(req.body.content)
+  const search = req.body.content
+
+  let sql = `SELECT * FROM tb_board WHERE b_title LIKE '%${search}%' OR b_content LIKE '%${search}%' OR user_id LIKE '%${search}%' OR b_type LIKE '%${search}%' order by created_at desc`
+
+  conn.query(sql,[search],(err, rows)=>{
+   res.render('screen/main', { data:rows , obj: req.session.user })
+  })
+})
+
 router.get("/join", (req, res) => {
   res.render("screen/join");
 });
