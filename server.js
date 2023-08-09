@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const { JSDOM } = require('jsdom');
 
 const bodyParser = require("body-parser");
 const nunjucks = require("nunjucks");
@@ -30,9 +31,9 @@ const env = nunjucks.configure("views", {
   express: app,
   watch: true,
 });
-//html 태그제거
-env.addFilter('stripHtmlTags', function (str) {
-  return str.replace(/<\/?[^>]+(>|$)/g, "");
+// html태그 제거기능
+env.addFilter("stripHtmlTags", function (str) {
+  return str.replace(/<[^>]*>?/gm, "");
 });
 
 // 3. post방식으로 데이터를 넘겨줄 때 필요함

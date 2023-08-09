@@ -7,7 +7,7 @@
             <time class="board__deadline" data-array="{{board.b_category}}" data-prepend="~" data-index="2">-</time>
         </div>
         <h1 class="board__title">{{board.b_title}}</h1>
-        <p class="board__desc">{{board.b_content.slice(0,30)}}</p>
+        <p class="board__desc">{{ board.b_content | stripHtmlTags | truncate(30) }}</p>
         <div class="board__stack">
             <h5 class="board__stack--title">스택</h5>
             <div>
