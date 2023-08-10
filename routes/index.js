@@ -29,7 +29,7 @@ router.get("/write", (req, res) => {
 router.get('/group_c',(req,res)=>{
   res.render("screen/group_c", { obj: req.session.user });
 })
-
+// 그룹 만드는 창에서 받아오기
 router.post('/group_c',(req,res)=>{
     let {group_title,group_desc} = req.body
     let {user_id} = req.session.user
@@ -45,7 +45,7 @@ router.post('/group_c',(req,res)=>{
       })
      })
 })
-
+// 그룹 초대하기에서 받아오기
 router.post('/group_inv',(req,res)=>{
   console.log(req.body)
   let {user_id,group_idx} = req.body
@@ -61,6 +61,22 @@ router.post('/group_inv',(req,res)=>{
     })
   })
   
+})
+
+// 회원 검색
+router.post('/user_search',(req,res)=>{
+  console.log('유저이름',req.body.user_name)
+  let {user_name} = req.body
+  console.log(user_name)
+  let sql = `select user_id, user_class from tb_user where user_name = ?;`
+  conn.query(sql,[user_name],(err,rows)=>{
+    if(rows[0]==undefined){
+      res.json('아이디 없음')
+    }else{
+       console.log(rows[0].user_id,rows[0].user_class)
+       res.json({ user_id: rows[0].user_id, user_class: rows[0].user_class });
+    }
+  })
 })
 
 //상세페이지
