@@ -36,7 +36,7 @@
 
     <section class="todo">
         <h1>Todo</h1>
-        <ul class="todo__list" data-id="1">
+        <ul class="todo__list" data-id="todo">
             {% for i in to %}
             {% if i.in_process == '0' %}
             <li class="todo__list__li" draggable="true" data-id="{{i.process_idx}}">
@@ -65,7 +65,7 @@
     </section>
     <section class="progress">
         <h1> In progress</h1>
-        <ul class="progress__list" data-id="2">
+        <ul class="progress__list" data-id="progress">
             {% for i in to %}
             {% if i.in_process == '1' %} <li class="todo__list__li" draggable="true" data-id="{{i.process_idx}}">
                 <div class="list__head">
@@ -91,10 +91,10 @@
     </section>
     <section class="done">
         <h1>Done</h1>
-        <ul class="done__list" data-id="3">
+        <ul class="done__list" data-id="done">
             {% for i in to %}
             {% if i.in_process == '2' %}
-            <li class="todo__list__li" draggable="true" data-id="i.process_idx">
+            <li class="todo__list__li" draggable="true" data-id="{{i.process_idx}}">
                 <div class="list__head">
                     <h3 class="list__title">{{i.todo}}</h3>
                     <button class="list__menu-btn"><i class="fa-regular fa-hand"></i></button>

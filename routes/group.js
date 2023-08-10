@@ -22,7 +22,7 @@ router.post('/canvan', (req, res) => {
 router.post('/update/:id', (req, res) => {
   const process_idx = parseInt(req.params.id);
   const { in_process } = req.body;
-
+  console.log(req.body)
   const sql = 'UPDATE tb_canvan SET in_process = ? WHERE process_idx = ?';
   conn.query(sql, [in_process, process_idx], (error, result) => {
     if (error) {

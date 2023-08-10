@@ -22,11 +22,12 @@ router.post("/write", (req, res) => {
       res.send(`<script>alert("전송 실패");
                 location.href="http://localhost:3000/"</script>`);
     } else {
+      idx_id = rows.insertId
       res.send(`<script>alert("업로드 되었습니다.");
-        location.href="http://localhost:3000/"</script>`);
+                location.href="http://localhost:3000/detail?a=${idx_id}"</script>`); // 새 포스트의 상세 페이지로 리디렉션합니다.
     }
   });
-});
+  });
 
 // 조회수
 
