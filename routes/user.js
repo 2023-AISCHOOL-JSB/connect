@@ -69,7 +69,7 @@ router.post('/login', (req,res)=>{
   console.log('로그인 기능 라우터',req.body)
   let {id,pw} = req.body
   // 3. DB 연동해서 해당 id 값과 pw 값이 일치하는 데이터가 DB에 있는지 확인한다
-  let sql = 'select * from tb_user where user_id=? and user_pw =SHA2(?,512)'
+  let sql = 'select * from tb_user where user_id=? and user_pw =SHA2(?,512) and user_status = "y"; '
   // 4. 데이터가 존재한다면 로그인 성공
   conn.query(sql,[id,pw],(err, rows)=>{
   
@@ -136,5 +136,24 @@ router.post('/modify',(req,res)=>{
     
   })
   
+// 회원탈퇴
+router.post('/delete_user', (req, res) => {
+  console.log('회원아이디',req.body.userId)
+  const userId = req.body.userId;
+  const query = `UPDATE tb_user SET user_status = 'n' WHERE user_id = ?`;
+
+  conn.query(query,userId, (err, result) => {
+    if (err) {
+      console.error('Error deleting user: ', err);
+      res.status(500).send('Error deleting user');
+    } else {
+      console.log('User deleted!');
+      req.session.destroy()
+      res.json('안녕하세요')
+      
+    }
+  });
+});
+
 
 module.exports = router;

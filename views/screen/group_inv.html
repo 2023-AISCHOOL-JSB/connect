@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/group.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        .team{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 80vh;
+        
+        }
+        
+        .team-make{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.25);
+            height: 480px;
+            width: 480px;
+            border-radius: 10px;
+            padding: 10px 0;
+        }
+        
+        .team-make input{
+            height: 50px;
+            width: 80%;
+            border: none;
+            background-color: #F4F4F4;
+            border-radius: 10px;
+            padding-left: 20px;
+        
+        }
+        
+        .team__add{
+            display: flex;
+            align-items: center;
+            width: 420px;
+        }
+        
+        .inviteBtn{
+            width: 420px;
+            height: 50px;
+            border: none;
+            background-color: #5A81FA;
+            border-radius: 10px;
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            margin-top:10px;
+        }
+        
+        .AddBtn{
+            width: 19%;
+            height: 50px;
+               background-color: #5A81FA;
+                   border-radius: 10px;
+            color: white;
+            border: none;
+            margin-left: 5px;
+        }
+        
+        .invite__user{
+            width: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            
+        }
+        
+        .invite__user span{
+            width: auto;
+            height: 20px;
+            background-color: #F4F4F4;
+            margin-right: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="team">
+       
+            <h1>connect</h1>
+            <div class="team__add">
+                <input type="text" style="display:none" value={{data}} class="room_idx">
+                <input type="text" placeholder="그룹원을 초대해주세요 :)" class="user_id">
+            <button class="AddBtn">추가</button>
+                
+            </div>
+            <div class="invite__user">
+                <!-- {% for i in userlist %} -->
+                <span>leechi</span>
+                
+                <!-- {% endfor %} -->
+            </div>
+            <a href="/group"><button class="inviteBtn" type="submit">초대하기</button></a>
+      
+
+    </section>
+
+    <script> 
+            $('.AddBtn').click((e)=>{
+            let user_id = $('.user_id').val()
+            let group_idx =  $('.room_idx').val()
+            let url = 'group_inv'
+                
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ 
+            
+            user_id : user_id,
+            group_idx : group_idx 
+        })
+        })
+        .then((res) => res.json())
+          .then((res) => {
+            if(res == "1"){alert("없는 회원 입니다")}else{
+            $('.invite__user').append(`<span>${res}</span>`)
+        }
+
+            
+        });
+
+    })
+
+</script>
+</body>
+
+</html>

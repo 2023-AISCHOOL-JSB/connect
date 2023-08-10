@@ -1,0 +1,77 @@
+.team{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+
+}
+
+.team-make{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.25);
+    height: 480px;
+    width: 480px;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.team-make input{
+    height: 50px;
+    width: 80%;
+    border: none;
+    background-color: #F4F4F4;
+    border-radius: 10px;
+    padding-left: 20px;
+
+}
+
+.team__add{
+    display: flex;
+    align-items: center;
+    width: 420px;
+}
+
+.inviteBtn{
+    width: 420px;
+    height: 50px;
+    border: none;
+    background-color: #5A81FA;
+    border-radius: 10px;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    margin-top:10px;
+}
+
+.AddBtn{
+    width: 19%;
+    height: 50px;
+       background-color: #5A81FA;
+           border-radius: 10px;
+    color: white;
+    border: none;
+    margin-left: 5px;
+}
+
+.invite__user{
+    width: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    
+}
+
+.invite__user span{
+    width: auto;
+    height: 20px;
+    background-color: #F4F4F4;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
