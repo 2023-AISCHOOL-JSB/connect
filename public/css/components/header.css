@@ -44,7 +44,7 @@ button:hover{
     width: 100px;
     height: 40px;
     border-radius: 5px;
-    color: white;
+    
     font-weight: 700;
     font-size: 16px;
     margin-left: 10px;
@@ -59,13 +59,17 @@ button:hover{
 
 
 .write-btn{
-    background-color: #5A81FA;
+    background-color: var(--sub-color1);
+    color: white;
 }
 
 .write-team{
-    background-color: #CEDEFF;
+    background-color: var(--main-color);
+    color: white;
+
 }
 
 .write-chat{
-    background-color: #A8B1CE;
+    background-color: var(--sub-color3);
+ color: white;
 }
