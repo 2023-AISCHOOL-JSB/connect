@@ -48,17 +48,27 @@ for (let i = 0; i < listMenuBtn.length; i++ ) {
     });
 }
 
-const canvanWrite = document.querySelector(".canvan__write");
-const openModalBtn = document.querySelector(".add-new-task-btn");
-const closeModalBtn = document.querySelector(".canvan__write__close");
+const canvanWrite = document.querySelector(".canvan__write")
+const openModalBtn = document.querySelector(".add-new-task-btn")
+const closeModalBtn = document.querySelector(".canvan__write__close")
 
 openModalBtn.addEventListener("click", () => {
-    canvanWrite.classList.remove('hidden');
+    canvanWrite.classList.remove('hidden')
 });
 
 closeModalBtn.addEventListener("click", () => {
-    canvanWrite.classList.add('hidden');
+    canvanWrite.classList.add('hidden')
 });
+
+canvanWrite.addEventListener("click", (event) => {
+    if (event.target == canvanWrite) {
+        canvanWrite.classList.add('hidden')
+    }
+    
+    
+})
+
+
 
 const listContainer = document.querySelector('.canvan');
 listContainer.addEventListener('click', (e) => {
@@ -68,6 +78,8 @@ listContainer.addEventListener('click', (e) => {
       deleteItem(itemId, deleteBtn);
     }
   });
+
+
 
 function deleteItem(id, deleteBtn) {
     fetch(`/group/delete/${id}`, {
