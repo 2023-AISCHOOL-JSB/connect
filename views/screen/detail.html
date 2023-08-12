@@ -10,7 +10,8 @@
         <div class="detail__info">
             <span>{{i.user_name}}</span>
             <time class="post-date" data-date="{{ i.created_at }}">-</time>
-            {% if loginUser and loginUser.user_id == i.user_id %}
+
+            {% if obj and obj.user_id == i.user_id %}
             <span id="delete-post-btn" style="cursor: pointer;">삭제</span>
             {% endif %}
         </div>
