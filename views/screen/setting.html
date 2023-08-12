@@ -35,13 +35,15 @@
 
 <script>
   // 회원 탈퇴 Fetch
+  let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
+
   function deleteUser() {
     if (!confirm('정말로 탈퇴하시겠습니까?')) {
       return;
     }
     const Id = document.getElementById('id');
     const userId = Id.textContent;
-    fetch('http://localhost:3000/user/delete_user', {
+    fetch(`${url}user/delete_user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +55,7 @@
         console.log(res);
 
         if (res) {
-          location.href = 'http://localhost:3000/';
+          location.href = `${url}`;
         }
       });
   }
@@ -92,7 +94,7 @@
   const completeUpdate = () => {
     console.log(changedName, changedGit, changedPhone, changedProcess);
 
-    let url = 'http://localhost:3000/user/modify';
+    let url = `${url}user/modify`;
 
     fetch(url, {
       method: 'POST',
@@ -115,7 +117,7 @@
         } else {
           alert('변경실패!');
         }
-        location.href = 'http://localhost:3000/user/setting';
+        location.href = `${url}user/setting`;
       });
   };
 

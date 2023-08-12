@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
 const io = require("socket.io-client")
+let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
 
 //채팅방 개설하기
 router.post('/chatroom_create',(req,res)=>{
@@ -63,7 +64,7 @@ router.post('/chat_inv',(req,res)=>{
 
 
 //실시간 채팅기능
-const ENDPOINT = 'http://localhost:3000'; //io의 endpoint 를 잡아서 넣는다.
+const ENDPOINT = url; //io의 endpoint 를 잡아서 넣는다.
   let socket;
   socket = io(ENDPOINT); // Socket.IO 라이브러리를 사용하여 서버와의 연결을 설정하는 부분입니다. 클라이언트는 이렇게 서버의 ENDPOINT로 소켓 연결을 시도하게 됩니다.
   

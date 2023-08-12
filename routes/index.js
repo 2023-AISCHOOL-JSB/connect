@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
+let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
 
 router.get("/", (req, res) => {
   res.render('screen/login')
@@ -298,7 +299,7 @@ async function getPostDetail(post_idx, req, res) {
 router.post("/addComment", (req, res) => {
   if (!req.session.user) {
     return res.status(401).send(`<script>alert('로그인을 해주세요!!');
-    location.href="http://localhost:3000/"</script>`);
+    location.href="${url}"</script>`);
   }
 
   const post_idx = req.body.post_idx;
