@@ -1,5 +1,3 @@
-console.log('hi')
-
 const noticeWrite = document.querySelector(".notice__write");
 const openNoticeBtn = document.querySelector(".add-new-task-btn1");
 const closeNoticeBtn = document.querySelector(".notice__write__close");

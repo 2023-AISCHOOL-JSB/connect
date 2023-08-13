@@ -35,7 +35,7 @@
 
 <script>
   // 회원 탈퇴 Fetch
-  let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
+  let urlcloud = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
 
   function deleteUser() {
     if (!confirm('정말로 탈퇴하시겠습니까?')) {
@@ -94,7 +94,7 @@
   const completeUpdate = () => {
     console.log(changedName, changedGit, changedPhone, changedProcess);
 
-    let url = `${url}user/modify`;
+    let url = `${urlcloud}user/modify`;
 
     fetch(url, {
       method: 'POST',

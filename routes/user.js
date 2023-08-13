@@ -94,8 +94,7 @@ router.post('/login', (req,res)=>{
       if(rows.length > 0){
          console.log('로그인 성공!', rows)
           req.session.user = rows[0];
-          res.send(`<script>alert("환영합니다");
-          location.href="${url}page/1"</script>`)
+          res.send(`<script>location.href="${url}page/1"</script>`)
       } 
          else {
          console.log('로그인 실패!')

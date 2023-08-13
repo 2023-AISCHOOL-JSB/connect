@@ -19,12 +19,14 @@
 
 <ul class="notice__list hidden">
     <!-- 상세페이지로 넘어가게 만들거임 html 수정은 차후 결정^^ -->
-        {% for notice in notice %}
-        <li>
-            <div>
-                <span>{{notice.noti_content}}</span>
-            </div>
-            <time>{{notice.user_id}}</time>
-        </li>
-        {% endfor %}
-    </ul>
+    {% for notice in notice %}
+    <li>
+        <div>
+            <span>{{notice.noti_content}}</span>
+        </div>
+        <time>{{notice.user_id}}</time>
+    </li>
+    {% endfor %}
+</ul>
+
+<script src="/js/components/notice.js"></script>

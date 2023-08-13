@@ -17,10 +17,8 @@
 @import url('screen/detail.css');
 @import url('screen/group.css');
 @import url('screen/mypage.css');
-@import url('screen/edit.css');
 @import url('screen/team.css');
 @import url('screen/chat.css');
-@import url('screen/chatroom.css');
 @import url('screen/setting.css');
 
 :root{
