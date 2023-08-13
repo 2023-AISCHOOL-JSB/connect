@@ -93,4 +93,14 @@
 
 .login__gitbtn{
     background-color: black;
+        height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.login__gitbtn span{
+    margin-left: 5px;
 }
