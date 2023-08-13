@@ -10,8 +10,8 @@ What is connect?
 <h1>커뮤니티 모집 서비스</h1>
 
 
-### 주요 기능 소개
-<hr>
+<h3>주요 기능 소개</h3>
+
 
 1. 모집, 게시판
 
@@ -21,17 +21,16 @@ What is connect?
 
 
 
+<h3>기술 스택 (Technique Used)</h3>
+<a><img src="https://img.shields.io/badge/HTML-ffa200?style=flat-square&logo=HTML&logoColor=white"/></a>   
 
-### 기술 스택 (Technique Used)
-<hr>
-
-<img src="https://img.shields.io/badge/HTML-ffa200?style=flat-square&logo=HTML&logoColor=white"/>
 <img src="https://img.shields.io/badge/CSS-blue?style=flat-square&logo=CSS&logoColor=white"/>
 <img src="https://img.shields.io/badge/JS-yellow?style=flat-square&logo=JS&logoColor=white"/>
 <img src="https://img.shields.io/badge/Node.js-green?style=flat-square&logo=Node.js&logoColor=white"/>
 express figma notion jquery 
 
-### 사용한 패키지 (Library Used)
+
+<h3>사용한 패키지 (Library Used)</h3>
 
 <ul>
   <li>@toast-ui/editor</li>
@@ -51,7 +50,7 @@ express figma notion jquery
 </ul>
 
 
-### 팀정보
+<h3>팀정보</h3>
 
 이치연
 김영재
