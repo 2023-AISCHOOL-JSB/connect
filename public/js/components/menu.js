@@ -7,7 +7,6 @@ menuBtn.addEventListener('click', () => {
     menuBar.classList.add('show-menu');
     menuBtn.classList.add('remove__btn')
     navBlack.classList.add('show-nav')
-    console.log('hi')
 });
 
 menuClose.addEventListener('click', () => {
