@@ -2,16 +2,18 @@
 
 
 
-What is connect?
+#### What is connect?
 
-<img src="public/img/logo.png">
+<img src="public/img/logo.png" style="width:200px; height:130px;">
 <span style="color:#5A81FA">connect...</span>
-<h1>광주인공지능사관학교 학생만을 위한</h1>
-<h1>커뮤니티 모집 서비스</h1>
+<h1>광주인공지능사관학교 학생만을 위한
+<br>커뮤니티 모집 서비스
+</h1>
+
 
 
 <h3>주요 기능 소개</h3>
-
+---
 
 1. 모집, 게시판
 
@@ -22,16 +24,20 @@ What is connect?
 
 
 <h3>기술 스택 (Technique Used)</h3>
-<a><img src="https://img.shields.io/badge/HTML-ffa200?style=flat-square&logo=HTML&logoColor=white"/></a>   
+---
+<div style="display:flex">
+    <img src="https://img.shields.io/badge/HTML-ffa200?style=flat-square&logo=HTML&logoColor=white"/>
+    <img src="https://img.shields.io/badge/CSS-blue?style=flat-square&logo=CSS&logoColor=white"/>
+    <img src="https://img.shields.io/badge/JS-yellow?style=flat-square&logo=JS&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Jquery-yellow?style=flat-square&logo=Jquery&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Node.js-green?style=flat-square&logo=Node.js&logoColor=white"/>
+    <img src="https://img.shields.io/badge/express-white?style=flat-square&logo=express&logoColor=black"/>
+    <img src="https://img.shields.io/badge/Figma-red?style=flat-square&logo=Figma&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Notion-white?style=flat-square&logo=Notion&logoColor=black"/>
+</div>
 
-<img src="https://img.shields.io/badge/CSS-blue?style=flat-square&logo=CSS&logoColor=white"/>
-<img src="https://img.shields.io/badge/JS-yellow?style=flat-square&logo=JS&logoColor=white"/>
-<img src="https://img.shields.io/badge/Node.js-green?style=flat-square&logo=Node.js&logoColor=white"/>
-express figma notion jquery 
-
-
-<h3>사용한 패키지 (Library Used)</h3>
-
+<h3>사용한 패키지 (Library Used)</h3> 
+--- 
 <ul>
   <li>@toast-ui/editor</li>
   <li>body-parser</li>
