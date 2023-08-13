@@ -1,4 +1,4 @@
-광주인공지능사관학교를 연결시키다, **connect!** 
+광주인공지능사관학교를 연결시키다, <i>connect!</i>
 
 
 
@@ -13,7 +13,7 @@
 
 
 <h3>주요 기능 소개</h3>
----
+***
 
 1. 모집, 게시판
 
@@ -24,7 +24,7 @@
 
 
 <h3>기술 스택 (Technique Used)</h3>
----
+***
 <div style="display:flex">
     <img src="https://img.shields.io/badge/HTML-ffa200?style=flat-square&logo=HTML&logoColor=white"/>
     <img src="https://img.shields.io/badge/CSS-blue?style=flat-square&logo=CSS&logoColor=white"/>
@@ -37,7 +37,7 @@
 </div>
 
 <h3>사용한 패키지 (Library Used)</h3> 
---- 
+***
 <ul>
   <li>@toast-ui/editor</li>
   <li>body-parser</li>
@@ -57,6 +57,7 @@
 
 
 <h3>팀정보</h3>
+***
 
 이치연
 김영재
@@ -65,4 +66,4 @@
 최진우
 
 
-![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=blue&height=200&section=footer)
