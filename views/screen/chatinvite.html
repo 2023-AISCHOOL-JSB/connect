@@ -5,7 +5,7 @@
     <div class="team-make">
         <img src="/img/logo.png" class="team__logo" alt="">
         <div class="search-container">
-            <input type="text" placeholder="아이디를 검색해보세요!" class="search-input" id="user_search">
+            <input type="text" placeholder="이름을 검색해보세요!" class="search-input" id="user_search">
             <button class="search-btn" id="search_btn">검색</button>
         </div>
         <div class="user_search"></div>
@@ -62,7 +62,7 @@
     // 그룹원 검색
     $('#search_btn').click((e) => {
         let user_name = $('#user_search').val()
-        let url = 'user_search'
+        let url = '/user_search'
 
         fetch(url, {
             method: 'POST',
@@ -75,13 +75,16 @@
         })
             .then((res) => res.json())
             .then((res) => {
+                console.log(res.search)
                 if (res == '아이디가 존재하지 않네요😥') {
                     $('.user_search').text(res);
                 } else {
-                    res2 = `아이디:  ${res.user_id}  
-                            반(과정): ${res.user_class}`
-                    $('.user_search').text(res2);
-                }
+                        for(i = 0 ; i <= res.search.length ; i++){
+
+                 
+                    $('.user_search').append(`<span>아이디:  ${res.search[i].user_id}  
+                        반(과정): ${res.search[i].user_class}</span><br><br>`);
+                }}
 
 
             });

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
 const io = require("socket.io-client")
-let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
+let url = 'http://localhost:3000/'
 
 //채팅방 개설하기
 router.post('/chatroom_create',(req,res)=>{
@@ -122,7 +122,7 @@ router.post("/save", (req, res) => {
     
 
     // socket.emit('connection2',{talk:req.body.talk,userid:req.session.user.id}); //socket를 써서 서버로 채팅내용 보내기 실시간
-    socket.emit('connection2',{talk:req.body.talk,userid:req.session.user.user_id}); //socket를 써서 서버로 채팅내용 보내기 실시간
+    socket.emit('connection2',{talk:req.body.talk,userid:req.session.user.user_id, username:req.session.user.user_name}); //socket를 써서 서버로 채팅내용 보내기 실시간
   
     let{room_idx} =req.body
     let {user_id} = req.session.user
@@ -135,6 +135,8 @@ router.post("/save", (req, res) => {
   }
   );
 
+
+ 
 
 
 module.exports = router;

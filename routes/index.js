@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
+let url = 'http://localhost:3000'
 
 router.get("/", (req, res) => {
   res.render('screen/login')
@@ -66,7 +66,7 @@ router.post('/user_search',(req,res)=>{
       res.json('아이디가 존재하지 않네요😥')
     }else{
        console.log(rows[0].user_id,rows[0].user_class)
-       res.json({ user_id: rows[0].user_id, user_class: rows[0].user_class });
+       res.json({ search : rows });
     }
   })
 })
