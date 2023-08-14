@@ -1,16 +1,7 @@
 광주인공지능사관학교를 연결시키다, <i>connect!</i>
 
 
-
-#### What is connect?
-
-<img src="public/img/logo.png" style="width:200px; height:130px;">
-<span style="color:#5A81FA">connect...</span>
-<h1>광주인공지능사관학교 학생만을 위한
-<br>커뮤니티 모집 서비스
-</h1>
-
-
+<img width="1127" alt="image" src="https://github.com/2023-AISCHOOL-JSB/connect/assets/100564742/fb4197dd-d49b-4de5-a50f-4bde5e634eeb">
 
 <h3>주요 기능 소개</h3>
 <hr/>
