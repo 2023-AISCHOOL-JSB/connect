@@ -29,14 +29,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
 <script>
-    // 스크롤 맨 아래에 배치
-    function scrollToBottom() {
-        var chatList = document.querySelector(".chat-content__list");
-        chatList.scrollTop = chatList.scrollHeight;
-    }
 
-    // Scroll to the bottom on page load
-    window.addEventListener("load", scrollToBottom);
 
 
 
@@ -89,6 +82,7 @@
 
                     $('.chat-content__input').val('');
                     $('.room_title').text(room_title)
+                    scrollToBottom()
 
                 })
 
@@ -129,12 +123,12 @@
 
                     <div class="chat-content__li">
                         <div class="chat-content__box">
-                            <h1 class="chat-content__name">나<h3 class="chat-content__subname">(${data.userid})</h3></h1>
+                            <h1 class="chat-content__name">${data.username}<h3 class="chat-content__subname">(${data.userid})</h3></h1>
                             <time class="chat-content__time">${formattedDate}</time>
                         </div>
                         <span class="chat-content__desc">${data.talk}</span>
                             `
-        )
+        ),scrollToBottom()
     })
 
 
@@ -163,6 +157,13 @@
     const dateFormatter = new Intl.DateTimeFormat('en-US', options);
     const formattedDate = dateFormatter.format(date);
 
+
+
+ //하단고정
+ let chat_content__list = $('.chat-content__list')
+ function scrollToBottom() {
+    chat_content__list.scrollTop(chat_content__list[0].scrollHeight);
+  }
 
 
 </script>
