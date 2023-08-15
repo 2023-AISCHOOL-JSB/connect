@@ -1,188 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>회원 정보변경</title>
-    <style>
-      .member__info__box {
-        display: flex;
-        align-items: center;
-        margin: auto;
-        flex-direction: column;
-        box-shadow: 0px 0px 10px 0px gray;
-        margin-top: 20px;
-        width: 450px;
-        height: 570px;
-        border-radius: 10px;
-      }
-      .picture-img {
-        margin-top: 20px;
-        margin-bottom: 10px;
-        width: 100px;
-        height: 60px;
-      }
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'components/header.html' %}
 
-      .box__input__info > span {
-        display: block;
-        font-weight: bold;
-        background-color: transparent;
-        border: none;
-        border-bottom: 1px solid #d2d2d2;
-        background-color: #f4f4f4;
-        padding: 10px 15px;
-        border-radius: 5px;
-        margin: 10px 0;
-        text-align: center; /* center the text */
-        width: 400px;
-        height: 50px;
-        font-size: 14px;
-        box-sizing: border-box;
-      }
+<main class="setting">
+  <div class="member__info__box">
+    <img class="setting-logo" src="/img/logo.png" />
 
-      .input-class {
-        width: 100%;
-        padding: 5px;
-        border: none;
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        text-align: center; /* center the text */
-      }
+    <h4 class="setting__title">나의 정보</h4>
+    <div class="box__input__info">
 
-      .title__idpw {
-        font-size: 17px;
-        font-weight: 900;
-        margin: 15px 0;
-        padding-bottom: 20px;
-      }
-
-      /* 버튼 */
-      .change__button__form {
-        border-radius: 10px;
-        justify-content: space-between;
-        display: flex;
-        align-items: center;
-        padding: 60px;
-      }
-
-      .change__button {
-        /*margin-top: 90px;*/
-        display: inline-block;
-        margin: 15px;
-        width: 80px;
-        height: 40px;
-        font-weight: bold;
-        color: white;
-        background-color: #5a81fa;
-        border: none;
-        border-radius: 10px;
-        font-size: 15px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="member__info__box">
-      <img class="picture-img" src="./photo/logo2.PNG" alt="logo2" />
-
-      <h4 class="title__idpw">회원 정보변경</h4>
-      <div class="box__input__info">
-        <span class="input-change">{{obj.user_id}}</span>
-        <span class="input-change">{{obj.user_name}}</span>
-        <span class="input-change">{{obj.user_email}}</span>
-        <span class="input-change">{{obj.user_phone}}</span>
-        <span class="input-change">{{obj.user_class}}</span>
-      </div>
-
-      <div class="change__button__form">
-        <button class="change__button" onclick="updateMyPage()">수정</button>
-        <button class="change__button" onclick="completeUpdate()">저장</button>
-        <a href="/"><button class="change__button">메인</button></a>
-        <button class="change__button" onclick="deleteUser()">회원탈퇴</button>
-      </div>
+      <h1 id="setting__userid">{{obj.user_id}}</h1>
+      <input type="text" class='input-class' placeholder="이름" value={{obj.user_name}}>
+      <input type="text" class='input-class' placeholder="깃허브 아이디" value={{obj.user_email}}>
+      <input type="text" class='input-class' placeholder="핸드폰번호" value={{obj.user_phone}}>
+      <select name="process1" class='input-class'>
+        <option value={{obj.user_class}} selected>{{obj.user_class}}</option>
+        <option value="JS">JS</option>
+        <option value="APP">App</option>
+        <option value="Spring">Spring</option>
+        <option value="클라우드">클라우드</option>
+        <option value="사물지능">사물지능</option>
+        <option value="시각지능">시각지능</option>
+        <option value="언어지능">언어지능</option>
+      </select>
     </div>
 
-    <script>
-      // 회원 탈퇴 Fetch
-      function deleteUser() {
-        if (!confirm('정말로 탈퇴하시겠습니까?')) {
-          return;
+    <div class="change__buttons">
+      <button class="change__button" id="saveButton">변경하기</button>
+      <button class="change__button delete" onclick="deleteUser()">탈퇴하기</button>
+    </div>
+  </div>
+</main>
+{% include 'components/footer.html' %}
+
+<script>
+  // 회원 탈퇴 Fetch
+  let urlcloud = 'https://connectschool.servehttp.com/'
+
+  function deleteUser() {
+    if (!confirm('정말로 탈퇴하시겠습니까?')) {
+      return;
+    }
+    const Id = document.getElementById('id');
+    const userId = Id.textContent;
+    fetch(`${url}user/delete_user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: userId }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+
+        if (res) {
+          location.href = `${url}`;
         }
-        const Id = document.getElementById('id');
-        const userId = Id.textContent;
-        fetch('http://localhost:3000/user/delete_user', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ userId: userId }),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            console.log(res);
+      });
+  }
 
-            if (res) {
-              location.href = 'http://localhost:3000/';
-            }
-          });
-      }
+  // 수정
 
-      // 수정
-      const updateMyPage = () => {
-        let inputList = document.getElementsByClassName('input-change');
-        for (let i = 1; i < inputList.length; i++) {
-          let currentValue = inputList[i].innerText;
-          let inputField = document.createElement('input');
-          inputField.setAttribute('type', 'text');
-          inputField.setAttribute('class', 'input-class');
-          inputField.setAttribute('value', currentValue);
-          inputField.addEventListener('input', changeData);
-          inputList[i].innerHTML = '';
-          inputList[i].appendChild(inputField);
+
+  const saveButton = document.getElementById('saveButton')
+  const inputField = document.querySelectorAll('.input-class');
+
+
+
+
+
+
+
+
+  let changedName;
+  let changedGit;
+  let changedPhone;
+  let changedProcess;
+
+
+
+  const changeData = () => {
+    changedName = inputField[0].value;
+    changedGit = inputField[1].value;
+    changedPhone = inputField[2].value;
+    changedProcess = inputField[3].value;
+  };
+
+
+
+
+  // 저장
+  const completeUpdate = () => {
+    console.log(changedName, changedGit, changedPhone, changedProcess);
+
+    let url = `${urlcloud}user/modify`;
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: changedName,
+        git: changedGit,
+        phone: changedPhone,
+        process1: changedProcess,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+
+        if (res.msg == 'success') {
+          alert('변경성공');
+        } else {
+          alert('변경실패!');
         }
-      };
+        let urlsetting = 'https://connectschool.servehttp.com/'
+        location.href = `${urlsetting}user/setting`;
+      });
+  };
 
-      let changedName = '';
-      let changedGit = '';
-      let changedPhone = '';
-      let changedProcess = '';
+  saveButton.addEventListener('click', () => {
+    changeData()
+    completeUpdate()
 
-      const changeData = () => {
-        changedName = document.getElementsByClassName('input-class')[0].value;
-        changedGit = document.getElementsByClassName('input-class')[1].value;
-        changedPhone = document.getElementsByClassName('input-class')[2].value;
-        changedProcess = document.getElementsByClassName('input-class')[3].value;
-      };
+  })
+</script>
 
-      // 저장
-      const completeUpdate = () => {
-        console.log(changedName, changedGit, changedPhone, changedProcess);
-
-        let url = 'http://localhost:3000/user/modify';
-
-        fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: changedName,
-            git: changedGit,
-            phone: changedPhone,
-            process1: changedProcess,
-          }),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            console.log(res);
-
-            if (res.msg == 'success') {
-              alert('변경성공');
-            } else {
-              alert('변경실패!');
-            }
-            location.href = 'http://localhost:3000/user/setting';
-          });
-      };
-    </script>
-  </body>
-</html>
+{% endblock %}

@@ -1,42 +1,65 @@
 {% extends 'layout.html' %}
 {% block content %}
-{% include 'screen/login.html' %}
-{% include 'components/nav.html' %}
+{% include 'components/header.html'%}
+<section class="banner">
+    <div class="banner__slide">
+        <div class="banner__box">
+            <div class="banner__content two">
+                <div class="banner__text">
 
-<header class="header">
-    {% if obj != undefined %}
-    <button class="header__menu">
-        <i class="fa-solid fa-bars"></i>
-    </button>
-    {% else %}
-    {% endif %}
-    <a href="/">
-    </a>
-    <div>
+                    <h1 class="banner__title">소통은 커넥트!</h1>
+                    <h2 class="banner__subtitle">함께 소통하며 성장하는 공간</h2>
+                    <h2 class="banner__desc">우리의 웹사이트에 오신것을 환영합니다!"</h2>
+                </div>
+                <div class="banner__img-box">
+                    <img class="banner__img" src="/img/love.png" alt="logo2">
+                    <span class="banner__deco one2"></span>
+                </div>
+            </div>
+        </div>
+        <div class="banner__box">
+            <div class="banner__content one">
+                <div class="banner__text">
+                    <h1 class="banner__title">함께 만들어나가요!</h1>
+                    <h3 class="banner__desc">지금 바로 참여해보세요🤗</h3>
+                </div>
+                <div class="banner__img-box">
+                    <img class="banner__img" src="/img/good-review.png" alt="logo2">
+                    <span class="banner__deco one1"></span>
+                </div>
+            </div>
+        </div>
+        <div class="banner__box">
+            <div class="banner__content three">
+                <div class="banner__text">
+                    <h1 class="banner__title"> 즐겁게 서로의 의견을 공유하고</h1>
+                    <h1 class="banner__subtitle">새로운 아이디어를 얻어가세요!</h1>
+
+                    <h2 class="banner__desc">자세히 알아보세요👀</h3>
+                </div>
+                <div class="banner__img-box">
+                    <img class="banner__img" src="/img/friendship.png" alt="logo2">
+                    <span class="banner__deco one3 yelloright"></span>
+                </div>
+            </div>
+        </div>
     </div>
-</header>
-<section class="intro">
-    <div class="intro__text">
-        <img class="intro__logo" src="img/logo.png" alt="">
-        <h6>저기 우리 함께 할래요?</h6>
-        <h3>동료를 모집해보세요!</h3>
-        {% if obj != undefined %}
-        <button class="intro__btn">
-            <a href="/write">Write</a>
-        </button>
-        <button class="intro__btn">
-            <a href="/group_c">Group</a>
-        </button>
-        {% else %}
-        <button class="login__btn">
-            <a>Sign in</a>
-        </button>
-        {% endif %}
+
+</section>
+<section class="click__box">
+    <div class="banner__click">
+        <div class="btnone"></div>
+        <div class="btntwo"></div>
+        <div class="btnthree"></div>
     </div>
-    <img class="intro__img" src="img/intro.jpeg" alt="">
+</section>
+
+<section class="">
+
 </section>
 
 <main class="main">
+
     {% include 'components/search.html'%}
     <div class="main__board-flex">
 
@@ -44,5 +67,9 @@
             {% include 'components/board.html'%}
         </div>
     </div>
+    {% include 'components/paging.html'%}
 </main>
+{% include 'components/footer.html'%}
+<script src="/js/components/banner.js"></script>
+
 {% endblock %}

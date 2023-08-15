@@ -1,15 +1,20 @@
 const writeGroup = document.querySelector('.write__group')
 const writeSelect = document.querySelector('.write__select')
 const selectValue = writeSelect.value
-
+const selectStack = document.querySelector('.select-stack')
+const selectCate = document.querySelector('.write__sort-cate')
 console.log(selectValue)
 
 
     writeSelect.addEventListener('input', () => {
-        if (writeSelect.value === '게시판') {
+        if (writeSelect.value === '자유게시판') {
             writeGroup.classList.add('hidden');
+            selectStack.classList.add('hidden');
+            selectCate.classList.remove('hidden');
         } else {
             writeGroup.classList.remove('hidden');
+            selectStack.classList.remove('hidden');
+            selectCate.classList.add('hidden');
         }
     });
 

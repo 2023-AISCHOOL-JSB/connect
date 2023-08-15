@@ -2,22 +2,28 @@
 
 
 {% block content %}
-
 {% include 'components/header.html' %}
+
 <!-- 편집기 영역 -->
 
 
 <main class="write__box">
-    <form action="../user/wirte" method="post" class="write">
+    <form action="/user/write" method="post" class="write">
         <div class="write__info">
+
             <h1>게시글 구분</h1>
-            <select class="write__select" name="categoryMain">
-                <option value="모집">모집</option>
-                <option value="게시판">게시판</option>
-            </select>
-            <section class="write__group">
+            <div class="write__sort">
+                <select class="write__select" name="categoryMain" required>
+                    <option value="" disabled selected>선택해주세요</option>
+                    <option value="모집">모집</option>
+                    <option value="자유게시판">게시판</option>
+                </select>
+            </div>
+
+            <section class="write__group hidden">
                 <h1 class="write__group--title">모집</h1>
                 <div class="write__group--info">
+
                     <div>
                         <h3>모집구분</h3>
                         <select name="category">
@@ -56,12 +62,16 @@
                             <option value="mongodb">MongoDB</option>
                             <option value="mysql">MySQL</option>
                         </select>
+
                     </div>
+
                 </div>
             </section>
-            <h1>선택한 스택</h1>
-            <div class="selected-container" id="selected-container"></div>
-            <input type="hidden" name="selectedStacks" id="selectedStacks">
+            <section class="select-stack hidden">
+                <h1>선택한 스택</h1>
+                <div class="selected-container" id="selected-container"></div>
+                <input type="hidden" name="selectedStacks" id="selectedStacks">
+            </section>
         </div>
         <div class="write__intro">
             <label for="write__title">제목</label>
@@ -69,8 +79,8 @@
             <div id="editor"></div>
             <input type="hidden" name="content" id="content">
             <div class="write__buttons">
-                <a href="/" class="write__back">go back</a>
-                <button type="submit" class="write__upload">Upload</button>
+                <a href="/page/1" class="write__back">뒤로가기</a>
+                <button type="submit" class="write__upload">등록하기</button>
             </div>
         </div>
     </form>
@@ -79,7 +89,7 @@
 
 
 <!-- TOAST UI Editor JS -->
-
+<script src="/js/screen/write.js"></script> <!-- path 수정 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
@@ -87,26 +97,34 @@
     const editor = new toastui.Editor({
         el: document.querySelector('#editor'),
         height: '500px',
-        initialEditType: 'wysiwyg',
+        initialEditType: 'WYSIWYG',
         previewStyle: 'vertical',
-        viewer: true,
+        viewer: false,
         hideModeSwitch: true, // 밑에 스위치 제거
         toolbarItems: [
+            // 툴바 옵션 설정
             ['heading', 'bold', 'italic', 'strike'],
             ['hr', 'quote'],
-            ['ul', 'ol', 'task'],
-            ['table', 'link'],
-            ['code', 'codeblock'],
-            ['scrollSync'],
-        ],
-    });
+            ['ul', 'ol'],
+            ['table', 'image', 'link'],
+            ['code', 'codeblock']
+        ]
+    })
+
+    let isSubmitting = false; // 중복 제출 방지 플래그 추가
 
     document.querySelector('.write').addEventListener('submit', function (event) {
+        if (isSubmitting) return; // 이미 제출 중이면 함수 실행 중지
+
         event.preventDefault();
         const editorContent = editor.getHTML();
         document.querySelector('#content').value = editorContent;
+
+        isSubmitting = true; // 제출 시작 전 플래그를 true로 설정
         this.submit();
     });
+
+
 
     document.querySelector('.write').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -124,7 +142,7 @@
 
         if (!selectedStacksArray.includes(selectedValue)) {
             selectedStacksArray.push(selectedValue);
-        
+
         }
 
         selectedStacksElement.value = JSON.stringify(selectedStacksArray);

@@ -1,13 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
+let url = 'https://connectschool.servehttp.com/'
 
-router.post("/wirte", (req, res) => {
-  let {title, content, categoryMain, category, human, lastdate, selectedStacks} = req.body;
-  let userid = req.session.user.user_id
+
+router.post("/write", (req, res) => {
+  let {
+    title,
+    content,
+    categoryMain,
+    category,
+    human,
+    lastdate,
+    selectedStacks,
+  } = req.body;
+  let userid = req.session.user.user_id;
   let categoryJson;
-  if (categoryMain !== "게시판") {
-    const parsedSelectedStacks = JSON.parse(selectedStacks);
+  if (categoryMain !== "자유게시판") {
+    const parsedSelectedStacks = selectedStacks
+      ? JSON.parse(selectedStacks)
+      : [];
     let categoryArray = [category, human, lastdate, parsedSelectedStacks];
     categoryJson = JSON.stringify(categoryArray);
   } else {
@@ -15,17 +27,23 @@ router.post("/wirte", (req, res) => {
     categoryJson = JSON.stringify({});
   }
 
-  let sql = "INSERT INTO tb_board (b_title, b_content, created_at,user_id, b_type, b_category) VALUES (?, ?, NOW(), ?,?, ?)";
-  conn.query(sql, [title, content, userid, categoryMain, categoryJson], (err, rows) => {
-    if (err) {
-      console.error("Error:", err);
-      res.send(`<script>alert("전송 실패");
-                location.href="http://localhost:3000/"</script>`);
-    } else {
-      res.send(`<script>alert("업로드 되었습니다.");
-        location.href="http://localhost:3000/"</script>`);
+  let sql =
+    "INSERT INTO tb_board (b_title, b_content, created_at,user_id, b_type, b_category) VALUES (?, ?, NOW(), ?,?, ?)";
+  conn.query(
+    sql,
+    [title, content, userid, categoryMain, categoryJson],
+    (err, rows) => {
+      if (err) {
+        console.error("Error:", err);
+        res.send(`<script>alert("전송 실패");
+                location.href="${url}"</script>`);
+      } else {
+        idx_id = rows.insertId;
+        res.send(`<script>alert("업로드 되었습니다.");
+                location.href="${url}detail?a=${idx_id}"</script>`); // 새 포스트의 상세 페이지로 리디렉션합니다.
+      }
     }
-  });
+  );
 });
 
 // 조회수
@@ -45,13 +63,13 @@ router.post('/join', (req, res) => {
           console.log('회원가입 결과',rows)
           if(rows.affectedRows>0){
               res.send(`<script>alert('회원가입 성공했습니다 로그인해주세요')
-                  location.href="http://localhost:3000/"</script>`)
+                  location.href="${url}"</script>`)
           }    
      // 4. 만약 회원가입에 성공하면 alert로 회원가입 성공! => 메인창 이동
       })
   } else {
       res.send(`<script>alert("비밀번호 확인이 다릅니다.")
-      location.href="http://localhost:3000/join"</script>`)
+      location.href="${url}join"</script>`)
   }
   // 5. 만약 회원가입에 실패하면 alert로 회원가입 실패 ... => 회원가입 창으로 이동
 
@@ -69,20 +87,19 @@ router.post('/login', (req,res)=>{
   console.log('로그인 기능 라우터',req.body)
   let {id,pw} = req.body
   // 3. DB 연동해서 해당 id 값과 pw 값이 일치하는 데이터가 DB에 있는지 확인한다
-  let sql = 'select * from tb_user where user_id=? and user_pw =SHA2(?,512) and user_status = "y"; '
+  let sql = 'select * from tb_user where user_id=? and user_pw =SHA2(?,512)'
   // 4. 데이터가 존재한다면 로그인 성공
   conn.query(sql,[id,pw],(err, rows)=>{
   
       if(rows.length > 0){
          console.log('로그인 성공!', rows)
-         req.session.user = rows[0];
-      
-         res.send(`<script>alert("환영합니다");
-         location.href="http://localhost:3000/"</script>`)
-      } else {
+          req.session.user = rows[0];
+          res.send(`<script>location.href="${url}page/1"</script>`)
+      } 
+         else {
          console.log('로그인 실패!')
-         res.send(`<script>alert("아이디/비밀번호를 다시 확인해주세여.");
-         location.href="http://localhost:3000/"</script>`)
+         res.send(`<script>alert("아이디 혹은 비밀번호를 다시 확인해주세요.");
+         location.href="${url}"</script>`)
       }
 
    })
@@ -96,14 +113,16 @@ router.get('/logout',(req,res)=>{
   // 1. 세션 삭제
   req.session.destroy()
   // 2. 메인페이지에 다시 접근
-  res.send(`<script>alert('로그아웃 완료');
-  location.href="http://localhost:3000/"</script>`)
+  res.send(`<script>location.href="${url}"</script>`)
 })
+
 
 // 회원가입 수정 페이지 이동
 router.get('/setting',(req,res)=>{
   res.render('screen/setting',{obj : req.session.user})
 })
+
+
 // 회원 정보 수정 기능 라우터 (JS fetch 와의 연동) ★★★★★
 router.post('/modify',(req,res)=>{
   console.log('회원정보수정!',req.body)
@@ -154,7 +173,33 @@ router.post('/delete_user', (req, res) => {
     }
   });
 });
+  
 
 
+// mypage 
+router.get('/myteam',(req,res)=>{
+  let {user_id} = req.session.user
+  let sql =`select A.user_id,  B.party_title, B.user_id, B.party_idx 
+  from tb_join A inner join tb_party B 
+  on A.party_idx = B.party_idx 
+  where A.user_id = ?;`
 
+  conn.query(sql,[user_id],(err,rows)=>{
+    res.render('screen/myteam',{data:rows,obj: req.session.user})
+  })
+})
+
+
+router.get("/mypost", (req, res) => {
+  const user_id = req.session.user.user_id;
+  let sql = `SELECT tb_board.*, tb_user.user_name 
+  FROM tb_board 
+  INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id 
+  WHERE tb_board.b_permit = 'YES' and
+  tb_board.user_id = ?
+  ORDER BY tb_board.b_idx DESC`;
+  conn.query(sql, [user_id], (err, rows) => {
+    res.render("screen/mypost", { data: rows, obj: req.session.user });
+  });
+});
 module.exports = router;

@@ -1,38 +1,32 @@
+.setting{
+    height: 77vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
 .member__info__box {
     display: flex;
     align-items: center;
-    margin: auto;
+    
     flex-direction: column;
     box-shadow: 0px 0px 10px 0px gray;
-    margin-top: 20px; /* 수정: 중복 margin 속성 삭제 */
-    width: 450px;
-    height: 570px;
-    border-radius: 10px;
-}
-.picture-img {
     margin-top: 20px;
-    margin-bottom: 10px;
-    width: 100px;
-    height: 60px;
+    width: 450px;
+    height: 600px;
+    border-radius: 10px;
+    position: relative;
 }
-
-
-.box__input__info> input {
-    display: block;
-    font-weight: bold;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #D2D2D2;
-    background-color: #F4F4F4;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     
+.setting-logo {
+margin-top: 20px;
+margin-bottom: 10px;
+width: 70px;
+height: 40px;
 }
-#process__under_line {
-    border-bottom: none;
-}
+
 .box__input__info input{
     display: block;
     padding-left: 15px;
@@ -40,38 +34,62 @@
     height: 50px;
     font-size: 14px;
     font-weight: bold;
+    
 }
 
-.title__idpw {
-    font-size: 17px;
-    font-weight: 900;
-    margin: 15px 0;
-    padding-bottom: 20px;
-}
-
-
-
-/*버튼*/
-.change__button__form{
+.input-class {
+    width: 100%;
+    height: 50px;
+    background-color: var(--input-color);
+    border: none !important;
+    margin-bottom: 10px;
     border-radius: 10px;
-    justify-content: space-between;
+    padding-left: 10px;
+    font-weight: 700;
+}
+
+#setting__userid{
+    background-color: var(--input-color);
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 15px;
+}
+
+
+.change__button{
+    width: 400px;
+    height: 50px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--main-color);
+
+}
+
+.change__buttons{
+    position: absolute;
     display: flex;
     align-items: center;
-    padding: 60px;   
+    justify-content: center;
+    flex-direction: column;
+    bottom: 20px;
+    
+}
+
+.delete{
+    background-color: var(--sub-color1);
 }
 
 
-
-.change__button {
-    /*margin-top: 90px;*/
-    display: inline-block;
-    margin: 15px;
-    width: 80px;
-    height: 40px;
-    font-weight: bold;
-    color: white;
-    background-color: #5A81FA;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
+.setting__title{
+    font-weight: 700;
+    margin: 20px 0;
+    width: 86%;
 }
+
+

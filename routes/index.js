@@ -1,69 +1,65 @@
 const express = require("express");
 const router = express.Router();
-
 const conn = require("../config/database");
+let url = 'https://connectschool.servehttp.com/'
 
 router.get("/", (req, res) => {
+  res.render('screen/login')
+});
+
+// 페이징 라우터 추가
+router.get("/page/:pageNumber", async (req, res) => {
+  if (!req.session.user) {
+    res.send(`<script>alert("로그인을 해주세요!!!");location.href="${url}"</script>`);
+    return;
+  }
+  const pageNumber = parseInt(req.params.pageNumber, 10);
+  
+  if (isNaN(pageNumber) || pageNumber < 1) {
+    return res.status(400).send("Invalid page number");
+  }
+  
+  const postsPerPage = 10;
+  const offset = (pageNumber - 1) * postsPerPage;
+
+  let totalPostCount, totalPages;
+  try {
+    totalPostCount = await getTotalPostCount();
+    totalPages = Math.ceil(totalPostCount / postsPerPage); 
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("데이터베이스 에러");
+  }
+
   let sql = `
       SELECT tb_board.*, tb_user.user_name 
       FROM tb_board 
       INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id 
       WHERE tb_board.b_permit = 'YES'
       ORDER BY tb_board.b_idx DESC
-      LIMIT 12
+      LIMIT ?, ?
     `;
-  conn.query(sql, (err, rows) => {
-    res.render("screen/main", { data: rows, obj: req.session.user });
+    
+  conn.query(sql, [offset, postsPerPage], (err, rows) => {
+    res.render("screen/main", { data: rows, obj: req.session.user, totalPages: totalPages });
   });
 });
 
-router.get("/join", (req, res) => {
-  res.render("screen/join");
-});
+// 총 게시물 수 반환 함수 추가
+function getTotalPostCount() {
+  return new Promise((resolve, reject) => {
+    const query = "SELECT COUNT(b_idx) as postCount FROM tb_board WHERE b_permit = 'YES'";
+    conn.query(query, (err, results, fields) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results[0].postCount);
+      }
+    });
+  });
+}
 
-router.get("/write", (req, res) => {
-  res.render("screen/write", { obj: req.session.user });
-});
-
-// 그룹 만드는 라우터
-router.get('/group_c',(req,res)=>{
-  res.render("screen/group_c", { obj: req.session.user });
-})
-// 그룹 만드는 창에서 받아오기
-router.post('/group_c',(req,res)=>{
-    let {group_title,group_desc} = req.body
-    let {user_id} = req.session.user
-    console.log(user_id)    
-    let sql = "insert into tb_party (party_title,party_desc,user_id,created_at,party_status)values (?,?,?,now(),1);"
-    let sql_idx ='SELECT LAST_INSERT_ID() AS room_idx;'
-
-    conn.query(sql,[group_title,group_desc,user_id],(err, rows)=>{
-      console.log(rows)
-      conn.query(sql_idx,(err,rows)=>{
-        console.log(rows[0].room_idx)
-        res.render('screen/group_inv',{data:rows[0].room_idx})
-      })
-     })
-})
-// 그룹 초대하기에서 받아오기
-router.post('/group_inv',(req,res)=>{
-  console.log(req.body)
-  let {user_id,group_idx} = req.body
-  let sql = "insert into tb_join (user_id,party_idx,joined_at)values (?,?,now());"
-  let sql_select ='select user_id from tb_join where user_id = ?'
-  conn.query(sql,[user_id,group_idx],(err,rows)=>{
-    conn.query(sql_select,[user_id],(err,rows)=>{
-      console.log(rows[0])
-      if(rows[0] == undefined){
-        res.json("1")
-      }else{
-      res.json(rows[0].user_id)}
-    })
-  })
-  
-})
-
-// 회원 검색
+// 그룹원 검색
 router.post('/user_search',(req,res)=>{
   console.log('유저이름',req.body.user_name)
   let {user_name} = req.body
@@ -71,7 +67,7 @@ router.post('/user_search',(req,res)=>{
   let sql = `select user_id, user_class from tb_user where user_name = ?;`
   conn.query(sql,[user_name],(err,rows)=>{
     if(rows[0]==undefined){
-      res.json('아이디 없음')
+      res.json('아이디가 존재하지 않네요😥')
     }else{
        console.log(rows[0].user_id,rows[0].user_class)
        res.json({ user_id: rows[0].user_id, user_class: rows[0].user_class });
@@ -79,8 +75,136 @@ router.post('/user_search',(req,res)=>{
   })
 })
 
-//상세페이지
+router.post('/increment_likes', (req, res) => {
+  const post_idx = req.body.post_idx;
+  const user_id = req.body.user_id;
+
+  // 사용자의 좋아요를 관리하는 세션 설정
+  if (!req.session.likes) {
+    req.session.likes = {};
+  }
+
+  // 이미 좋아요를 누른 사용자 확인
+  if (req.session.likes[user_id] && req.session.likes[user_id].includes(post_idx)) {
+    res.status(400).send("이미 좋아요 누른 사용자입니다.");
+    return;
+  }
+
+  // 좋아요 증가 로직
+  const updateLikesSql = "UPDATE tb_board SET b_likes = b_likes + 1 WHERE b_idx = ?";
+  conn.query(updateLikesSql, [post_idx], (err, result) => {
+    // 에러 처리
+    if (result.affectedRows > 0) {
+      // 좋아요가 성공적으로 적용되면 사용자의 세션에 좋아요 정보 추가
+      if (!req.session.likes[user_id]) {
+        req.session.likes[user_id] = [];
+      }
+      req.session.likes[user_id].push(post_idx);
+      res.status(200).send("좋아요 추가 완료!");
+    } else {
+      res.status(404).send("해당 게시물이 없습니다.");
+    }
+  });
+});
+
+// 검색 기능
+router.post('/search',(req,res)=>{
+  console.log(req.body.content)
+  const search = req.body.content
+
+  let sql = `SELECT a.*, b.user_name FROM tb_board a INNER JOIN tb_user b ON a.user_id = b.user_id WHERE a.b_title LIKE '%${search}%' OR a.b_content LIKE '%${search}%' OR b.user_name LIKE '%${search}%' OR a.b_type LIKE '%${search}%' AND a.b_permit = 'YES' order by a.created_at desc;`
+
+  conn.query(sql,[search],(err, rows)=>{
+   res.render('screen/main', { data:rows , obj: req.session.user })
+  })
+})
+
+// 카테고리 프로젝트 별 모음 기능
+router.get('/project',(req,res)=>{
+  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE tb_board.b_permit = 'YES' and SUBSTRING_INDEX(b_category, ',', 1) = '["프로젝트"';`
+  conn.query(sql,(err, rows)=>{
+    res.render('screen/main', { data:rows , obj: req.session.user })
+   })
+
+})
+// 카테고리 스터디 별 모음 기능
+router.get('/study',(req,res)=>{
+  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE tb_board.b_permit = 'YES' and SUBSTRING_INDEX(b_category, ',', 1) = '["스터디"';`
+  conn.query(sql,(err, rows)=>{
+    res.render('screen/main', { data:rows , obj: req.session.user })
+   })
+})
+// 카테고리 공모전 별 모음 기능
+router.get('/Competition',(req,res)=>{
+  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE tb_board.b_permit = 'YES' and SUBSTRING_INDEX(b_category, ',', 1) = '["공모전"';`
+  conn.query(sql,(err, rows)=>{
+    res.render('screen/main', { data:rows , obj: req.session.user })
+   })
+})
+// 카테고리 게시판 별 모음 기능
+router.get('/boardpan', (req, res) => {
+  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE tb_board.b_permit = 'YES' and b_type = "자유게시판";`
+  conn.query(sql,(err, rows)=>{
+    res.render('screen/main', { data:rows , obj: req.session.user })
+   })
+})
+
+
+
+// 회원가입 중복체크 기능
+router.post('/user/dup_check', (req, res) => {
+  console.log(req.body.userId)
+  let {userId} = req.body;
+
+  let sql = `select user_id from tb_user where user_id = ?;`
+
+  conn.query(sql,[userId],(err, rows)=>{
+     res.json(rows.length)
+   
+   })
+})
+
+
+router.get("/join", (req, res) => {
+  res.render("screen/join");
+});
+
+router.get("/write", (req, res) => {
+    if (!req.session.user) {
+      res.send(`<script>alert("로그인을 해주세요!!!");location.href="${url}"</script>`);
+      return;
+    }
+    res.render("screen/write", { obj: req.session.user });
+  });
+
+router.delete('/deletePost/:postIdx', (req, res) => {
+  const postIdx = req.params.postIdx;
+
+  // SQL 쿼리를 사용하여 게시물 삭제
+  const sql = 'UPDATE tb_board SET b_permit = "NO" WHERE b_idx = ?';
+  conn.query(sql, [postIdx], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('데이터베이스 에러');
+    }
+    if (result.affectedRows > 0) {
+      res.status(200).send('성공적으로 삭제되었습니다.');
+    } else {
+      res.status(404).send('해당 게시물이 없습니다.');
+    }
+  });
+});
+
+
+router.get('/screen/login', (req, res) => {
+  res.render('/screen/login')
+})
+
 router.get("/detail", (req, res) => {
+  if (!req.session.user) {
+    res.send(`<script>alert("로그인을 해주세요!!!");location.href="${url}"</script>`);
+    return;
+  }
   // req.query에서 post_idx 값 가져오기
   const post_idx = req.query.a;
 
@@ -117,55 +241,6 @@ router.get("/detail", (req, res) => {
   }
 });
 
-// 검색 기능
-router.post('/search',(req,res)=>{
-   console.log(req.body.content)
-   const search = req.body.content
-
-   let sql = `SELECT * FROM tb_board WHERE b_title LIKE '%${search}%' OR b_content LIKE '%${search}%' OR user_id LIKE '%${search}%' OR b_type LIKE '%${search}%' order by created_at desc`
-
-   conn.query(sql,[search],(err, rows)=>{
-    res.render('screen/main', { data:rows , obj: req.session.user })
-   })
-})
-
-
-// 카테고리 프로젝트 별 모음 기능
-router.get('/project',(req,res)=>{
-  let sql = `SELECT * FROM tb_board WHERE SUBSTRING_INDEX(b_category, ',', 1) = '["프로젝트"';`
-  conn.query(sql,(err, rows)=>{
-    res.render('screen/main', { data:rows , obj: req.session.user })
-   })
-
-})
-// 카테고리 스터디 별 모음 기능
-router.get('/study',(req,res)=>{
-  let sql = `SELECT * FROM tb_board WHERE SUBSTRING_INDEX(b_category, ',', 1) = '["스터디"';`
-  conn.query(sql,(err, rows)=>{
-    res.render('screen/main', { data:rows , obj: req.session.user })
-   })
-})
-// 카테고리 공모전 별 모음 기능
-router.get('/Competition',(req,res)=>{
-  let sql = `SELECT * FROM tb_board WHERE SUBSTRING_INDEX(b_category, ',', 1) = '["공모전"';`
-  conn.query(sql,(err, rows)=>{
-    res.render('screen/main', { data:rows , obj: req.session.user })
-   })
-})
-
-// 회원가입 중복체크 기능
-router.post('/user/dup_check', (req, res) => {
-  console.log(req.body.userId)
-  let {userId} = req.body;
-
-  let sql = `select user_id from tb_user where user_id = ?;`
-
-  conn.query(sql,[userId],(err, rows)=>{
-     res.json(rows.length)
-   
-   })
-})
-
 // 댓글 수를 가져오는 함수 추가
 function getCommentCount(post_idx) {
   return new Promise((resolve, reject) => {
@@ -180,10 +255,10 @@ function getCommentCount(post_idx) {
   });
 }
 
-// 게시글 가져오는 함수를 수정하여 댓글 수를 함께 가져옴
+// 게시글 가져오는 함수를 수정하여 작성자 이메일도 함께 가져옴
 async function getPostDetail(post_idx, req, res) {
   let selectPostSql = `
-    SELECT tb_board.*, tb_user.user_name
+    SELECT tb_board.*, tb_user.user_name, tb_user.user_email 
     FROM tb_board
     INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id
     WHERE tb_board.b_permit = 'YES' AND tb_board.b_idx = ?
@@ -199,7 +274,6 @@ async function getPostDetail(post_idx, req, res) {
       // 해당 게시글이 없을 경우 오류 메시지 출력
       return res.status(404).send("해당게시글이 없습니다.");
     }
-
     // 댓글 수를 가져옴
     let commentCount;
     try {
@@ -225,7 +299,7 @@ async function getPostDetail(post_idx, req, res) {
       // 게시글 데이터와 댓글 데이터와 댓글 수를 detail 템플릿으로 전달
       res.render("screen/detail", {
         data: rows,
-        loginUser: req.session.user || null,
+        obj: req.session.user || null,
         comments: comments,
         commentCount: commentCount,
       });
@@ -237,7 +311,7 @@ async function getPostDetail(post_idx, req, res) {
 router.post("/addComment", (req, res) => {
   if (!req.session.user) {
     return res.status(401).send(`<script>alert('로그인을 해주세요!!');
-    location.href="http://localhost:3000/"</script>`);
+    location.href="${url}"</script>`);
   }
 
   const post_idx = req.body.post_idx;
@@ -263,24 +337,58 @@ router.post("/addComment", (req, res) => {
   });
 });
 
-// mypage 
-router.get('/mypage',(req,res)=>{
-  let {user_id} = req.session.user
-  let sql =`select B.party_idx,party_title,party_desc, date_format(created_at, '%Y-%m-%d') as created_at from tb_join as A right outer join tb_party as B on A.user_id = B.user_id 
-  where B.user_id = ? ;`
 
-  conn.query(sql,[user_id],(err,rows)=>{
-    console.log(rows)
-    res.render('screen/mypage',{data:rows})
+
+// 그룹 만드는 라우터
+router.get('/teammake',(req,res)=>{
+  res.render("screen/teammake", { obj: req.session.user });
+})
+
+router.post('/teammake',(req,res)=>{
+    let {group_title,group_desc} = req.body
+    let {user_id} = req.session.user
+    console.log(user_id)    
+    let sql = "insert into tb_party (party_title,party_desc,user_id,created_at,party_status)values (?,?,?,now(),1);"
+    let sql_idx ='SELECT LAST_INSERT_ID() AS room_idx;'
+    let sql_leader = "insert into tb_join (user_id,party_idx,joined_at) values(?,?,now())"
+    conn.query(sql,[group_title,group_desc,user_id],(err, rows)=>{
+      console.log("그룹방마들기",rows)
+      conn.query(sql_idx,(err,rows)=>{
+        console.log("그룹방번호",rows[0].room_idx)
+        let room_idx = rows[0].room_idx
+        res.render('screen/teaminvite',{data:rows[0].room_idx})
+        conn.query(sql_leader, [user_id, room_idx], (err, rows) => {
+          console.log("방장추가됨",rows)
+            
+          })
+      
+      })
+     })
+})
+
+router.post('/teaminvite',(req,res)=>{
+  console.log(req.body)
+  let {user_id,group_idx} = req.body
+  let sql = "insert into tb_join (user_id,party_idx,joined_at)values (?,?,now());"
+  let sql_select ='select user_id from tb_join where user_id = ?'
+  conn.query(sql,[user_id,group_idx],(err,rows)=>{
+    conn.query(sql_select,[user_id],(err,rows)=>{
+      console.log(rows[0])
+      if(rows[0] == undefined){
+        res.json("1")
+      }else{
+      res.json(rows[0].user_id)}
+    })
   })
   
 })
 
+//채팅방 개설 
+  //채팅창 만들기
+  router.get('/chatmake',(req,res)=>{
+    res.render("screen/chatmake")
+})
 
 
-// 나중에 group router 만들어야됨
-router.get("/group", (req, res) => {
-  res.render("screen/group");
-});
 
 module.exports = router;

@@ -1,136 +1,106 @@
-.login{
-    position: fixed;
-    width: 100%;
-    height: 1000px;
-    background-color: rgba(235, 235, 235, 0.7);
+.login-box{
     display: flex;
     align-items: center;
+    height: 100vh;
     justify-content: center;
-    transition: all 1s;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 1s;
-    z-index: 5;
-    
+    width: 100%;
 }
 
 
-.show-modal {
-  visibility : visible;
-  opacity : 1;
-}
-
-.login__form{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: 800px;
-    width: 500px;
-    justify-content: center;
-    background-color: var(--menu-bar);
-    padding-left:50px ;
-    position: relative;
-}
-
-
-
-.login__box{
-    display: flex;
-    flex-direction: column;
-    margin-bottom:20px;
-    
-}
-
-.login__box label{
-    margin-bottom:10px ;
+.login__alert{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
     font-weight: 700;
-    font-size: 18px;
 }
+.login{
+    display: flex;
+    align-items: center;
+    height: 500px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.25);
+    border-radius: 10px;
 
-.login__auto{
-    margin-bottom:30px;
+
 }
 
 .login img{
-    height: 800px;
-    width: 600px;
+        border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
 }
 
+.login form, .login img{
+    width: 400px;
+    height: 500px;
+    
+    
+}
 
+.login form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 50px;
+}
 
 .login__title{
-    font-size: 40px ;
-    font-weight: 900;
-    margin-bottom:30px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    
 }
 
-.login__box input{
-    width: 400px;
-    height: 40px;
+.login__inputs{
+    margin-bottom: 30px;
+}
+
+.login__inputs input{
+    height: 45px;
+    width: 300px;
+    margin: 7px 0;
     border: none;
+    background-color: #F8F9FD;
+    border-radius: 10px;
+    padding-left: 20px;
 }
-
 
 .login__buttons button{
-    width: 400px;
-    height: 60px;
-    border: none;
-    margin-bottom: 20px;
-    font-size: 28px;
+    height: 45px;
+    width: 300px;
+    margin-bottom:15px;
+    border-radius: 10px;
     color: white;
-    background-color: var(--main-color);
-}
-
-
-#login__join{
-    background-color: white;
-    color: var(--main-color);
-    width: 400px;
-    height: 60px;
-    border: none;
-    margin-bottom: 20px;
-    font-size: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    
-
-}
-
-#login__git{
-    background-color: black;
-}
-
-#login__git i{
-    margin-right: 10px;
-}
-
-
-.login__close{
-    font-weight: 900;
-    font-size: 40px;
-    color: white;
-    border: none;
-    background-color: inherit;
-
-    position: absolute;
-    right: 20px;
-    top:20px
-
-}
-
-.login__alert{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom:20px;
-    width: 400px;
-}
-
-.login__alert-text{
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 700;
-    color: var(--main-color);
+}
+
+.login__btnn{
+    background-color: #5A81FA;
+}
+
+.login__joinbtn{
+    color: white;
+    background-color: #CEDEFF;
     
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:15px;
+}
+
+.login__gitbtn{
+    background-color: black;
+        height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.login__gitbtn span{
+    margin-left: 5px;
 }

@@ -7,8 +7,15 @@ const session = require("express-session");
 const fileStore = require("session-file-store")(session);
 const indexRouter = require("./routes");
 const userRouter = require("./routes/user");
+const groupRouter = require("./routes/group");
+const chatRouter = require("./routes/chat");
+const socketio = require('socket.io')
+const http = require('http').createServer(app);
+const io = socketio(http)
 
 const cors = require("cors");
+
+let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
 
 /* CORS 오류 발생! 
 1) cors 설치 npm i cors
@@ -23,10 +30,15 @@ app.set("port", process.env.PORT || 3000);
 
 // 2. 동적인 페이지 설정 - nunjucks
 app.set("view engine", "html");
-nunjucks.configure("views", {
+const env = nunjucks.configure("views", {
   express: app,
   watch: true,
 });
+// html태그 제거기능
+env.addFilter("stripHtmlTags", function (str) {
+  return str.replace(/<[^>]*>?/gm, "");
+});
+
 // 3. post방식으로 데이터를 넘겨줄 때 필요함
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -47,7 +59,25 @@ app.use(
 // 6. 라우팅 처리
 app.use("/", indexRouter);
 app.use("/user", userRouter);
+app.use("/group", groupRouter);
+app.use("/chat", chatRouter);
 
-app.listen(app.get("port"), () => {
+io.on('connection',(socket)=>{    //user가 웹소켓으로 서버에 connection했을 때 함수실행해라
+  console.log('유저접속함')  
+  // socket.on('user-send',(data)=>{  //이벤트리스너 기능. 전송받은 자료는 data에 저장됨.
+  //   console.log(data)      
+  // })
+
+  socket.on('disconnect', () => {
+      console.log('유저가 나갔습니다.')
+    })
+
+    socket.on('connection2', (data) => {
+    console.log(data)
+    io.emit('broadcast',data)
+    })
+})
+
+http.listen(app.get("port"), () => {
   console.log(app.get("port") + "번 포트에서 대기중...");
 });
