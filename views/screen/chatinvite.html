@@ -63,7 +63,7 @@
     $('#search_btn').click((e) => {
         let user_name = $('#user_search').val()
         let url = '/user_search'
-
+        $('.user_search').html('');
         fetch(url, {
             method: 'POST',
             headers: {

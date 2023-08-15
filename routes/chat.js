@@ -7,10 +7,11 @@ let url = 'http://localhost:3000/'
 //채팅방 개설하기
 router.post('/chatroom_create',(req,res)=>{
     let {title} = req.body
+    let {user_name} = req.session.user
     console.log("제목",title)
     let room_idx;
     let sql = `insert into tb_chatroom (room_title,room_desc,user_id,created_at,room_type)values(?,'채팅방입니다',?,now(),1)` //채팅방 만들기
-    let sql_room = `insert into tb_chatpeople (room_people,created_at,room_idx)values(?,now(),?);`
+    let sql_room = `insert into tb_chatpeople (room_people,created_at,room_idx,chat_status,user_name)values(?,now(),?,1,?);`
     let selectQuery = 'SELECT LAST_INSERT_ID() AS room_idx;'
     conn.query(sql,[title,req.session.user.user_id],(err,rows)=>{   //채팅방 만드는 db실행
         
@@ -20,7 +21,7 @@ router.post('/chatroom_create',(req,res)=>{
             console.log("들어가는건가",rows_number[0])
             res.json(rows_number[0])
             console.log("룸인덱스",room_idx)
-            conn.query(sql_room,[req.session.user.user_id,room_idx.room_idx],(err,rows)=>{ //채팅방을 만든 후 개설자도 chatpeople 테이블에 들어간다.
+            conn.query(sql_room,[req.session.user.user_id,room_idx.room_idx,user_name],(err,rows)=>{ //채팅방을 만든 후 개설자도 chatpeople 테이블에 들어간다.
                 console.log("작동하냐",rows)
         
             })
@@ -44,7 +45,7 @@ router.post('/chat_inv',(req,res)=>{
         console.log("채팅초대할인원",req.body.invite)
     let {room_idx} =req.body    
     let {invite} = req.body
-    let invitesql = "insert into tb_chatpeople (room_people,created_at,room_idx)values(?,now(),?);"
+    let invitesql = "insert into tb_chatpeople (room_people,created_at,room_idx,chat_status,user_name)values(?,now(),?,1,?);"
     let sql = "select * from tb_user where user_id = ?"          
     conn.query(sql,[invite,room_idx],(err,rows)=>{  //검색한 유저를 db에서 불러온다.
            //채팅방 초대할 인원 user 테이블에서 가져오기
@@ -55,12 +56,50 @@ router.post('/chat_inv',(req,res)=>{
             console.log("1")         
             res.json(rows[0].user_id)   //불러온 유저를 chatcreate_inv.html로 보내준다. 이유는 검색결과를 표시하기 위함
             console.log("여기까지 되냐",rows[0])
-            conn.query(invitesql,[invite,room_idx],(err,rows)=>{    //chatpeople 테이블에 참가자 추가
+            conn.query(invitesql,[invite,room_idx,rows[0].user_name],(err,rows)=>{    //chatpeople 테이블에 참가자 추가
                 console.log("초대되냐",rows)            
             })}
         })
     })
 
+//채팅방 개설 후 추가로 초대하기
+router.post('/chatroom_inv',(req,res)=>{
+
+let {room_idx,user_id} = req.body
+let sql = "insert into tb_chatpeople (room_people,created_at,room_idx,chat_status,user_name)values(?,now(),?,1,?);"
+let sql_inv ="select * from tb_user where user_id = ?"
+conn.query(sql_inv,[user_id],(err,rows)=>{
+    if(rows[0] == undefined){ res.json("1")}
+    else{   res.json(rows)
+
+        conn.query(sql,[user_id,room_idx,rows[0].user_name],(err,rows)=>{
+            
+        })
+
+}})
+
+
+
+
+
+})
+
+
+
+
+//채팅방 나가기
+router.post('/exit',(req,res)=>{
+    console.log('나가기',req.body.room_idx,req.session.user.user_id)
+    let {room_idx} =req.body
+    let {user_id} = req.session.user
+    let sql = `update tb_chatpeople set chat_status = 0 where room_idx =? and room_people = ?;` 
+    conn.query(sql,[room_idx,user_id],(err,rows)=>{
+
+    })
+
+
+
+})
 
 
 //실시간 채팅기능
@@ -79,7 +118,7 @@ router.get('/',(req,res)=>{
     let {user_id} = req.session.user
    
         let sql = `select room_title,room_desc,DATE_FORMAT(A.created_at, '%Y-%m-%d %p %h:%i') as created_at,room_people,
-        B.room_idx from tb_chatroom as A left outer join tb_chatpeople as B on A.room_idx = B.room_idx where B.room_people = ? `
+        B.room_idx from tb_chatroom as A left outer join tb_chatpeople as B on A.room_idx = B.room_idx where B.room_people = ? and B.chat_status = 1 `
     //chatroom 과 chatpeople 를 조인함. 내 아이디가 참가한 모든 채팅방을 불러온다.
     conn.query(sql,[user_id],(err,rows)=>{  //불러온 채팅방을 chat.html에 보내준다.
         console.log(rows)
@@ -98,7 +137,7 @@ router.post("/message", (req, res) => {
     console.log("아이디",user_id)
     let sql = `select A.talker as talker,user_name,talk,DATE_FORMAT(A.talked_at,'%m/%d/%Y, %l:%i %p') as talked_at,room_idx 
     from tb_talk as A left outer join tb_user as B on A.talker = B.user_id where  room_idx = ? order by talked_at` //채팅방을 누르면 채팅방에 해당하는 모든 대화목록을 쏴준다.
-    let sql_userlist = `select * from tb_chatpeople where room_idx= ?`
+    let sql_userlist = `select * from tb_chatpeople where room_idx= ? and chat_status = 1`
     conn.query(sql,[room_idx],(err,rows)=>{
             
             conn.query(sql_userlist,[room_idx],(err,userlist)=>{
