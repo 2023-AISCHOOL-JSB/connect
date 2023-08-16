@@ -7,23 +7,82 @@
     <div class="group__nav">
         <div class="group__board blue">커넥보드</div>
         <div class="group__notice">팀 소통</div>
-
+   
     </div>
     {% include 'components/notice.html' %}
     {% include 'components/canvan.html' %}
-    <div>
-        <ul>
-            <li>
-                <p>팀원들들</p>
-                {%for member in group_info%}
-                {{member.user_name}}
-                {%endfor%}
-            </li>
-        </ul>
-    </div>
+    
 </main>
 
 {% include 'components/footer.html' %}
 <script src="/js/screen/group.js"></script> <!-- path 수정 -->
+
+<script>
+
+//그룹원 추가로 초대하기   
+    
+    $('.group_inv_btn').click((e)=>{
+        let group_idx = $('.group_inv_btn').data('id') //group_idx 가져오기    
+        let user_id = $('.group_inv_name').val() //추가 초대할 인원 가져오기
+        let url = '/group/group_inv'
+        fetch(url, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                }, 
+                body: JSON.stringify({
+                    group_idx: group_idx,
+                    user_id:user_id               
+                })
+    
+            })
+            .then(res => res.json())
+            .then(res =>{   
+                    // 그룹에 초대하면 유저목록에 추가되는 로직
+                if(res==1){alert('없는 아이디입니다.')}
+                else{
+                    $('.plus__group__user').append(` 
+                    <li>
+                        ${res[0].user_name}                
+                    </li>`)
+
+
+
+                }
+            
+            })
+            
+        
+    
+    })
+
+
+//그룹 나가기
+$('.plus__group__exit').click((e)=>{
+    let group_idx = $('.group_inv_btn').data('id') //group_idx 가져오기 
+    console.log("채팅방 나가기",group_idx)
+    let url = '/group/exit'
+    fetch(url, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                party_idx: group_idx             
+            })
+
+        }).then(window.location.href = "http://localhost:3000/user/myteam")
+        
+    
+
+})
+
+
+
+</script>
+
+
+
+
 
 {% endblock %}

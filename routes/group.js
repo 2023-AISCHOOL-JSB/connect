@@ -93,10 +93,6 @@ WHERE a.party_idx = ?;
   });
 });
 
-
-
-
-
 router.post("/update/:id", (req, res) => {
   const process_idx = parseInt(req.params.id);
   const { in_process } = req.body;
@@ -131,5 +127,38 @@ router.delete("/delete/:id", function (req, res) {
     }
   });
 });
+
+//그룹추가초대하기
+router.post("/group_inv", (req, res) => {
+  let { group_idx, user_id } = req.body;
+  console.log(group_idx, user_id);
+  let sql = `select * from tb_user where user_id = ?`;
+  let sql_add =
+    "insert into tb_join (user_id,party_idx,joined_at) values(?,?,now())";
+  conn.query(sql, [user_id], (err, rows) => {
+    console.log(rows);
+    if (rows[0] == undefined) {
+      res.json("1");
+    } else {
+      res.json(rows);
+      conn.query(sql_add, [user_id, group_idx], (err, rows) => {});
+    }
+  });
+});
+
+//그룹 나가기
+router.post('/exit',(req,res)=>{
+  console.log('나가기',req.body.group_idx,req.session.user.user_id)
+  let {party_idx} =req.body
+  let {user_id} = req.session.user
+  let sql = `delete from tb_join where party_idx =? and user_id = ?;` 
+  conn.query(sql,[party_idx,user_id],(err,rows)=>{
+
+  })
+
+
+
+})
+
 
 module.exports = router;

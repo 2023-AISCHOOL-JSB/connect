@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
 const io = require("socket.io-client")
-let url = 'https://connect.aischool.o-r.kr/'
-
+//let url = 'https://connect.aischool.o-r.kr/'
+url = 'http://localhost:3000/'
 //채팅방 개설하기
 router.post('/chatroom_create',(req,res)=>{
     let {title} = req.body

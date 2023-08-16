@@ -15,8 +15,8 @@ const io = socketio(http)
 
 const cors = require("cors");
 
-let url = 'https://connect.aischool.o-r.kr/'
-
+//let url = 'https://connect.aischool.o-r.kr/'
+url = 'http://localhost:3000/'
 /* CORS 오류 발생! 
 1) cors 설치 npm i cors
 2) require
