@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-let url = 'https://aiconnect.sytes.net/'
+let url = 'https://connect.aischool.o-r.kr/'
 
 router.get("/", (req, res) => {
   res.render('screen/login')

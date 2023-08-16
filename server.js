@@ -15,7 +15,7 @@ const io = socketio(http)
 
 const cors = require("cors");
 
-let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
+let url = 'https://connect.aischool.o-r.kr/'
 
 /* CORS 오류 발생! 
 1) cors 설치 npm i cors
