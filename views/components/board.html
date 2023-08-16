@@ -12,7 +12,7 @@
             {% elif board.b_category == '스터디'%}
             <span class="board__group" data-array="{{board.b_category}}" data-index="0" data-prepend="✏️ "
                 style="background-color: tomato;">-</span>
-            {% end if%}
+            {%endif%}
             <time class="board__deadline" data-array="{{board.b_category}}" data-prepend="마감일 | "
                 data-index="2">-</time>
 
