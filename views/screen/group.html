@@ -9,10 +9,18 @@
         <div class="group__notice">팀 소통</div>
 
     </div>
-
     {% include 'components/notice.html' %}
     {% include 'components/canvan.html' %}
-
+    <div>
+        <ul>
+            <li>
+                <p>팀원들들</p>
+                {%for member in group_info%}
+                {{member.user_name}}
+                {%endfor%}
+            </li>
+        </ul>
+    </div>
 </main>
 
 {% include 'components/footer.html' %}

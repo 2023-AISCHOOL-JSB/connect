@@ -2,9 +2,12 @@ const noticeWrite = document.querySelector(".notice__write");
 const openNoticeBtn = document.querySelector(".add-new-task-btn1");
 const closeNoticeBtn = document.querySelector(".notice__write__close");
 // 모달창 열기
-openNoticeBtn.addEventListener("click", () => {
-    noticeWrite.classList.remove('hidden')
+
+openNoticeBtn.addEventListener("click", (event) => {
+
     
+    noticeWrite.classList.remove('hidden')
+ 
   
 });
 // 모달창 닫기
@@ -18,3 +21,4 @@ noticeWrite.addEventListener('click', (event) => {
     console.log(event.target)
     
 })
+

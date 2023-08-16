@@ -24,7 +24,10 @@
         <div>
             <span>{{notice.noti_content}}</span>
         </div>
-        <time>{{notice.user_id}}</time>
+        <div>
+            <time style="margin-right: 20px;">{{notice.user_name}}</time>
+            <time style="font-weight: 400; color:var(--main-color)">{{notice.created_at}}</time>
+        </div>
     </li>
     {% endfor %}
 </ul>

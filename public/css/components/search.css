@@ -9,6 +9,10 @@
 .search a {
     text-decoration: none;
     color: inherit;
+    padding-bottom: 10px;
+    width: 20%;
+    text-align: center;
+    
 }
 
 .search li {
@@ -24,15 +28,19 @@
     color: var(--search-color);
     list-style-type: none;
     padding-left: 0;
+
 }
 
 
 .search__list a:hover{
+    
     font-weight: 900;
+    border-bottom: 3px solid black;
 }
 
 .search-clicked{
     
+    border-bottom: 3px solid black;
     font-weight: 900;
 }
 

@@ -9,6 +9,10 @@ router.get("/", (req, res) => {
 
 // 페이징 라우터 추가
 router.get("/page/:pageNumber", async (req, res) => {
+  if (!req.session.user) {
+    res.send(`<script>alert("로그인을 해주세요!!!");location.href="${url}"</script>`);
+    return;
+  }
   const pageNumber = parseInt(req.params.pageNumber, 10);
   
   if (isNaN(pageNumber) || pageNumber < 1) {
@@ -108,7 +112,7 @@ router.post('/search',(req,res)=>{
   console.log(req.body.content)
   const search = req.body.content
 
-  let sql = `SELECT a.*, b.user_name FROM tb_board a INNER JOIN tb_user b ON a.user_id = b.user_id WHERE a.b_title LIKE '%${search}%' OR a.b_content LIKE '%${search}%' OR b.user_name LIKE '%${search}%' OR a.b_type LIKE '%${search}%' order by a.created_at desc;`
+  let sql = `SELECT a.*, b.user_name FROM tb_board a INNER JOIN tb_user b ON a.user_id = b.user_id WHERE a.b_title LIKE '%${search}%' OR a.b_content LIKE '%${search}%' OR b.user_name LIKE '%${search}%' OR a.b_type LIKE '%${search}%' AND a.b_permit = 'YES' order by a.created_at desc;`
 
   conn.query(sql,[search],(err, rows)=>{
    res.render('screen/main', { data:rows , obj: req.session.user })
@@ -117,7 +121,7 @@ router.post('/search',(req,res)=>{
 
 // 카테고리 프로젝트 별 모음 기능
 router.get('/project',(req,res)=>{
-  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE SUBSTRING_INDEX(b_category, ',', 1) = '["프로젝트"';`
+  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE tb_board.b_permit = 'YES' and SUBSTRING_INDEX(b_category, ',', 1) = '["프로젝트"';`
   conn.query(sql,(err, rows)=>{
     res.render('screen/main', { data:rows , obj: req.session.user })
    })
@@ -125,21 +129,21 @@ router.get('/project',(req,res)=>{
 })
 // 카테고리 스터디 별 모음 기능
 router.get('/study',(req,res)=>{
-  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE SUBSTRING_INDEX(b_category, ',', 1) = '["스터디"';`
+  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE tb_board.b_permit = 'YES' and SUBSTRING_INDEX(b_category, ',', 1) = '["스터디"';`
   conn.query(sql,(err, rows)=>{
     res.render('screen/main', { data:rows , obj: req.session.user })
    })
 })
 // 카테고리 공모전 별 모음 기능
 router.get('/Competition',(req,res)=>{
-  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE SUBSTRING_INDEX(b_category, ',', 1) = '["공모전"';`
+  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE tb_board.b_permit = 'YES' and SUBSTRING_INDEX(b_category, ',', 1) = '["공모전"';`
   conn.query(sql,(err, rows)=>{
     res.render('screen/main', { data:rows , obj: req.session.user })
    })
 })
 // 카테고리 게시판 별 모음 기능
 router.get('/boardpan', (req, res) => {
-  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE b_type = "자유게시판";`
+  let sql = `SELECT tb_board.*,tb_user.user_name FROM tb_board INNER JOIN tb_user ON tb_board.user_id = tb_user.user_id WHERE tb_board.b_permit = 'YES' and b_type = "자유게시판";`
   conn.query(sql,(err, rows)=>{
     res.render('screen/main', { data:rows , obj: req.session.user })
    })
@@ -166,6 +170,10 @@ router.get("/join", (req, res) => {
 });
 
 router.get("/write", (req, res) => {
+  if (!req.session.user) {
+    res.send(`<script>alert("로그인을 해주세요!!!");location.href="${url}"</script>`);
+    return;
+  }
   res.render("screen/write", { obj: req.session.user });
 });
 
@@ -193,6 +201,10 @@ router.get('/screen/login', (req, res) => {
 })
 
 router.get("/detail", (req, res) => {
+  if (!req.session.user) {
+    res.send(`<script>alert("로그인을 해주세요!!!");location.href="${url}"</script>`);
+    return;
+  }
   // req.query에서 post_idx 값 가져오기
   const post_idx = req.query.a;
 

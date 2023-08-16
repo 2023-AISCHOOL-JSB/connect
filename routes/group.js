@@ -36,39 +36,55 @@ router.post("/notice", (req, res) => {
   });
 });
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
+  if (!req.session.user) {
+    res.redirect("/");
+    return;
+  }
   let data = req.query.data;
   let user_id = req.session.user.user_id;
 
-  let sql_group_info = `SELECT A.user_id, B.party_title, B.user_id, B.party_idx
-                        FROM tb_join A INNER JOIN tb_party B
-                        ON A.party_idx = B.party_idx
-                        WHERE A.user_id = ? AND B.party_idx = ?;`;
+  let sql_group_info = `SELECT A.user_id, B.party_title, B.party_idx, C.user_name
+  FROM tb_join A
+  INNER JOIN tb_party B ON A.party_idx = B.party_idx
+  INNER JOIN tb_user C ON A.user_id = C.user_id
+  WHERE B.party_idx = ?;`;
 
-  conn.query(sql_group_info, [user_id, data], (err, rows_group_info) => {
+  conn.query(sql_group_info, [data], (err, rows_group_info) => {
     if (err) {
-      console.error('Error retrieving data:', err);
-      res.status(500).json({ message: 'Database error' });
+      console.error("Error retrieving data:", err);
+      res.status(500).json({ message: "Database error" });
     } else if (rows_group_info.length === 0) {
-      res.status(404).json({ message: 'No matching party found' });
+      res.status(404).json({ message: "No matching party found" });
     } else {
       let party_idx = rows_group_info[0].party_idx;
 
-      let sql_notice = `SELECT noti_content, created_at, user_id, party_idx FROM tb_notification WHERE party_idx = ?;`;
+      let sql_notice = `
+SELECT a.noti_content, DATE_FORMAT(a.created_at, '%Y-%m-%d %p %h:%i') as created_at, a.user_id, a.party_idx, b.user_name
+FROM tb_notification a
+INNER JOIN tb_user b ON a.user_id = b.user_id
+WHERE a.party_idx = ?;
+`;
       let sql_todo = `SELECT todo, member, DATE_FORMAT(deadline, '%m / %d') AS formattedDeadline, in_process, process_idx, party_idx FROM tb_canvan WHERE party_idx = ?;`;
 
       conn.query(sql_notice, [party_idx], (err, rows_notice) => {
         if (err) {
-          console.error('Error retrieving data:', err);
-          res.status(500).json({ message: 'Database error' });
+          console.error("Error retrieving data:", err);
+          res.status(500).json({ message: "Database error" });
         } else {
           conn.query(sql_todo, [party_idx], (err, rows_todo) => {
             if (err) {
-              console.error('Error retrieving data:', err);
-              res.status(500).json({ message: 'Database error' });
+              console.error("Error retrieving data:", err);
+              res.status(500).json({ message: "Database error" });
             } else {
               // 공지사항 목록과 그룹 데이터를 렌더링하는 group   이지에 데이터 전달
-              res.render('screen/group', { obj: req.session.user, notice: rows_notice, to: rows_todo, group_info: rows_group_info, group: data });
+              res.render("screen/group", {
+                obj: req.session.user,
+                notice: rows_notice,
+                to: rows_todo,
+                group_info: rows_group_info,
+                group: data,
+              });
             }
           });
         }
