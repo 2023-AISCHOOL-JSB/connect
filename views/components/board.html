@@ -3,13 +3,13 @@
 <a href="/detail?a={{ board.b_idx }}" class="post_idx" style=" color: black;">
     <section class="board">
         <div class="board__head">
-            {% if board.b_category == '프로젝트' %}
+            {% if board.b_category[0] == '프로젝트' %}
             <span class="board__group" data-array="{{board.b_category}}" data-index="0" data-prepend="🚀 "
                 style="background-color: var(--sub-color1);">-</span>
-            {% elif board.b_category == '공모전'%}
+            {% elif board.b_category[0] == '공모전'%}
             <span class="board__group" data-array="{{board.b_category}}" data-index="0" data-prepend="💻 "
                 style="background-color: var(--main-color);">-</span>
-            {% elif board.b_category == '스터디'%}
+            {% elif board.b_category[0] == '스터디'%}
             <span class="board__group" data-array="{{board.b_category}}" data-index="0" data-prepend="✏️ "
                 style="background-color: tomato;">-</span>
             {%endif%}
