@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-let url = 'http://localhost:3000'
+let url = 'https://aiconnect.sytes.net/'
 
 router.get("/", (req, res) => {
   res.render('screen/login')

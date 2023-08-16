@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
 const io = require("socket.io-client")
-let url = 'http://localhost:3000/'
+let url = 'https://aiconnect.sytes.net/'
 
 //채팅방 개설하기
 router.post('/chatroom_create',(req,res)=>{
