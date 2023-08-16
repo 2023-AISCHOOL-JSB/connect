@@ -41,9 +41,9 @@
     if (!confirm('정말로 탈퇴하시겠습니까?')) {
       return;
     }
-    const Id = document.getElementById('id');
+    const Id = document.getElementById('setting__userid');
     const userId = Id.textContent;
-    fetch(`${url}user/delete_user`, {
+    fetch(`/user/delete_user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +55,7 @@
         console.log(res);
 
         if (res) {
-          location.href = `${url}`;
+          location.href = `${urlcloud}`;
         }
       });
   }

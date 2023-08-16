@@ -87,7 +87,7 @@ router.post('/login', (req,res)=>{
   console.log('로그인 기능 라우터',req.body)
   let {id,pw} = req.body
   // 3. DB 연동해서 해당 id 값과 pw 값이 일치하는 데이터가 DB에 있는지 확인한다
-  let sql = 'select * from tb_user where user_id=? and user_pw =SHA2(?,512)'
+  let sql = 'select * from tb_user where user_id=? and user_pw =SHA2(?,512) and user_status = "y"'
   // 4. 데이터가 존재한다면 로그인 성공
   conn.query(sql,[id,pw],(err, rows)=>{
   

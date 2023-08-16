@@ -9,8 +9,8 @@ const indexRouter = require("./routes");
 const userRouter = require("./routes/user");
 const groupRouter = require("./routes/group");
 const chatRouter = require("./routes/chat");
-const socketio = require('socket.io')
 const http = require('http').createServer(app);
+const socketio = require('socket.io')
 const io = socketio(http)
 
 const cors = require("cors");
