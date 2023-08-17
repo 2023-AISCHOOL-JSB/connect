@@ -178,11 +178,13 @@ router.post('/delete_user', (req, res) => {
 // mypage 
 router.get('/myteam',(req,res)=>{
   let {user_id} = req.session.user
-  let sql =`select A.user_id,  B.party_title, B.user_id, B.party_idx 
+  let sql =`select A.user_id,  B.party_title, B.user_id, B.party_idx , C.user_name
   from tb_join A inner join tb_party B 
   on A.party_idx = B.party_idx 
+  inner join tb_user C
+  on B.user_id = C.user_id
   where A.user_id = ?;`
-
+  
   conn.query(sql,[user_id],(err,rows)=>{
     res.render('screen/myteam',{data:rows,obj: req.session.user})
   })
