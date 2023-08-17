@@ -2,11 +2,19 @@ const todolist = document.querySelectorAll('.todo__list__li');
 const sections = document.querySelectorAll('.canvan section');
 
 const groupPlusBtn = document.querySelector('.group-plus-btn')
+const groupPlusBtni = document.querySelector('.group-plus-btn i')
 const groupPlus = document.querySelector('.plus__group')
 
 groupPlusBtn.addEventListener('click', () => {
     groupPlus.classList.toggle('hidden')
 })
+document.body.addEventListener('click',(event)=>{
+    if(groupPlusBtn != event.target && groupPlusBtni !=event.target){
+    groupPlus.classList.add('hidden')}
+  
+})
+
+
 
 const groupInvite = document.querySelector('.group-invite')
 const groupInviteInput = document.querySelector('.group-invite-input')
@@ -82,7 +90,9 @@ closeModalBtn.addEventListener("click", () => {
 canvanWrite.addEventListener("click", (event) => {
     if (event.target == canvanWrite) {
         canvanWrite.classList.add('hidden')
+        
     }
+    console.log(event.target)
     
     
 })
