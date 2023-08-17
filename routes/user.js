@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-let url = 'https://aiconnect.sytes.net/'
+const url  = require('../server').url;
 
 
 router.post("/write", (req, res) => {

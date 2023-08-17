@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const url = 'http://localhost:3000/' ; module.exports ={ url:url }; //url 다른 파일에서도 한번에 바꾸기!
 const bodyParser = require("body-parser");
 const nunjucks = require("nunjucks");
 const session = require("express-session");
@@ -15,7 +15,7 @@ const io = socketio(http)
 
 const cors = require("cors");
 
-let url = 'https://port-0-connect-eu1k2lll7tjjl4.sel3.cloudtype.app/'
+
 
 /* CORS 오류 발생! 
 1) cors 설치 npm i cors
@@ -81,3 +81,4 @@ io.on('connection',(socket)=>{    //user가 웹소켓으로 서버에 connection
 http.listen(app.get("port"), () => {
   console.log(app.get("port") + "번 포트에서 대기중...");
 });
+

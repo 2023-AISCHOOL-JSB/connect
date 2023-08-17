@@ -11,7 +11,30 @@ font-weight: 900;
 font-size: 25px;
 }
 
+.new-task__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    
+}
 
+.group-plus__box{
+    position: relative;
+}
+
+.plus__group{
+    position: absolute;
+    background-color: #4C7DFB;
+    list-style: none;
+    height: 200px;
+    width: 150px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
 .group__nav{
 display: flex;
 width:1200px;
