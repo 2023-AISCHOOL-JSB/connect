@@ -164,6 +164,20 @@ router.post('/user/dup_check', (req, res) => {
    })
 })
 
+// 회원가입 번호인증 기능
+router.post('/user/phone_check', (req, res) => {
+  console.log(req.body.userPhone)
+  let {userPhone} = req.body;
+
+  let sql = `select user_phone from tb_user where user_phone = ?;`
+
+  conn.query(sql,[userPhone],(err, rows)=>{
+     res.json(rows.length)
+   
+   })
+})
+
+
 
 router.get("/join", (req, res) => {
   res.render("screen/join");
