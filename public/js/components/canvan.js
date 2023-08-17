@@ -8,6 +8,16 @@ groupPlusBtn.addEventListener('click', () => {
     groupPlus.classList.toggle('hidden')
 })
 
+const groupInvite = document.querySelector('.group-invite')
+const groupInviteInput = document.querySelector('.group-invite-input')
+
+
+
+groupInvite.addEventListener('click', () => {
+    groupInviteInput.classList.toggle('hidden')
+    console.log('hi')
+})
+
 
 
 sections.forEach((section, index) => {

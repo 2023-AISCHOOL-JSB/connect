@@ -20,7 +20,8 @@ font-size: 25px;
 
 .group-plus__box{
     position: absolute;
-    left: 60%;
+    top: -10px;
+    left: 20px;
 
 }
 
@@ -43,15 +44,35 @@ font-size: 25px;
 
 .plus__group{
     position: absolute;
-    background-color: #4C7DFB;
+    background-color: white;
     list-style: none;
     height: 200px;
-    width: 150px;
-    color: white;
+    width: 170px;
+    color: black;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.25);
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
+    border-radius: 5px;
+}
+.plus__group__user{
+    display: flex;
+    flex-wrap: wrap;
+    width: 140px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.hidden{
+    display: none;
+}
+
+.group-invite:hover{
+    cursor: pointer;
+}
+.group_inv_name{
+    width: 130px;
+    border: none;
 }
 .group__nav{
 display: flex;

@@ -10,20 +10,23 @@
             <button class="group-plus-btn"><i class="fa-solid fa-list"></i></button>
 
             <ul class="plus__group hidden">
-                <p>팀원들들</p>
+                <h1 style="font-weight: 700;">팀원</h1>
                 <div class="plus__group__user">
                     {%for member in group_info%}
-                    <li>
+                    <li style="margin-bottom: 4px; margin-right:5px">
                         {{member.user_name}}
                     </li>
                     {%endfor%}
                 </div>
                 <!--그룹초대-->
-                <li>초대하기</li>
-                <input type="text" class="group_inv_name" placeholder="아이디를 입력하세요"><button class="group_inv_btn"
-                    data-id="{{group_info[0].party_idx}}">✔</button>
+
+                <li class="group-invite" style="font-weight: 700;">초대하기</li>
+                <div style="display: flex;" class="group-invite-input hidden">
+                    <input type="text" class="group_inv_name" placeholder="아이디를 입력하세요"><button class="group_inv_btn"
+                        data-id="{{group_info[0].party_idx}}">✔</button>
+                </div>
                 <!--그룹나가기-->
-                <li class="plus__group__exit">그룹 나가기</li>
+                <li class="plus__group__exit" style="font-weight: 700;">그룹 나가기</li>
 
             </ul>
 

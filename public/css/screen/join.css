@@ -8,7 +8,24 @@
     height: 52px;
 }
 
-
+.join__phone{
+    position: relative;
+}
+#join__phone__du{
+        
+    width:60px;
+    font-size: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: #5A81FA;
+    border:none; 
+    height: 20px;
+    font-weight: 600;
+    top: 14px;
+    right: 16px;
+    position: absolute;
+    
+}
 
 .join{
     position: relative;

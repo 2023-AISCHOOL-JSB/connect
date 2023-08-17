@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
 const io = require("socket.io-client")
-const url = 'http://connect.aischool.o-r.kr/';
+const url = 'https://connect.aischool.o-r.kr/';
 
 
 //채팅방 개설하기

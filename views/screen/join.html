@@ -30,9 +30,9 @@
                 <div class="box__input__under">
                     <input type="text" name="name" id="name" placeholder="이름">
                     <input type="text" name="git" placeholder="깃허브 아이디" id="gitid">
-                    <div>
-                        <input type="text" name="phone" placeholder="휴대전화번호     ex) 010-xxxx-xxxx" id="phone">
-                        <button id="join__du" type="button" onclick="phone_check()">
+                    <div class="join__phone">
+                        <input type="text" name="phone" placeholder="휴대전화번호     ex) 010-1234-5678" id="phone">
+                        <button id="join__phone__du" type="button" onclick="phone_check()">
                             번호인증
                         </button>
                     </div>
@@ -101,7 +101,7 @@
                     alert("인증 됐습니다")
                 } else {
                     alert("없는 번호 입니다 관리자에게 문의하세요")
-                    document.getElementById('phone').value ="";
+                    document.getElementById('phone').value = "";
                 }
 
 

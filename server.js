@@ -14,7 +14,7 @@ const http = require('http').createServer(app);
 const io = socketio(http)
 
 const cors = require("cors");
-const url = 'http://connect.aischool.o-r.kr/';
+const url = 'https://connect.aischool.o-r.kr/';
 
 
 /* CORS 오류 발생! 

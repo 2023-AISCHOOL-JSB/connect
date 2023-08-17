@@ -25,9 +25,3 @@ canvanBtn.addEventListener('click', () => {
     openModalBtn2.classList.add('hidden')
 })
 
-const groupPlusBtn = document.querySelector('.group-plus-btn')
-const groupPlus = document.querySelector('.plus__group')
-
-groupPlusBtn.addEventListener('click', () => {
-    groupPlus.classList.toggle('hidden')
-})
