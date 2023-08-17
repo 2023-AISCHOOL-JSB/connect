@@ -90,9 +90,13 @@
 .new-task__box {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 60%;
+    justify-content: flex-end;
+    width: 100%;
     
+}
+
+.canvan1{
+    display: flex;
 }
 
 .group-plus__box{
@@ -112,11 +116,12 @@
     flex-direction: column;
 }
 .add-new-task-btn{
-    width: 150px;
+    width: 100px;
     height: 40px;
     font-weight: 700;
     background-color: white;
     font-size: 17px;
+
     border-radius: 10px;
 }
 .add-new-task-btn:hover{

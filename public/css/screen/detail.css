@@ -237,7 +237,7 @@
   /* CSS 댓글창*/
   .comment-container {
     font-family: Arial, sans-serif;
-    width: 700px;
+    width: 600px;
     margin: auto;
     background-color: #F8F9FD;
     padding: 20px 20px 10px 20px; /* bottom 패딩을 5px에서 10px로 변경 */
