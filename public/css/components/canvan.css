@@ -90,8 +90,8 @@
 .new-task__box {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 60%;
+    justify-content: flex-end;
+    width: 100%;
     
 }
 
@@ -121,6 +121,7 @@
     font-weight: 700;
     background-color: white;
     font-size: 17px;
+
     border-radius: 10px;
 }
 .add-new-task-btn:hover{
