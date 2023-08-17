@@ -1,6 +1,15 @@
 const todolist = document.querySelectorAll('.todo__list__li');
 const sections = document.querySelectorAll('.canvan section');
 
+const groupPlusBtn = document.querySelector('.group-plus-btn')
+const groupPlus = document.querySelector('.plus__group')
+
+groupPlusBtn.addEventListener('click', () => {
+    groupPlus.classList.toggle('hidden')
+})
+
+
+
 sections.forEach((section, index) => {
     section.addEventListener('dragover', (e) => {
         e.preventDefault();
