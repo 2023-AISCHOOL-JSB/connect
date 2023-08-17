@@ -10,6 +10,24 @@ margin: 60px 0 80px 0 ;
 font-weight: 900;
 font-size: 25px;
 }
+.group__head{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.group-plus__box{
+    position: absolute;
+    left: 60%;
+
+}
+
+.group-plus-btn{
+    background-color: inherit;
+}
+`
 
 .new-task__box {
     display: flex;

@@ -23,23 +23,6 @@
 
 <div class="new-task__box">
     <button class="add-new-task-btn"><i class="fa-solid fa-plus"></i> 리스트 추가하기</button>
-    <div class="group-plus__box">
-        <button class="group-plus-btn">☝🏻</button>
-
-        <ul class="plus__group hidden">
-            <li>
-                <p>팀원들들</p>
-                {%for member in group_info%}
-                {{member.user_name}}
-                {%endfor%}
-            </li>
-            <li>초대하기</li>
-            <input type="text">
-            <li>그룹 나가기</li>
-
-        </ul>
-
-    </div>
 </div>
 
 

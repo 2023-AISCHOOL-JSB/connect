@@ -3,47 +3,39 @@
 {% include 'components/header.html' %}
 
 <main class="group">
-    <h1 class='group__title'>{{group_info[0].party_title}}</h1>
-    
-    <div class="group-plus__box">
-        <button class="group-plus-btn">☝🏻</button>
- 
-        <ul class="plus__group hidden">
-            <p>팀원들들</p>
-            <div class="plus__group__user">
-            {%for member in group_info%}
-            <li>
-                {{member.user_name}}                
-            </li>
-            {%endfor%}
-            </div>
-            <!--그룹초대-->
-            <li>초대하기</li>
-            <input type="text" class="group_inv_name" placeholder="아이디를 입력하세요"><button  class="group_inv_btn" data-id="{{group_info[0].party_idx}}">✔</button>
-            <!--그룹나가기-->
-            <li class="plus__group__exit">그룹 나가기</li>
+    <div class="group__head">
+        <h1 class='group__title'>{{group_info[0].party_title}}</h1>
 
-        </ul>
+        <div class="group-plus__box">
+            <button class="group-plus-btn"><i class="fa-solid fa-list"></i></button>
 
+            <ul class="plus__group hidden">
+                <p>팀원들들</p>
+                <div class="plus__group__user">
+                    {%for member in group_info%}
+                    <li>
+                        {{member.user_name}}
+                    </li>
+                    {%endfor%}
+                </div>
+                <!--그룹초대-->
+                <li>초대하기</li>
+                <input type="text" class="group_inv_name" placeholder="아이디를 입력하세요"><button class="group_inv_btn"
+                    data-id="{{group_info[0].party_idx}}">✔</button>
+                <!--그룹나가기-->
+                <li class="plus__group__exit">그룹 나가기</li>
+
+            </ul>
+
+        </div>
     </div>
     <div class="group__nav">
         <div class="group__board blue">커넥보드</div>
         <div class="group__notice">팀 소통</div>
-   
+
     </div>
     {% include 'components/notice.html' %}
     {% include 'components/canvan.html' %}
-<<<<<<< HEAD
-    <div>
-        <ul>
-            <li>
-
-            </li>
-        </ul>
-    </div>
-=======
-    
->>>>>>> 101a8003aaf6f1e5a0f8da0caab9191a5d027f0c
 </main>
 
 {% include 'components/footer.html' %}
@@ -51,28 +43,28 @@
 
 <script>
 
-//그룹원 추가로 초대하기   
-    
-    $('.group_inv_btn').click((e)=>{
+    //그룹원 추가로 초대하기   
+
+    $('.group_inv_btn').click((e) => {
         let group_idx = $('.group_inv_btn').data('id') //group_idx 가져오기    
         let user_id = $('.group_inv_name').val() //추가 초대할 인원 가져오기
         let url = '/group/group_inv'
         fetch(url, {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                }, 
-                body: JSON.stringify({
-                    group_idx: group_idx,
-                    user_id:user_id               
-                })
-    
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                group_idx: group_idx,
+                user_id: user_id
             })
+
+        })
             .then(res => res.json())
-            .then(res =>{   
-                    // 그룹에 초대하면 유저목록에 추가되는 로직
-                if(res==1){alert('없는 아이디입니다.')}
-                else{
+            .then(res => {
+                // 그룹에 초대하면 유저목록에 추가되는 로직
+                if (res == 1) { alert('없는 아이디입니다.') }
+                else {
                     $('.plus__group__user').append(` 
                     <li>
                         ${res[0].user_name}                
@@ -81,33 +73,33 @@
 
 
                 }
-            
+
             })
-            
-        
-    
+
+
+
     })
 
 
-//그룹 나가기
-$('.plus__group__exit').click((e)=>{
-    let group_idx = $('.group_inv_btn').data('id') //group_idx 가져오기 
-    console.log("채팅방 나가기",group_idx)
-    let url = '/group/exit'
-    fetch(url, {
+    //그룹 나가기
+    $('.plus__group__exit').click((e) => {
+        let group_idx = $('.group_inv_btn').data('id') //group_idx 가져오기 
+        console.log("채팅방 나가기", group_idx)
+        let url = '/group/exit'
+        fetch(url, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                party_idx: group_idx             
+                party_idx: group_idx
             })
 
         }).then(window.location.href = "https://connect.aischool.o-r.kr/user/myteam")
-        
-    
 
-})
+
+
+    })
 
 
 

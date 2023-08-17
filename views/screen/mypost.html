@@ -18,9 +18,9 @@
 
     <section class="mypageboard__box">
         {%for i in data%}
-        <a  class="mypageboard" href="/detail?a={{ i.b_idx }}" style="color: black;">
+        <a class="mypageboard" href="/detail?a={{ i.b_idx }}" style="color: black;">
             <span>{{i.b_type}}</span>
-            <h1 >{{i.b_title | stripHtmlTags | truncate(10)}}</h1>
+            <h1>{{i.b_title | stripHtmlTags | truncate(10)}}</h1>
             <h2 style="width: 170px;">{{i.b_content | stripHtmlTags | truncate(20)}}</h2>
 
         </a>
