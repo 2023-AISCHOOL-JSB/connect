@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-const url = require('../server').url;
+const url = 'https://connect.aischool.o-r.kr/';
 
 
 router.get("/", (req, res) => {

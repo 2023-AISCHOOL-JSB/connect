@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const url = 'https://connect.aischool.o-r.kr/';module.exports = {url:url};
+const url = 'https://connect.aischool.o-r.kr/';
 const bodyParser = require("body-parser");
 const nunjucks = require("nunjucks");
 const session = require("express-session");
