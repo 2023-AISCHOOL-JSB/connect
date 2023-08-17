@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-
 const conn = require("../config/database");
 const session = require("express-session");
+const url  = require('../server').url;
+
 
 router.post("/canvan", (req, res) => {
   let { todo, deadline, member, group_idx } = req.body;

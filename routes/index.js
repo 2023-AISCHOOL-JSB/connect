@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-//let url = 'https://connect.aischool.o-r.kr/'
-url = 'http://localhost:3000/'
+const url  = require("../server").url
+
+
 router.get("/", (req, res) => {
   res.render('screen/login')
+  console.log(url)
 });
 
 // 페이징 라우터 추가

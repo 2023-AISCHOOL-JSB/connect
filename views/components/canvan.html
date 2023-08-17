@@ -23,31 +23,6 @@
 
 <div class="new-task__box">
     <button class="add-new-task-btn"><i class="fa-solid fa-plus"></i> 리스트 추가하기</button>
-    <div class="group-plus__box">
-        <button class="group-plus-btn">☝🏻</button>
- 
-       
-
-        
- 
-        <ul class="plus__group hidden">
-            <p>팀원들들</p>
-            <div class="plus__group__user">
-            {%for member in group_info%}
-            <li>
-                {{member.user_name}}                
-            </li>
-            {%endfor%}
-            </div>
-            <!--그룹초대-->
-            <li>초대하기</li>
-            <input type="text" class="group_inv_name" placeholder="아이디를 입력하세요"><button  class="group_inv_btn" data-id="{{group_info[0].party_idx}}">✔</button>
-            <!--그룹나가기-->
-            <li class="plus__group__exit">그룹 나가기</li>
-
-        </ul>
-
-    </div>
 </div>
 
 
