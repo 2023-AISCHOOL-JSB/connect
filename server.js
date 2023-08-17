@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const url = 'http://localhost:3000/' ; module.exports ={ url:url }; //url 다른 파일에서도 한번에 바꾸기!
+const url = 'http://connect.aischool.o-r.kr/' ; module.exports ={ url:url }; //url 다른 파일에서도 한번에 바꾸기!
 const bodyParser = require("body-parser");
 const nunjucks = require("nunjucks");
 const session = require("express-session");
