@@ -15,13 +15,13 @@ router.get("/page/:pageNumber", async (req, res) => {
     res.send(`<script>alert("로그인을 해주세요!!!");location.href="${url}"</script>`);
     return;
   }
-  const pageNumber = parseInt(req.params.pageNumber, 10);
+  const pageNumber = parseInt(req.params.pageNumber, 12);
   
   if (isNaN(pageNumber) || pageNumber < 1) {
     return res.status(400).send("Invalid page number");
   }
   
-  const postsPerPage = 10;
+  const postsPerPage = 12;
   const offset = (pageNumber - 1) * postsPerPage;
 
   let totalPostCount, totalPages;
