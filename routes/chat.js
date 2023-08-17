@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
 const io = require("socket.io-client")
-const url = 'https://connect.aischool.o-r.kr/';
+const url = require('../server').url;
+
 
 
 //채팅방 개설하기
@@ -140,13 +141,13 @@ router.post("/message", (req, res) => {
     from tb_talk as A left outer join tb_user as B on A.talker = B.user_id where  room_idx = ? order by talked_at` //채팅방을 누르면 채팅방에 해당하는 모든 대화목록을 쏴준다.
     let sql_userlist = `select * from tb_chatpeople where room_idx= ? and chat_status = 1`
     conn.query(sql,[room_idx],(err,rows)=>{
-            
+        console.log("내용불러오기1111",rows)
             conn.query(sql_userlist,[room_idx],(err,userlist)=>{
                     const data = {
                         rows:rows,
                         user:userlist
                     }
-                    
+                    console.log("내용불러오기",rows)
                     res.json(data)
             })
      

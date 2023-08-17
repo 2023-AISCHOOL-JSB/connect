@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const url = 'http://localhost:3000/';module.exports = {url:url};
 const bodyParser = require("body-parser");
 const nunjucks = require("nunjucks");
 const session = require("express-session");
@@ -14,7 +14,7 @@ const http = require('http').createServer(app);
 const io = socketio(http)
 
 const cors = require("cors");
-const url = 'https://connect.aischool.o-r.kr/';
+
 
 
 /* CORS 오류 발생! 

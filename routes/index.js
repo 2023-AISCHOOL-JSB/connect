@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-const url = 'https://connect.aischool.o-r.kr/';
+const url = require('../server').url;
 
 
 router.get("/", (req, res) => {
@@ -41,6 +41,8 @@ router.get("/page/:pageNumber", async (req, res) => {
       ORDER BY tb_board.b_idx DESC
       LIMIT ?, ?
     `;
+
+    
     
   conn.query(sql, [offset, postsPerPage], (err, rows) => {
     res.render("screen/main", { data: rows, obj: req.session.user, totalPages: totalPages });

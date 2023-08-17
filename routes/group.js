@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
 const session = require("express-session");
-const url = 'https://connect.aischool.o-r.kr/';
+const url = 'http://localhost:3000/';
 
 
 router.post("/canvan", (req, res) => {

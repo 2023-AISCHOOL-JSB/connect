@@ -68,6 +68,7 @@
         })
             .then(res => res.json())
             .then(content => {
+                console.log('채팅방 내용불러오기',content)
                 const result = content
                 result.rows.forEach((i) => {
                     $(".chat-content__list").append(
@@ -90,7 +91,7 @@
 
                 },$('.room_title').text(room_title))
         //채팅방 유저 표현해주는 로직
-                console.log("유저", result.user[0])      
+                    
                 result.user.forEach((a) => {
                     $('.chat-room_userbox').append(`<li class ="chat-room_userlis"> ${a.user_name}<span class="chat-room_userlis_name"> (${a.room_people})</span> </li>`)
 
