@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-let url = 'https://connect.aischool.o-r.kr/'
+const url = 'http://connect.aischool.o-r.kr/';
+
 
 router.get("/", (req, res) => {
   res.render('screen/login')
+  console.log(url)
 });
 
 // 페이징 라우터 추가
@@ -163,6 +165,20 @@ router.post('/user/dup_check', (req, res) => {
    
    })
 })
+
+// 회원가입 번호인증 기능
+router.post('/user/phone_check', (req, res) => {
+  console.log(req.body.userPhone)
+  let {userPhone} = req.body;
+
+  let sql = `select user_phone from tb_user where user_phone = ?;`
+
+  conn.query(sql,[userPhone],(err, rows)=>{
+     res.json(rows.length)
+   
+   })
+})
+
 
 
 router.get("/join", (req, res) => {

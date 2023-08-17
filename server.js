@@ -14,8 +14,8 @@ const http = require('http').createServer(app);
 const io = socketio(http)
 
 const cors = require("cors");
+const url = 'http://connect.aischool.o-r.kr/';
 
-let url = 'https://connect.aischool.o-r.kr/'
 
 /* CORS 오류 발생! 
 1) cors 설치 npm i cors
@@ -81,3 +81,4 @@ io.on('connection',(socket)=>{    //user가 웹소켓으로 서버에 connection
 http.listen(app.get("port"), () => {
   console.log(app.get("port") + "번 포트에서 대기중...");
 });
+

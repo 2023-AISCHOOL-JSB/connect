@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const conn = require("../config/database");
-let url = 'http://localhost:3000/'
-
+const url = 'http://connect.aischool.o-r.kr/';
 
 router.post("/write", (req, res) => {
   let {
