@@ -95,6 +95,10 @@
     
 }
 
+.canvan1{
+    display: flex;
+}
+
 .group-plus__box{
     position: relative;
 }
@@ -112,7 +116,7 @@
     flex-direction: column;
 }
 .add-new-task-btn{
-    width: 150px;
+    width: 100px;
     height: 40px;
     font-weight: 700;
     background-color: white;

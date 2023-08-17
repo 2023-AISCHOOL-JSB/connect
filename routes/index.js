@@ -264,7 +264,7 @@ function getCommentCount(post_idx) {
     conn.query(query, [post_idx], (err, results, fields) => {
       if (err) {
         reject(err);
-      } else {
+      } else { 
         resolve(results[0].commentCount);
       }
     });
